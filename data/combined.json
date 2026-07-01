@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-01T18:14:45.255Z",
+  "generatedAt": "2026-07-01T19:42:40.367Z",
   "dataThrough": "2026-03-31",
   "infraUpdated": "Jun 30, 2026, 9:14 AM UTC",
   "verdict": {
-    "heat": 90,
+    "heat": 92,
     "answer": "No.",
     "tag": "It's still accelerating",
     "tone": "hot"
@@ -11,22 +11,22 @@
   "signals": [
     {
       "label": "Infrastructure investment",
-      "blurb": "Combined quarterly capital spending by the four largest platform operators, versus a year earlier.",
-      "value": "$130B / qtr",
-      "change": "+80%",
+      "blurb": "Combined quarterly capital spending by the five largest platform operators, versus a year earlier.",
+      "value": "$148B / qtr",
+      "change": "+91%",
       "score": 100
     },
     {
       "label": "Spending momentum",
       "blurb": "Whether that investment is still climbing quarter-on-quarter or has started to roll over.",
-      "value": "+9% vs prior qtr",
-      "change": "+9%",
-      "score": 81
+      "value": "+14% vs prior qtr",
+      "change": "+14%",
+      "score": 95
     },
     {
       "label": "Platform demand",
       "blurb": "Combined top-line revenue growth — the paying demand that the build-out is meant to serve.",
-      "value": "$431B / qtr",
+      "value": "$448B / qtr",
       "change": "+20%",
       "score": 75
     },
@@ -46,11 +46,11 @@
     }
   ],
   "headline": {
-    "combinedQuarterlyCapex": 129.8,
-    "combinedCapexYoY": 80,
-    "combinedTTMCapex": 434,
-    "combinedTTMCapexYoY": 70,
-    "combinedQuarterlyRevenue": 431,
+    "combinedQuarterlyCapex": 148.4,
+    "combinedCapexYoY": 91,
+    "combinedTTMCapex": 482,
+    "combinedTTMCapexYoY": 78,
+    "combinedQuarterlyRevenue": 448,
     "combinedRevenueYoY": 20,
     "dcActiveCapacityGw": 82.1,
     "dcActiveRequests": 569,
@@ -63,55 +63,55 @@
     "capexCombined": [
       {
         "end": "2023-03-31",
-        "val": 33.9
+        "val": 36.6
       },
       {
         "end": "2023-06-30",
-        "val": 33.4
+        "val": 35.3
       },
       {
         "end": "2023-09-30",
-        "val": 36.9
+        "val": 38.3
       },
       {
         "end": "2023-12-31",
-        "val": 42.9
+        "val": 44
       },
       {
         "end": "2024-03-31",
-        "val": 44.3
+        "val": 46
       },
       {
         "end": "2024-06-30",
-        "val": 52.9
+        "val": 55.7
       },
       {
         "end": "2024-09-30",
-        "val": 58.9
+        "val": 61.2
       },
       {
         "end": "2024-12-31",
-        "val": 72.3
+        "val": 76.3
       },
       {
         "end": "2025-03-31",
-        "val": 71.9
+        "val": 77.8
       },
       {
         "end": "2025-06-30",
-        "val": 88.2
-      },
-      {
-        "end": "2025-09-30",
         "val": 97.3
       },
       {
+        "end": "2025-09-30",
+        "val": 105.8
+      },
+      {
         "end": "2025-12-31",
-        "val": 118.6
+        "val": 130.7
       },
       {
         "end": "2026-03-31",
-        "val": 129.8
+        "val": 148.4
       }
     ],
     "companies": [
@@ -350,6 +350,65 @@
           }
         ],
         "latestYoY": 47
+      },
+      {
+        "name": "Oracle",
+        "color": "#f43f5e",
+        "capex": [
+          {
+            "end": "2023-03-31",
+            "val": 2.6
+          },
+          {
+            "end": "2023-06-30",
+            "val": 1.9
+          },
+          {
+            "end": "2023-09-30",
+            "val": 1.3
+          },
+          {
+            "end": "2023-12-31",
+            "val": 1.1
+          },
+          {
+            "end": "2024-03-31",
+            "val": 1.7
+          },
+          {
+            "end": "2024-06-30",
+            "val": 2.8
+          },
+          {
+            "end": "2024-09-30",
+            "val": 2.3
+          },
+          {
+            "end": "2024-12-31",
+            "val": 4
+          },
+          {
+            "end": "2025-03-31",
+            "val": 5.9
+          },
+          {
+            "end": "2025-06-30",
+            "val": 9.1
+          },
+          {
+            "end": "2025-09-30",
+            "val": 8.5
+          },
+          {
+            "end": "2025-12-31",
+            "val": 12
+          },
+          {
+            "end": "2026-03-31",
+            "val": 18.6
+          }
+        ],
+        "latestYoY": 82
       }
     ],
     "dcCapacityByYear": [

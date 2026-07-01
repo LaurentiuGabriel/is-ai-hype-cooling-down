@@ -1,4 +1,4 @@
-// Scrapes quarterly capital expenditure + revenue for the four largest
+// Scrapes quarterly capital expenditure + revenue for the five largest
 // cloud/AI platform operators from their public financial disclosures (XBRL).
 // Writes data/hyperscalers.json.
 import { fetchJSON, writeData, quarterizeCumulative, pctChange, log, sleep } from "./lib.mjs";
@@ -11,7 +11,33 @@ const COMPANIES = [
   { key: "alphabet", name: "Alphabet", cik: "0001652044", color: "#a78bfa" },
   { key: "amazon", name: "Amazon", cik: "0001018724", color: "#f59e0b" },
   { key: "meta", name: "Meta", cik: "0001326801", color: "#34d399" },
+  { key: "oracle", name: "Oracle", cik: "0001341439", color: "#f43f5e" },
 ];
+
+// Most operators close their quarters on calendar-quarter ends (Mar/Jun/Sep/Dec),
+// but Oracle's fiscal year ends May 31, so its quarters land on Aug/Nov/Feb/May.
+// Snap every period-end to the nearest calendar-quarter end so the series line up
+// for like-for-like combination downstream (a no-op for the calendar-aligned names).
+const QUARTER_ENDS = ["03-31", "06-30", "09-30", "12-31"];
+function snapToCalendarQuarterEnd(end) {
+  const d = new Date(`${end}T00:00:00Z`);
+  const y = d.getUTCFullYear();
+  const candidates = [
+    `${y - 1}-12-31`,
+    ...QUARTER_ENDS.map((q) => `${y}-${q}`),
+    `${y + 1}-03-31`,
+  ];
+  let best = candidates[0];
+  let bestDiff = Infinity;
+  for (const c of candidates) {
+    const diff = Math.abs(new Date(`${c}T00:00:00Z`) - d);
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      best = c;
+    }
+  }
+  return best;
+}
 
 // Capex ("purchases of property & equipment") is tagged differently across
 // companies; revenue likewise migrated tags over the years. Try each in order
@@ -48,7 +74,10 @@ async function seriesFrom(cik, tags) {
       }
     }
   }
-  return quarterizeCumulative(merged);
+  return quarterizeCumulative(merged).map((q) => ({
+    ...q,
+    end: snapToCalendarQuarterEnd(q.end),
+  }));
 }
 
 function attachYoY(series) {

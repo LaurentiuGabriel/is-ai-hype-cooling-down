@@ -89,7 +89,7 @@ function build() {
     {
       key: "capex",
       label: "Infrastructure investment",
-      blurb: "Combined quarterly capital spending by the four largest platform operators, versus a year earlier.",
+      blurb: "Combined quarterly capital spending by the five largest platform operators, versus a year earlier.",
       value: `$${(capexLatest.val / 1e9).toFixed(0)}B / qtr`,
       change: fmtPct(capexYoY),
       score: scoreFromGrowth(capexYoY),
@@ -178,19 +178,30 @@ function build() {
       genCapacityYoY: genCapacityYoY == null ? null : Math.round(genCapacityYoY),
       totalQueueAllTime: infra.totalRequestsAllTime,
     },
-    charts: {
-      capexCombined: capex.slice(-QUARTERS_ON_CHART).map((q) => ({ end: q.end, val: Math.round(q.val / 1e8) / 10 })),
-      companies: hyper.companies.map((c) => ({
-        name: c.name,
-        color: c.color,
-        capex: c.capex.slice(-QUARTERS_ON_CHART).map((q) => ({ end: q.end, val: Math.round(q.val / 1e8) / 10 })),
-        latestYoY: c.capex.at(-1)?.yoyPct == null ? null : Math.round(c.capex.at(-1).yoyPct),
-      })),
+    // Shared quarter axis so every operator's line lines up on the same dates,
+    // even when one (e.g. Oracle) has already reported a quarter the others haven't.
+    charts: (() => {
+      const chartQuarters = capex.slice(-QUARTERS_ON_CHART);
+      return {
+      capexCombined: chartQuarters.map((q) => ({ end: q.end, val: Math.round(q.val / 1e8) / 10 })),
+      companies: hyper.companies.map((c) => {
+        const byEnd = new Map(c.capex.map((q) => [q.end, q.val]));
+        return {
+          name: c.name,
+          color: c.color,
+          capex: chartQuarters.map((q) => ({
+            end: q.end,
+            val: byEnd.has(q.end) ? Math.round(byEnd.get(q.end) / 1e8) / 10 : null,
+          })),
+          latestYoY: c.capex.at(-1)?.yoyPct == null ? null : Math.round(c.capex.at(-1).yoyPct),
+        };
+      }),
       dcCapacityByYear: dc.byYear.map((d) => ({ year: d.year, gw: Math.round(d.capacityMw / 100) / 10, requests: d.requests })),
       genCapacityByYear: gen.byYear.map((d) => ({ year: d.year, gw: Math.round(d.capacityMw / 100) / 10 })),
       dcTopStates: dc.topStates.map((s) => ({ state: s.state, gw: Math.round(s.capacityMw / 100) / 10 })),
       currentYear,
-    },
+      };
+    })(),
   };
 
   writeData("combined.json", combined);
