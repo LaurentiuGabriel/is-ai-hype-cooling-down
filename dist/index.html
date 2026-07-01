@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is the AI hype cooling down?</title>
+  <meta name="description" content="A live, data-driven answer to one question: is the AI hype cooling down?" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Data injected by the build script. Do not edit by hand. -->
+  <script>
+    /*__DATA_START__*/
+    window.__DATA__ = {"generatedAt":"2026-07-01T18:14:45.255Z","dataThrough":"2026-03-31","infraUpdated":"Jun 30, 2026, 9:14 AM UTC","verdict":{"heat":90,"answer":"No.","tag":"It's still accelerating","tone":"hot"},"signals":[{"label":"Infrastructure investment","blurb":"Combined quarterly capital spending by the four largest platform operators, versus a year earlier.","value":"$130B / qtr","change":"+80%","score":100},{"label":"Spending momentum","blurb":"Whether that investment is still climbing quarter-on-quarter or has started to roll over.","value":"+9% vs prior qtr","change":"+9%","score":81},{"label":"Platform demand","blurb":"Combined top-line revenue growth — the paying demand that the build-out is meant to serve.","value":"$431B / qtr","change":"+20%","score":75},{"label":"Data-center power pipeline","blurb":"New large-load electrical capacity entering the build queue (2025 vs 2024).","value":"23.5 GW added","change":"+172%","score":100},{"label":"New project starts","blurb":"Count of new large-load facilities queued to connect (2025 vs 2024).","value":"82 projects","change":"+26%","score":83}],"headline":{"combinedQuarterlyCapex":129.8,"combinedCapexYoY":80,"combinedTTMCapex":434,"combinedTTMCapexYoY":70,"combinedQuarterlyRevenue":431,"combinedRevenueYoY":20,"dcActiveCapacityGw":82.1,"dcActiveRequests":569,"dcCapacityYoY":172,"genActiveCapacityGw":1741.8,"genCapacityYoY":76,"totalQueueAllTime":42703},"charts":{"capexCombined":[{"end":"2023-03-31","val":33.9},{"end":"2023-06-30","val":33.4},{"end":"2023-09-30","val":36.9},{"end":"2023-12-31","val":42.9},{"end":"2024-03-31","val":44.3},{"end":"2024-06-30","val":52.9},{"end":"2024-09-30","val":58.9},{"end":"2024-12-31","val":72.3},{"end":"2025-03-31","val":71.9},{"end":"2025-06-30","val":88.2},{"end":"2025-09-30","val":97.3},{"end":"2025-12-31","val":118.6},{"end":"2026-03-31","val":129.8}],"companies":[{"name":"Microsoft","color":"#22d3ee","capex":[{"end":"2023-03-31","val":6.6},{"end":"2023-06-30","val":8.9},{"end":"2023-09-30","val":9.9},{"end":"2023-12-31","val":9.7},{"end":"2024-03-31","val":11},{"end":"2024-06-30","val":13.9},{"end":"2024-09-30","val":14.9},{"end":"2024-12-31","val":15.8},{"end":"2025-03-31","val":16.7},{"end":"2025-06-30","val":17.1},{"end":"2025-09-30","val":19.4},{"end":"2025-12-31","val":29.9},{"end":"2026-03-31","val":30.9}],"latestYoY":84},{"name":"Alphabet","color":"#a78bfa","capex":[{"end":"2023-03-31","val":6.3},{"end":"2023-06-30","val":6.9},{"end":"2023-09-30","val":8.1},{"end":"2023-12-31","val":11},{"end":"2024-03-31","val":12},{"end":"2024-06-30","val":13.2},{"end":"2024-09-30","val":13.1},{"end":"2024-12-31","val":14.3},{"end":"2025-03-31","val":17.2},{"end":"2025-06-30","val":22.4},{"end":"2025-09-30","val":24},{"end":"2025-12-31","val":27.9},{"end":"2026-03-31","val":35.7}],"latestYoY":107},{"name":"Amazon","color":"#f59e0b","capex":[{"end":"2023-03-31","val":14.2},{"end":"2023-06-30","val":11.5},{"end":"2023-09-30","val":12.5},{"end":"2023-12-31","val":14.6},{"end":"2024-03-31","val":14.9},{"end":"2024-06-30","val":17.6},{"end":"2024-09-30","val":22.6},{"end":"2024-12-31","val":27.8},{"end":"2025-03-31","val":25},{"end":"2025-06-30","val":32.2},{"end":"2025-09-30","val":35.1},{"end":"2025-12-31","val":39.5},{"end":"2026-03-31","val":44.2}],"latestYoY":77},{"name":"Meta","color":"#34d399","capex":[{"end":"2023-03-31","val":6.8},{"end":"2023-06-30","val":6.1},{"end":"2023-09-30","val":6.5},{"end":"2023-12-31","val":7.6},{"end":"2024-03-31","val":6.4},{"end":"2024-06-30","val":8.2},{"end":"2024-09-30","val":8.3},{"end":"2024-12-31","val":14.4},{"end":"2025-03-31","val":12.9},{"end":"2025-06-30","val":16.5},{"end":"2025-09-30","val":18.8},{"end":"2025-12-31","val":21.4},{"end":"2026-03-31","val":19}],"latestYoY":47}],"dcCapacityByYear":[{"year":2004,"gw":0,"requests":1},{"year":2005,"gw":2.8,"requests":9},{"year":2006,"gw":0.1,"requests":9},{"year":2007,"gw":0.4,"requests":15},{"year":2008,"gw":0.2,"requests":23},{"year":2009,"gw":0.4,"requests":15},{"year":2010,"gw":0.1,"requests":5},{"year":2011,"gw":0.6,"requests":20},{"year":2012,"gw":0.5,"requests":15},{"year":2013,"gw":1.3,"requests":8},{"year":2014,"gw":0.6,"requests":17},{"year":2015,"gw":1.3,"requests":12},{"year":2016,"gw":2.1,"requests":16},{"year":2017,"gw":2.3,"requests":23},{"year":2018,"gw":2.7,"requests":28},{"year":2019,"gw":1.3,"requests":22},{"year":2020,"gw":2.1,"requests":18},{"year":2021,"gw":3.5,"requests":30},{"year":2022,"gw":6.5,"requests":47},{"year":2023,"gw":10.9,"requests":53},{"year":2024,"gw":8.6,"requests":65},{"year":2025,"gw":23.5,"requests":82},{"year":2026,"gw":10.2,"requests":35}],"genCapacityByYear":[{"year":1998,"gw":0.3},{"year":1999,"gw":1.1},{"year":2000,"gw":0.2},{"year":2001,"gw":0.9},{"year":2002,"gw":0},{"year":2003,"gw":0.8},{"year":2004,"gw":0.4},{"year":2005,"gw":1.1},{"year":2006,"gw":3.8},{"year":2007,"gw":5.1},{"year":2008,"gw":1.5},{"year":2009,"gw":3.2},{"year":2010,"gw":1.5},{"year":2011,"gw":2.7},{"year":2012,"gw":1},{"year":2013,"gw":2.3},{"year":2014,"gw":4.4},{"year":2015,"gw":11.6},{"year":2016,"gw":20.5},{"year":2017,"gw":39.6},{"year":2018,"gw":58.7},{"year":2019,"gw":85.6},{"year":2020,"gw":100},{"year":2021,"gw":176.7},{"year":2022,"gw":197.4},{"year":2023,"gw":175},{"year":2024,"gw":234.9},{"year":2025,"gw":412.4},{"year":2026,"gw":187.9}],"dcTopStates":[{"state":"WA","gw":33.8},{"state":"OR","gw":33},{"state":"NY","gw":13.9},{"state":"CA","gw":1.5},{"state":"PA","gw":0.8},{"state":"MT","gw":0.7},{"state":"ID","gw":0.3},{"state":"NV","gw":0.3}],"currentYear":2026}};
+    /*__DATA_END__*/
+  </script>
+
+  <style>
+    body { background-color: #05060a; }
+    .glass {
+      background: linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+    }
+    .aurora {
+      background:
+        radial-gradient(60% 55% at 20% 0%, rgba(245,158,11,0.16), transparent 60%),
+        radial-gradient(50% 50% at 85% 10%, rgba(168,85,247,0.16), transparent 60%),
+        radial-gradient(45% 45% at 60% 100%, rgba(34,211,238,0.12), transparent 60%);
+    }
+    .grid-lines {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(70% 60% at 50% 20%, black, transparent 85%);
+    }
+    .fade-up { opacity: 0; transform: translateY(18px); animation: fadeUp .7s cubic-bezier(.2,.7,.3,1) forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .gauge-marker { transition: left 1.4s cubic-bezier(.2,.8,.2,1); }
+    ::selection { background: rgba(245,158,11,0.35); }
+    canvas { max-width: 100%; }
+  </style>
+</head>
+
+<body class="font-sans text-slate-200 antialiased selection:text-white">
+  <!-- backdrop -->
+  <div class="pointer-events-none fixed inset-0 -z-10 aurora"></div>
+  <div class="pointer-events-none fixed inset-0 -z-10 grid-lines"></div>
+
+  <main class="mx-auto max-w-6xl px-5 sm:px-8">
+
+    <!-- ============ HERO / VERDICT ============ -->
+    <section class="min-h-[92vh] flex flex-col justify-center py-20">
+      <div class="fade-up flex items-center gap-2 text-xs font-medium uppercase tracking-[0.25em] text-slate-400">
+        <span class="inline-flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Live signal index
+        <span class="text-slate-600">·</span>
+        <span id="data-through" class="text-slate-500"></span>
+      </div>
+
+      <h1 class="fade-up mt-8 font-display text-4xl font-bold leading-tight text-white sm:text-6xl md:text-7xl" style="animation-delay:.05s">
+        Is the AI hype<br class="hidden sm:block" /> cooling down?
+      </h1>
+
+      <!-- The answer, front and center -->
+      <div class="fade-up mt-10" style="animation-delay:.12s">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:gap-6">
+          <span id="verdict-answer" class="font-display text-6xl font-bold leading-none sm:text-8xl">—</span>
+          <span id="verdict-tag" class="pb-2 text-lg text-slate-300 sm:text-2xl"></span>
+        </div>
+      </div>
+
+      <!-- Heat gauge -->
+      <div class="fade-up mt-12 max-w-2xl" style="animation-delay:.2s">
+        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <span>❄ Cooling</span>
+          <span id="heat-readout" class="font-display text-sm text-white"></span>
+          <span>Overheating 🔥</span>
+        </div>
+        <div class="relative mt-3 h-3 rounded-full" style="background:linear-gradient(90deg,#38bdf8,#22d3ee,#a3e635,#f59e0b,#ef4444);">
+          <div id="gauge-marker" class="gauge-marker absolute top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-white bg-slate-900 shadow-lg" style="left:0%">
+          </div>
+        </div>
+        <p class="mt-6 max-w-xl text-sm leading-relaxed text-slate-400">
+          A composite reading of physical build-out and platform economics. Higher means the
+          expansion is still intensifying; lower means the momentum is fading.
+          Here's what goes into it.
+        </p>
+      </div>
+
+      <a href="#breakdown" class="fade-up mt-14 inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-white" style="animation-delay:.3s">
+        See the breakdown
+        <svg class="h-4 w-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+      </a>
+    </section>
+
+    <!-- ============ SIGNAL BREAKDOWN ============ -->
+    <section id="breakdown" class="scroll-mt-16 py-16">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-semibold text-white sm:text-3xl">What the answer is built from</h2>
+        <p class="mt-3 text-slate-400">
+          Five independent signals, each weighted by how directly it reflects real, committed
+          demand. Each is scored from 0 (contracting) to 100 (surging).
+        </p>
+      </div>
+
+      <div id="signals" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+    <!-- ============ HEADLINE STATS ============ -->
+    <section class="py-8">
+      <div id="stats" class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:grid-cols-4"></div>
+    </section>
+
+    <!-- ============ CHARTS ============ -->
+    <section class="py-16 space-y-6">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-semibold text-white sm:text-3xl">The trajectory</h2>
+        <p class="mt-3 text-slate-400">Where the money and the megawatts are actually going.</p>
+      </div>
+
+      <!-- headline chart -->
+      <div class="glass rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-lg text-white">Combined infrastructure spend, per quarter</h3>
+          <span class="text-xs uppercase tracking-wider text-slate-500">Billions of dollars</span>
+        </div>
+        <div class="mt-5 h-[300px]"><canvas id="chart-capex"></canvas></div>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="glass rounded-2xl p-5 sm:p-7">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-display text-lg text-white">Spend by operator</h3>
+            <span class="text-xs uppercase tracking-wider text-slate-500">$B / quarter</span>
+          </div>
+          <div class="mt-5 h-[280px]"><canvas id="chart-companies"></canvas></div>
+        </div>
+
+        <div class="glass rounded-2xl p-5 sm:p-7">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-display text-lg text-white">New data-center power queued</h3>
+            <span class="text-xs uppercase tracking-wider text-slate-500">Gigawatts / year</span>
+          </div>
+          <div class="mt-5 h-[280px]"><canvas id="chart-dc"></canvas></div>
+        </div>
+
+        <div class="glass rounded-2xl p-5 sm:p-7">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-display text-lg text-white">Total new power capacity queued</h3>
+            <span class="text-xs uppercase tracking-wider text-slate-500">Gigawatts / year</span>
+          </div>
+          <div class="mt-5 h-[280px]"><canvas id="chart-gen"></canvas></div>
+        </div>
+
+        <div class="glass rounded-2xl p-5 sm:p-7">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-display text-lg text-white">Where data-center load is landing</h3>
+            <span class="text-xs uppercase tracking-wider text-slate-500">GW in queue, top regions</span>
+          </div>
+          <div class="mt-5 h-[280px]"><canvas id="chart-states"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="border-t border-white/10 py-10 text-sm text-slate-500">
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <p>
+          A composite index of build-out and platform economics.
+          Regenerated automatically from the latest available figures.
+        </p>
+        <p id="generated-at" class="text-slate-600"></p>
+      </div>
+      <div class="mt-6 border-t border-white/5 pt-6 text-slate-600">
+        Built by
+        <a href="https://laurentiu-raducu.com" target="_blank" rel="noopener"
+           class="font-medium text-slate-400 transition hover:text-white">Laurentiu Raducu</a>
+        ·
+        <a href="https://bitheap.ch" target="_blank" rel="noopener"
+           class="font-medium text-slate-400 transition hover:text-white">bitheap.ch</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      const D = window.__DATA__;
+      const root = document.documentElement;
+      if (!D) {
+        document.getElementById('verdict-answer').textContent = 'No data';
+        return;
+      }
+
+      // ---------- helpers ----------
+      const TONE = {
+        hot:     { text: '#fbbf24', accent: '#f59e0b' },
+        warm:    { text: '#fcd34d', accent: '#eab308' },
+        neutral: { text: '#a3e635', accent: '#84cc16' },
+        cool:    { text: '#38bdf8', accent: '#0ea5e9' },
+        cold:    { text: '#60a5fa', accent: '#3b82f6' },
+      };
+      const tone = TONE[D.verdict.tone] || TONE.neutral;
+
+      const qLabel = (end) => {
+        const [y, m] = end.split('-');
+        const q = { '03': 'Q1', '06': 'Q2', '09': 'Q3', '12': 'Q4' }[m] || m;
+        return `${q} '${y.slice(2)}`;
+      };
+      const scoreColor = (s) =>
+        s >= 62 ? '#f59e0b' : s >= 50 ? '#eab308' : s >= 38 ? '#84cc16' : s >= 25 ? '#0ea5e9' : '#3b82f6';
+      const changeColor = (str) =>
+        str.startsWith('+') ? 'text-amber-400' : str.startsWith('-') ? 'text-sky-400' : 'text-slate-300';
+
+      // ---------- hero ----------
+      document.getElementById('verdict-answer').textContent = D.verdict.answer;
+      document.getElementById('verdict-answer').style.color = tone.text;
+      document.getElementById('verdict-tag').textContent = D.verdict.tag + '.';
+      document.getElementById('heat-readout').textContent = `Index ${D.verdict.heat} / 100`;
+      document.getElementById('data-through').textContent = 'Data through ' + qLabel(D.dataThrough);
+      requestAnimationFrame(() =>
+        setTimeout(() => { document.getElementById('gauge-marker').style.left = D.verdict.heat + '%'; }, 250)
+      );
+
+      // ---------- signal cards ----------
+      const signalsEl = document.getElementById('signals');
+      signalsEl.innerHTML = D.signals.map((s, i) => {
+        const col = scoreColor(s.score ?? 0);
+        return `
+        <div class="glass rounded-2xl p-5 fade-up" style="animation-delay:${0.05 * i}s">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-display text-base font-semibold text-white">${s.label}</h3>
+            <span class="shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${changeColor(s.change)}"
+                  style="background:rgba(255,255,255,0.06)">${s.change}</span>
+          </div>
+          <p class="mt-1 font-display text-2xl font-bold text-white">${s.value}</p>
+          <div class="mt-4 h-1.5 w-full rounded-full bg-white/10">
+            <div class="h-full rounded-full" style="width:${s.score ?? 0}%;background:${col}"></div>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed text-slate-400">${s.blurb}</p>
+        </div>`;
+      }).join('');
+
+      // ---------- headline stats ----------
+      const h = D.headline;
+      const stats = [
+        { label: 'Quarterly infra spend', value: '$' + h.combinedQuarterlyCapex + 'B', sub: (h.combinedCapexYoY >= 0 ? '+' : '') + h.combinedCapexYoY + '% vs last year' },
+        { label: 'Spend, last 12 months', value: '$' + h.combinedTTMCapex + 'B', sub: (h.combinedTTMCapexYoY >= 0 ? '+' : '') + h.combinedTTMCapexYoY + '% vs prior year' },
+        { label: 'Active data-center power', value: h.dcActiveCapacityGw + ' GW', sub: h.dcActiveRequests + ' facilities in queue' },
+        { label: 'Total power in queue', value: h.genActiveCapacityGw + ' GW', sub: (h.genCapacityYoY >= 0 ? '+' : '') + h.genCapacityYoY + '% new capacity YoY' },
+      ];
+      document.getElementById('stats').innerHTML = stats.map(s => `
+        <div class="bg-[#0a0c12] p-5 sm:p-6">
+          <p class="text-xs uppercase tracking-wider text-slate-500">${s.label}</p>
+          <p class="mt-2 font-display text-3xl font-bold text-white">${s.value}</p>
+          <p class="mt-1 text-sm ${s.sub.startsWith('+') ? 'text-amber-400' : s.sub.startsWith('-') ? 'text-sky-400' : 'text-slate-400'}">${s.sub}</p>
+        </div>`).join('');
+
+      // ---------- footer ----------
+      const gen = new Date(D.generatedAt);
+      document.getElementById('generated-at').textContent =
+        'Last refreshed ' + gen.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+      // ---------- charts ----------
+      Chart.defaults.color = '#94a3b8';
+      Chart.defaults.font.family = "'Inter', sans-serif";
+      Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+      const grid = { color: 'rgba(255,255,255,0.05)' };
+      const noGrid = { display: false };
+      const tip = {
+        backgroundColor: '#0b0e15', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+        padding: 10, cornerRadius: 8, titleColor: '#fff', bodyColor: '#cbd5e1',
+      };
+
+      // combined capex (gradient bars)
+      const cc = D.charts.capexCombined;
+      const ctxCap = document.getElementById('chart-capex').getContext('2d');
+      const g = ctxCap.createLinearGradient(0, 0, 0, 300);
+      g.addColorStop(0, 'rgba(245,158,11,0.95)');
+      g.addColorStop(1, 'rgba(245,158,11,0.15)');
+      new Chart(ctxCap, {
+        type: 'bar',
+        data: { labels: cc.map(d => qLabel(d.end)), datasets: [{ data: cc.map(d => d.val), backgroundColor: g, borderRadius: 6, borderSkipped: false }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: c => ' $' + c.parsed.y + 'B' } } },
+          scales: { x: { grid: noGrid }, y: { grid, ticks: { callback: v => '$' + v + 'B' } } },
+        },
+      });
+
+      // per-company lines
+      new Chart(document.getElementById('chart-companies'), {
+        type: 'line',
+        data: {
+          labels: D.charts.companies[0].capex.map(d => qLabel(d.end)),
+          datasets: D.charts.companies.map(c => ({
+            label: c.name, data: c.capex.map(d => d.val),
+            borderColor: c.color, backgroundColor: c.color,
+            tension: 0.35, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4,
+          })),
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+          plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8, padding: 14 } }, tooltip: { ...tip, callbacks: { label: c => ` ${c.dataset.label}: $${c.parsed.y}B` } } },
+          scales: { x: { grid: noGrid }, y: { grid, ticks: { callback: v => '$' + v + 'B' } } },
+        },
+      });
+
+      // data-center power by year (bar) — highlight partial current year
+      const dcY = D.charts.dcCapacityByYear;
+      new Chart(document.getElementById('chart-dc'), {
+        type: 'bar',
+        data: {
+          labels: dcY.map(d => d.year),
+          datasets: [{
+            data: dcY.map(d => d.gw), borderRadius: 6, borderSkipped: false,
+            backgroundColor: dcY.map(d => d.year >= D.charts.currentYear ? 'rgba(34,211,238,0.35)' : 'rgba(34,211,238,0.85)'),
+          }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: c => ` ${c.parsed.y} GW` + (dcY[c.dataIndex].year >= D.charts.currentYear ? ' (year in progress)' : '') } } },
+          scales: { x: { grid: noGrid }, y: { grid, ticks: { callback: v => v + ' GW' } } },
+        },
+      });
+
+      // total generation queue by year
+      const gY = D.charts.genCapacityByYear;
+      new Chart(document.getElementById('chart-gen'), {
+        type: 'bar',
+        data: {
+          labels: gY.map(d => d.year),
+          datasets: [{
+            data: gY.map(d => d.gw), borderRadius: 6, borderSkipped: false,
+            backgroundColor: gY.map(d => d.year >= D.charts.currentYear ? 'rgba(168,85,247,0.35)' : 'rgba(168,85,247,0.85)'),
+          }],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: c => ` ${c.parsed.y} GW` + (gY[c.dataIndex].year >= D.charts.currentYear ? ' (year in progress)' : '') } } },
+          scales: { x: { grid: noGrid }, y: { grid, ticks: { callback: v => v + ' GW' } } },
+        },
+      });
+
+      // top states (horizontal)
+      const st = D.charts.dcTopStates;
+      new Chart(document.getElementById('chart-states'), {
+        type: 'bar',
+        data: { labels: st.map(s => s.state), datasets: [{ data: st.map(s => s.gw), backgroundColor: 'rgba(52,211,153,0.8)', borderRadius: 5, borderSkipped: false }] },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: c => ' ' + c.parsed.x + ' GW' } } },
+          scales: { x: { grid, ticks: { callback: v => v + ' GW' } }, y: { grid: noGrid } },
+        },
+      });
+    })();
+  </script>
+</body>
+</html>

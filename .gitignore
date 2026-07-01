@@ -80,7 +80,9 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+dist/*
+# The static page is the deployable artifact (and the build template) — keep it tracked.
+!dist/index.html
 .output
 
 # Gatsby files

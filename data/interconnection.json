@@ -1,0 +1,321 @@
+{
+  "scrapedAt": "2026-07-01T16:00:57.426Z",
+  "sourceLastUpdated": "Jun 30, 2026, 9:14 AM UTC",
+  "totalRequestsAllTime": 42703,
+  "minYear": 1995,
+  "maxYear": 2026,
+  "dataCenters": {
+    "totalActiveRequests": 569,
+    "totalCapacityMw": 82089,
+    "byYear": [
+      {
+        "year": 2004,
+        "requests": 1,
+        "capacityMw": 0
+      },
+      {
+        "year": 2005,
+        "requests": 9,
+        "capacityMw": 2791
+      },
+      {
+        "year": 2006,
+        "requests": 9,
+        "capacityMw": 59
+      },
+      {
+        "year": 2007,
+        "requests": 15,
+        "capacityMw": 370
+      },
+      {
+        "year": 2008,
+        "requests": 23,
+        "capacityMw": 170
+      },
+      {
+        "year": 2009,
+        "requests": 15,
+        "capacityMw": 400
+      },
+      {
+        "year": 2010,
+        "requests": 5,
+        "capacityMw": 75
+      },
+      {
+        "year": 2011,
+        "requests": 20,
+        "capacityMw": 554
+      },
+      {
+        "year": 2012,
+        "requests": 15,
+        "capacityMw": 537
+      },
+      {
+        "year": 2013,
+        "requests": 8,
+        "capacityMw": 1341
+      },
+      {
+        "year": 2014,
+        "requests": 17,
+        "capacityMw": 637
+      },
+      {
+        "year": 2015,
+        "requests": 12,
+        "capacityMw": 1256
+      },
+      {
+        "year": 2016,
+        "requests": 16,
+        "capacityMw": 2098
+      },
+      {
+        "year": 2017,
+        "requests": 23,
+        "capacityMw": 2349
+      },
+      {
+        "year": 2018,
+        "requests": 28,
+        "capacityMw": 2689
+      },
+      {
+        "year": 2019,
+        "requests": 22,
+        "capacityMw": 1315
+      },
+      {
+        "year": 2020,
+        "requests": 18,
+        "capacityMw": 2091
+      },
+      {
+        "year": 2021,
+        "requests": 30,
+        "capacityMw": 3486
+      },
+      {
+        "year": 2022,
+        "requests": 47,
+        "capacityMw": 6529
+      },
+      {
+        "year": 2023,
+        "requests": 53,
+        "capacityMw": 10927
+      },
+      {
+        "year": 2024,
+        "requests": 65,
+        "capacityMw": 8641
+      },
+      {
+        "year": 2025,
+        "requests": 82,
+        "capacityMw": 23512
+      },
+      {
+        "year": 2026,
+        "requests": 35,
+        "capacityMw": 10232
+      }
+    ],
+    "topStates": [
+      {
+        "state": "WA",
+        "requests": 257,
+        "capacityMw": 33769
+      },
+      {
+        "state": "OR",
+        "requests": 184,
+        "capacityMw": 33020
+      },
+      {
+        "state": "NY",
+        "requests": 69,
+        "capacityMw": 13887
+      },
+      {
+        "state": "CA",
+        "requests": 14,
+        "capacityMw": 1514
+      },
+      {
+        "state": "PA",
+        "requests": 2,
+        "capacityMw": 750
+      },
+      {
+        "state": "MT",
+        "requests": 12,
+        "capacityMw": 711
+      },
+      {
+        "state": "ID",
+        "requests": 25,
+        "capacityMw": 314
+      },
+      {
+        "state": "NV",
+        "requests": 4,
+        "capacityMw": 289
+      }
+    ]
+  },
+  "generation": {
+    "totalActiveRequests": 7954,
+    "totalCapacityMw": 1741778,
+    "byYear": [
+      {
+        "year": 1998,
+        "requests": 2,
+        "capacityMw": 348
+      },
+      {
+        "year": 1999,
+        "requests": 6,
+        "capacityMw": 1090
+      },
+      {
+        "year": 2000,
+        "requests": 1,
+        "capacityMw": 174
+      },
+      {
+        "year": 2001,
+        "requests": 6,
+        "capacityMw": 920
+      },
+      {
+        "year": 2002,
+        "requests": 1,
+        "capacityMw": 5
+      },
+      {
+        "year": 2003,
+        "requests": 2,
+        "capacityMw": 788
+      },
+      {
+        "year": 2004,
+        "requests": 8,
+        "capacityMw": 402
+      },
+      {
+        "year": 2005,
+        "requests": 8,
+        "capacityMw": 1126
+      },
+      {
+        "year": 2006,
+        "requests": 14,
+        "capacityMw": 3842
+      },
+      {
+        "year": 2007,
+        "requests": 15,
+        "capacityMw": 5129
+      },
+      {
+        "year": 2008,
+        "requests": 10,
+        "capacityMw": 1530
+      },
+      {
+        "year": 2009,
+        "requests": 21,
+        "capacityMw": 3249
+      },
+      {
+        "year": 2010,
+        "requests": 12,
+        "capacityMw": 1521
+      },
+      {
+        "year": 2011,
+        "requests": 17,
+        "capacityMw": 2732
+      },
+      {
+        "year": 2012,
+        "requests": 12,
+        "capacityMw": 954
+      },
+      {
+        "year": 2013,
+        "requests": 13,
+        "capacityMw": 2255
+      },
+      {
+        "year": 2014,
+        "requests": 29,
+        "capacityMw": 4371
+      },
+      {
+        "year": 2015,
+        "requests": 61,
+        "capacityMw": 11621
+      },
+      {
+        "year": 2016,
+        "requests": 133,
+        "capacityMw": 20476
+      },
+      {
+        "year": 2017,
+        "requests": 236,
+        "capacityMw": 39643
+      },
+      {
+        "year": 2018,
+        "requests": 290,
+        "capacityMw": 58743
+      },
+      {
+        "year": 2019,
+        "requests": 488,
+        "capacityMw": 85576
+      },
+      {
+        "year": 2020,
+        "requests": 558,
+        "capacityMw": 99992
+      },
+      {
+        "year": 2021,
+        "requests": 881,
+        "capacityMw": 176700
+      },
+      {
+        "year": 2022,
+        "requests": 980,
+        "capacityMw": 197414
+      },
+      {
+        "year": 2023,
+        "requests": 835,
+        "capacityMw": 174978
+      },
+      {
+        "year": 2024,
+        "requests": 1091,
+        "capacityMw": 234932
+      },
+      {
+        "year": 2025,
+        "requests": 1552,
+        "capacityMw": 412368
+      },
+      {
+        "year": 2026,
+        "requests": 581,
+        "capacityMw": 187921
+      }
+    ]
+  }
+}

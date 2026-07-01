@@ -1,0 +1,17 @@
+{
+  "name": "is-ai-hype-cooling-down",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A data-driven static page that answers one question: is the AI hype cooling down?",
+  "scripts": {
+    "scrape:infra": "node scripts/scrape-interconnection.mjs",
+    "scrape:capex": "node scripts/scrape-hyperscalers.mjs",
+    "scrape": "npm run scrape:infra && npm run scrape:capex",
+    "build": "node scripts/build.mjs",
+    "update": "npm run scrape && npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

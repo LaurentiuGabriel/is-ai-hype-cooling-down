@@ -1,0 +1,626 @@
+{
+  "generatedAt": "2026-07-01T18:14:45.255Z",
+  "dataThrough": "2026-03-31",
+  "infraUpdated": "Jun 30, 2026, 9:14 AM UTC",
+  "verdict": {
+    "heat": 90,
+    "answer": "No.",
+    "tag": "It's still accelerating",
+    "tone": "hot"
+  },
+  "signals": [
+    {
+      "label": "Infrastructure investment",
+      "blurb": "Combined quarterly capital spending by the four largest platform operators, versus a year earlier.",
+      "value": "$130B / qtr",
+      "change": "+80%",
+      "score": 100
+    },
+    {
+      "label": "Spending momentum",
+      "blurb": "Whether that investment is still climbing quarter-on-quarter or has started to roll over.",
+      "value": "+9% vs prior qtr",
+      "change": "+9%",
+      "score": 81
+    },
+    {
+      "label": "Platform demand",
+      "blurb": "Combined top-line revenue growth — the paying demand that the build-out is meant to serve.",
+      "value": "$431B / qtr",
+      "change": "+20%",
+      "score": 75
+    },
+    {
+      "label": "Data-center power pipeline",
+      "blurb": "New large-load electrical capacity entering the build queue (2025 vs 2024).",
+      "value": "23.5 GW added",
+      "change": "+172%",
+      "score": 100
+    },
+    {
+      "label": "New project starts",
+      "blurb": "Count of new large-load facilities queued to connect (2025 vs 2024).",
+      "value": "82 projects",
+      "change": "+26%",
+      "score": 83
+    }
+  ],
+  "headline": {
+    "combinedQuarterlyCapex": 129.8,
+    "combinedCapexYoY": 80,
+    "combinedTTMCapex": 434,
+    "combinedTTMCapexYoY": 70,
+    "combinedQuarterlyRevenue": 431,
+    "combinedRevenueYoY": 20,
+    "dcActiveCapacityGw": 82.1,
+    "dcActiveRequests": 569,
+    "dcCapacityYoY": 172,
+    "genActiveCapacityGw": 1741.8,
+    "genCapacityYoY": 76,
+    "totalQueueAllTime": 42703
+  },
+  "charts": {
+    "capexCombined": [
+      {
+        "end": "2023-03-31",
+        "val": 33.9
+      },
+      {
+        "end": "2023-06-30",
+        "val": 33.4
+      },
+      {
+        "end": "2023-09-30",
+        "val": 36.9
+      },
+      {
+        "end": "2023-12-31",
+        "val": 42.9
+      },
+      {
+        "end": "2024-03-31",
+        "val": 44.3
+      },
+      {
+        "end": "2024-06-30",
+        "val": 52.9
+      },
+      {
+        "end": "2024-09-30",
+        "val": 58.9
+      },
+      {
+        "end": "2024-12-31",
+        "val": 72.3
+      },
+      {
+        "end": "2025-03-31",
+        "val": 71.9
+      },
+      {
+        "end": "2025-06-30",
+        "val": 88.2
+      },
+      {
+        "end": "2025-09-30",
+        "val": 97.3
+      },
+      {
+        "end": "2025-12-31",
+        "val": 118.6
+      },
+      {
+        "end": "2026-03-31",
+        "val": 129.8
+      }
+    ],
+    "companies": [
+      {
+        "name": "Microsoft",
+        "color": "#22d3ee",
+        "capex": [
+          {
+            "end": "2023-03-31",
+            "val": 6.6
+          },
+          {
+            "end": "2023-06-30",
+            "val": 8.9
+          },
+          {
+            "end": "2023-09-30",
+            "val": 9.9
+          },
+          {
+            "end": "2023-12-31",
+            "val": 9.7
+          },
+          {
+            "end": "2024-03-31",
+            "val": 11
+          },
+          {
+            "end": "2024-06-30",
+            "val": 13.9
+          },
+          {
+            "end": "2024-09-30",
+            "val": 14.9
+          },
+          {
+            "end": "2024-12-31",
+            "val": 15.8
+          },
+          {
+            "end": "2025-03-31",
+            "val": 16.7
+          },
+          {
+            "end": "2025-06-30",
+            "val": 17.1
+          },
+          {
+            "end": "2025-09-30",
+            "val": 19.4
+          },
+          {
+            "end": "2025-12-31",
+            "val": 29.9
+          },
+          {
+            "end": "2026-03-31",
+            "val": 30.9
+          }
+        ],
+        "latestYoY": 84
+      },
+      {
+        "name": "Alphabet",
+        "color": "#a78bfa",
+        "capex": [
+          {
+            "end": "2023-03-31",
+            "val": 6.3
+          },
+          {
+            "end": "2023-06-30",
+            "val": 6.9
+          },
+          {
+            "end": "2023-09-30",
+            "val": 8.1
+          },
+          {
+            "end": "2023-12-31",
+            "val": 11
+          },
+          {
+            "end": "2024-03-31",
+            "val": 12
+          },
+          {
+            "end": "2024-06-30",
+            "val": 13.2
+          },
+          {
+            "end": "2024-09-30",
+            "val": 13.1
+          },
+          {
+            "end": "2024-12-31",
+            "val": 14.3
+          },
+          {
+            "end": "2025-03-31",
+            "val": 17.2
+          },
+          {
+            "end": "2025-06-30",
+            "val": 22.4
+          },
+          {
+            "end": "2025-09-30",
+            "val": 24
+          },
+          {
+            "end": "2025-12-31",
+            "val": 27.9
+          },
+          {
+            "end": "2026-03-31",
+            "val": 35.7
+          }
+        ],
+        "latestYoY": 107
+      },
+      {
+        "name": "Amazon",
+        "color": "#f59e0b",
+        "capex": [
+          {
+            "end": "2023-03-31",
+            "val": 14.2
+          },
+          {
+            "end": "2023-06-30",
+            "val": 11.5
+          },
+          {
+            "end": "2023-09-30",
+            "val": 12.5
+          },
+          {
+            "end": "2023-12-31",
+            "val": 14.6
+          },
+          {
+            "end": "2024-03-31",
+            "val": 14.9
+          },
+          {
+            "end": "2024-06-30",
+            "val": 17.6
+          },
+          {
+            "end": "2024-09-30",
+            "val": 22.6
+          },
+          {
+            "end": "2024-12-31",
+            "val": 27.8
+          },
+          {
+            "end": "2025-03-31",
+            "val": 25
+          },
+          {
+            "end": "2025-06-30",
+            "val": 32.2
+          },
+          {
+            "end": "2025-09-30",
+            "val": 35.1
+          },
+          {
+            "end": "2025-12-31",
+            "val": 39.5
+          },
+          {
+            "end": "2026-03-31",
+            "val": 44.2
+          }
+        ],
+        "latestYoY": 77
+      },
+      {
+        "name": "Meta",
+        "color": "#34d399",
+        "capex": [
+          {
+            "end": "2023-03-31",
+            "val": 6.8
+          },
+          {
+            "end": "2023-06-30",
+            "val": 6.1
+          },
+          {
+            "end": "2023-09-30",
+            "val": 6.5
+          },
+          {
+            "end": "2023-12-31",
+            "val": 7.6
+          },
+          {
+            "end": "2024-03-31",
+            "val": 6.4
+          },
+          {
+            "end": "2024-06-30",
+            "val": 8.2
+          },
+          {
+            "end": "2024-09-30",
+            "val": 8.3
+          },
+          {
+            "end": "2024-12-31",
+            "val": 14.4
+          },
+          {
+            "end": "2025-03-31",
+            "val": 12.9
+          },
+          {
+            "end": "2025-06-30",
+            "val": 16.5
+          },
+          {
+            "end": "2025-09-30",
+            "val": 18.8
+          },
+          {
+            "end": "2025-12-31",
+            "val": 21.4
+          },
+          {
+            "end": "2026-03-31",
+            "val": 19
+          }
+        ],
+        "latestYoY": 47
+      }
+    ],
+    "dcCapacityByYear": [
+      {
+        "year": 2004,
+        "gw": 0,
+        "requests": 1
+      },
+      {
+        "year": 2005,
+        "gw": 2.8,
+        "requests": 9
+      },
+      {
+        "year": 2006,
+        "gw": 0.1,
+        "requests": 9
+      },
+      {
+        "year": 2007,
+        "gw": 0.4,
+        "requests": 15
+      },
+      {
+        "year": 2008,
+        "gw": 0.2,
+        "requests": 23
+      },
+      {
+        "year": 2009,
+        "gw": 0.4,
+        "requests": 15
+      },
+      {
+        "year": 2010,
+        "gw": 0.1,
+        "requests": 5
+      },
+      {
+        "year": 2011,
+        "gw": 0.6,
+        "requests": 20
+      },
+      {
+        "year": 2012,
+        "gw": 0.5,
+        "requests": 15
+      },
+      {
+        "year": 2013,
+        "gw": 1.3,
+        "requests": 8
+      },
+      {
+        "year": 2014,
+        "gw": 0.6,
+        "requests": 17
+      },
+      {
+        "year": 2015,
+        "gw": 1.3,
+        "requests": 12
+      },
+      {
+        "year": 2016,
+        "gw": 2.1,
+        "requests": 16
+      },
+      {
+        "year": 2017,
+        "gw": 2.3,
+        "requests": 23
+      },
+      {
+        "year": 2018,
+        "gw": 2.7,
+        "requests": 28
+      },
+      {
+        "year": 2019,
+        "gw": 1.3,
+        "requests": 22
+      },
+      {
+        "year": 2020,
+        "gw": 2.1,
+        "requests": 18
+      },
+      {
+        "year": 2021,
+        "gw": 3.5,
+        "requests": 30
+      },
+      {
+        "year": 2022,
+        "gw": 6.5,
+        "requests": 47
+      },
+      {
+        "year": 2023,
+        "gw": 10.9,
+        "requests": 53
+      },
+      {
+        "year": 2024,
+        "gw": 8.6,
+        "requests": 65
+      },
+      {
+        "year": 2025,
+        "gw": 23.5,
+        "requests": 82
+      },
+      {
+        "year": 2026,
+        "gw": 10.2,
+        "requests": 35
+      }
+    ],
+    "genCapacityByYear": [
+      {
+        "year": 1998,
+        "gw": 0.3
+      },
+      {
+        "year": 1999,
+        "gw": 1.1
+      },
+      {
+        "year": 2000,
+        "gw": 0.2
+      },
+      {
+        "year": 2001,
+        "gw": 0.9
+      },
+      {
+        "year": 2002,
+        "gw": 0
+      },
+      {
+        "year": 2003,
+        "gw": 0.8
+      },
+      {
+        "year": 2004,
+        "gw": 0.4
+      },
+      {
+        "year": 2005,
+        "gw": 1.1
+      },
+      {
+        "year": 2006,
+        "gw": 3.8
+      },
+      {
+        "year": 2007,
+        "gw": 5.1
+      },
+      {
+        "year": 2008,
+        "gw": 1.5
+      },
+      {
+        "year": 2009,
+        "gw": 3.2
+      },
+      {
+        "year": 2010,
+        "gw": 1.5
+      },
+      {
+        "year": 2011,
+        "gw": 2.7
+      },
+      {
+        "year": 2012,
+        "gw": 1
+      },
+      {
+        "year": 2013,
+        "gw": 2.3
+      },
+      {
+        "year": 2014,
+        "gw": 4.4
+      },
+      {
+        "year": 2015,
+        "gw": 11.6
+      },
+      {
+        "year": 2016,
+        "gw": 20.5
+      },
+      {
+        "year": 2017,
+        "gw": 39.6
+      },
+      {
+        "year": 2018,
+        "gw": 58.7
+      },
+      {
+        "year": 2019,
+        "gw": 85.6
+      },
+      {
+        "year": 2020,
+        "gw": 100
+      },
+      {
+        "year": 2021,
+        "gw": 176.7
+      },
+      {
+        "year": 2022,
+        "gw": 197.4
+      },
+      {
+        "year": 2023,
+        "gw": 175
+      },
+      {
+        "year": 2024,
+        "gw": 234.9
+      },
+      {
+        "year": 2025,
+        "gw": 412.4
+      },
+      {
+        "year": 2026,
+        "gw": 187.9
+      }
+    ],
+    "dcTopStates": [
+      {
+        "state": "WA",
+        "gw": 33.8
+      },
+      {
+        "state": "OR",
+        "gw": 33
+      },
+      {
+        "state": "NY",
+        "gw": 13.9
+      },
+      {
+        "state": "CA",
+        "gw": 1.5
+      },
+      {
+        "state": "PA",
+        "gw": 0.8
+      },
+      {
+        "state": "MT",
+        "gw": 0.7
+      },
+      {
+        "state": "ID",
+        "gw": 0.3
+      },
+      {
+        "state": "NV",
+        "gw": 0.3
+      }
+    ],
+    "currentYear": 2026
+  }
+}
