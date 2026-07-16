@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T18:23:34.895Z",
+  "generatedAt": "2026-07-16T18:50:40.748Z",
   "dataThrough": "2026-03-31",
   "infraUpdated": "Jun 30, 2026, 9:14 AM UTC",
   "verdict": {
@@ -25,7 +25,7 @@
     },
     {
       "label": "Platform demand",
-      "blurb": "Combined top-line revenue growth — the paying demand that the build-out is meant to serve.",
+      "blurb": "Combined top-line revenue growth, the paying demand that the build-out is meant to serve.",
       "value": "$448B / qtr",
       "change": "+20%",
       "score": 75

@@ -107,7 +107,7 @@ function build() {
     {
       key: "revenue",
       label: "Platform demand",
-      blurb: "Combined top-line revenue growth — the paying demand that the build-out is meant to serve.",
+      blurb: "Combined top-line revenue growth, the paying demand that the build-out is meant to serve.",
       value: `$${(revenue[ri].val / 1e9).toFixed(0)}B / qtr`,
       change: fmtPct(revYoY),
       score: scoreFromGrowth(revYoY),
