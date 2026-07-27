@@ -482,7 +482,9 @@
         reports); the latest point is FY2025 guidance, earlier points are reported actuals, converted to
         USD at period rates. Fiscal years and treatment differ (Micron’s ends in August; Intel’s figures
         are gross additions, before the partner offsets and CHIPS grants that lower net capex materially).
-        “Samsung” is its semiconductor (DS) division. Two kinds of company carry small capex by design and
+        “Samsung” is its semiconductor (DS) division. CXMT only began reporting publicly with its July 2026
+        Shanghai listing, so its bar is the 2026 equipment-procurement plan rather than an audited capex
+        history, and it is absent from the 2019–2025 chart above for the same reason. Two kinds of company carry small capex by design and
         should not be read as small spenders: equipment makers, whose revenue is the mirror of everyone
         else’s capex, and fabless designers (AMD, Broadcom, Nvidia), who buy foundry capacity instead of
         building it, so R&amp;D is the figure that matters and their volume lands on TSMC’s capex line.
@@ -537,7 +539,7 @@
           <span class="flex items-center gap-1.5"><span class="h-2.5 w-5 rounded-sm" style="background:#eab308"></span>tight</span>
           <span class="flex items-center gap-1.5"><span class="h-2.5 w-5 rounded-sm" style="background:#f97316"></span>severe</span>
           <span class="flex items-center gap-1.5"><span class="h-2.5 w-5 rounded-sm" style="background:#ef4444"></span>binding</span>
-          <span class="text-slate-600">· hover a year for detail</span>
+          <span class="text-slate-600">· hover a year for detail · click any card for market share &amp; a deep dive</span>
         </div>
       </div>
 
@@ -854,11 +856,13 @@ const BOTTLENECKS = [
       '2025 opens the multi-year AI memory-shortage era across DRAM and HBM.',
       'SK Group: HBM stays scarce until <strong>~2030</strong>, wafer supply ~20% under demand.',
       'Relief may begin ~2028, but capacity keeps chasing demand.',
+      'CXMT’s <strong>$8.6B Shanghai IPO</strong> (Jul 2026) funds a fourth DRAM source, but not an HBM one.',
     ],
     companies: [
       { name: 'SK Hynix', ticker: '000660.KS', role: 'HBM market leader; Nvidia’s lead supplier' },
       { name: 'Micron', ticker: 'MU', role: 'Only US HBM maker; HBM3E/4 ramp' },
       { name: 'Samsung', ticker: '005930.KS', role: 'DRAM scale racing into HBM' },
+      { name: 'CXMT', ticker: '688825.SS', role: 'China’s DRAM champion; listed Jul 2026' },
       { name: 'Hanmi Semi', ticker: '042700.KS', role: 'TC bonders for HBM stacking' },
     ],
   },
@@ -1512,15 +1516,595 @@ const BOTTLENECKS = [
   },
 ];
 
+// Per-bottleneck detail shown in the modal: who holds the market, and what is
+// actually going on underneath the one-line thesis on the card.
+// Shares are approximate industry estimates for the stated basis, rounded to
+// whole percent and normalised to 100. `caveat` explains any company named on
+// the card that does not appear in the pie (different layer of the chain,
+// pre-revenue, or a supplier to the market rather than a participant in it).
+const DEEP = {
+  'AI accelerators & allocation': {
+    basis: 'Share of AI accelerator value shipped, 2025 (est.)',
+    shares: [
+      { n: 'Nvidia', v: 85 }, { n: 'Google TPU', v: 6 }, { n: 'AMD', v: 4 },
+      { n: 'Amazon Trainium', v: 3 }, { n: 'Cerebras / Groq', v: 1 }, { n: 'Other', v: 1 },
+    ],
+    caveat: 'Broadcom sells no accelerator under its own badge. It co-designs and manufactures the Google TPU and Meta MTIA parts, so its economics sit inside the custom-silicon slices rather than beside them.',
+    summary: 'The accelerator shortage was never mainly a manufacturing story. Nvidia decides who gets what, and position in the queue is set by allocation, strategic relationships and software gravity rather than by price clearing supply against demand. That is why this chokepoint behaves differently from every other one on the page: it can loosen physically while staying just as binding commercially.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Nvidia buys the scarce upstream inputs, TSMC packaging slots and HBM stacks, years ahead, then rations finished systems. Customers do not order a quantity, they receive an allocation, and its size tracks how strategically useful the buyer is. Neoclouds, sovereigns and the big labs are bidding for position in a queue, not for a product on a shelf.' },
+      { h: 'Why it binds', p: 'CUDA is close to twenty years of kernels, libraries and tribal knowledge. Switching vendors is not a purchase decision but a porting project across the entire training and inference stack, so even when a rival part is cheaper per FLOP the switching cost keeps demand pinned to one supplier.' },
+      { h: 'What breaks it open', p: 'In-house silicon is the only relief valve that has actually worked. Google TPU, AWS Trainium and Meta MTIA sidestep the allocation queue entirely because their owners buy fab capacity directly, and the software problem is tractable when you also control the workload. AMD ROCm and the compiler layer, Triton and the PyTorch and JAX backends, chip at the moat from the other side.' },
+    ],
+    stats: [
+      { k: 'Nvidia share of AI silicon', v: '~85–90%' },
+      { k: 'CUDA in the field since', v: '2007' },
+      { k: 'Lead time, top-end systems', v: '~6–12 months' },
+      { k: 'Custom ASIC share by 2028', v: '~15–20% (est.)' },
+    ],
+  },
+
+  'Advanced logic (foundry)': {
+    basis: 'Share of leading-edge (≤7 nm) foundry revenue, 2025 (est.)',
+    shares: [{ n: 'TSMC', v: 90 }, { n: 'Samsung Foundry', v: 7 }, { n: 'Intel Foundry', v: 3 }],
+    caveat: 'Rapidus is pre-revenue. Its 2 nm pilot line runs at Chitose with volume production targeted for 2027, so it holds no measurable share yet.',
+    summary: 'Below 7 nm this is not an oligopoly, it is one company with two loss-making followers. TSMC prints roughly nine in ten leading-edge wafers, and AI has been given priority inside that allocation, which means the physical ceiling on frontier silicon is effectively set in Hsinchu.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Leading-edge wafer starts are booked through long-term capacity agreements signed two to three years before the silicon exists. A fab costs upwards of $20B and takes about four years from groundbreaking to qualified output, so the supply curve for any given node is fixed long before anyone knows how much AI demand there will be.' },
+      { h: 'Why it binds', p: 'Yield learning is the real barrier, not money. Samsung and Intel both have leading-edge capacity on paper, but no one risks a flagship die on a process with unproven defect density, so nominal second sources do not convert into real ones on the timescale that matters.' },
+      { h: 'What breaks it open', p: 'TSMC Arizona, the Kumamoto and Dresden fabs and the N2 ramp all add genuine capacity from 2026, and Intel 18A winning serious external customers would be the real structural change. The catch is that every new node opens oversubscribed, so relief always arrives on the node behind the frontier, never on the frontier itself.' },
+    ],
+    stats: [
+      { k: 'TSMC leading-edge share', v: '~90%' },
+      { k: 'Cost of one leading-edge fab', v: '~$20B+' },
+      { k: 'Groundbreaking to output', v: '~4 years' },
+      { k: 'TSMC 2025 capex', v: '~$40B' },
+    ],
+  },
+
+  'HBM / DRAM': {
+    basis: 'Share of global DRAM revenue, Q1 2026 (est.)',
+    shares: [
+      { n: 'Samsung', v: 38 }, { n: 'SK Hynix', v: 29 }, { n: 'Micron', v: 22 },
+      { n: 'CXMT', v: 8 }, { n: 'Other', v: 3 },
+    ],
+    caveat: 'CXMT’s share is DRAM only. In HBM specifically SK Hynix holds roughly 60%, with Micron and Samsung splitting most of the rest, and CXMT’s IPO prospectus contains no HBM project at all. Hanmi Semiconductor is not a memory maker: it supplies the thermocompression bonders used to stack HBM dies.',
+    summary: 'Every accelerator is bandwidth-starved without stacked memory beside it, and the industry entered the AI boom having just cut capex through the worst downturn in a decade. Wafer supply now runs roughly 20% behind demand, and SK Group has said publicly that it expects scarcity to persist to around 2030.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'One Blackwell-class part carries 192 GB or more of HBM. Because HBM consumes roughly three times the wafer area per bit of standard DRAM and takes far longer to test, every bit shifted into HBM removes several bits of conventional supply. That is why an AI shortage drained the commodity memory market alongside it and put DRAM prices into the steepest run in the industry’s history.' },
+      { h: 'Why it binds', p: 'Memory capacity is committed a year ahead and takes two to three years to add. The 2023 capex cuts landed exactly when the AI orders were forming, so the supply that would have relieved 2026 was cancelled in 2023. Nothing in the current cycle can undo that timing.' },
+      { h: 'What breaks it open', p: 'Three things: HBM4 lifting bandwidth per stack so fewer stacks are needed per accelerator, new fabs at Cheongju, Pyeongtaek and Idaho reaching volume, and CXMT converting Chinese domestic DDR5 output into real commodity relief. The last of those is the newest variable, and because CXMT is not building HBM it will show up in DRAM prices well before it shows up in AI.' },
+    ],
+    stats: [
+      { k: 'Wafer supply vs demand', v: '~20% short' },
+      { k: 'HBM per Blackwell-class GPU', v: '192 GB+' },
+      { k: 'CXMT wafer starts, end-2026', v: '~350k/month' },
+      { k: 'CXMT IPO, 27 Jul 2026', v: '$8.6B raised' },
+    ],
+  },
+
+  'Storage: HDD & enterprise NAND': {
+    basis: 'Share of nearline HDD exabytes shipped, 2025 (est.)',
+    shares: [{ n: 'Seagate', v: 43 }, { n: 'Western Digital', v: 38 }, { n: 'Toshiba', v: 19 }],
+    caveat: 'Nearline disk is a three-way market and Toshiba is the third player, not named on the card. The NAND names beside it, SanDisk, Kioxia, Micron and Samsung, compete in the separate enterprise SSD market where Samsung leads at roughly 30% of NAND revenue.',
+    summary: 'Every checkpoint, training corpus and inference cache has to land somewhere, and the AI build-out arrived just as the disk industry was recovering from a glut it had answered by cutting capacity. Nearline drives went from oversupplied to sold out a year forward in about six quarters.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Hyperscalers buy nearline capacity on multi-year contracts measured in exabytes rather than units. When three suppliers see demand exceed their combined output they stop quoting spot and move everyone onto allocation, and because a disk plant takes years to expand there is no marginal supply left to bid for.' },
+      { h: 'Why it binds', p: 'The triopoly is the whole story. HDD manufacturing carries deep enough capital and patent requirements that no new entrant can appear on any relevant timescale, so when the three incumbents are full the market is simply full at any price.' },
+      { h: 'What breaks it open', p: 'HAMR is the technical answer, raising areal density enough to lift exabytes per plant without building new ones, and Seagate is furthest along. On the flash side, inference workloads offloading KV-cache to enterprise QLC are pulling SSDs into the same squeeze, so NAND capex has become part of the same story rather than an alternative to it.' },
+    ],
+    stats: [
+      { k: 'Nearline lead times', v: '52+ weeks' },
+      { k: 'Suppliers of nearline HDD', v: '3' },
+      { k: 'Effectively sold out through', v: '~2027' },
+      { k: 'HDD share of hyperscale bytes', v: '~80%' },
+    ],
+  },
+
+  'EUV lithography': {
+    basis: 'Share of wafer-fab equipment revenue, 2025 (est.)',
+    shares: [
+      { n: 'Applied Materials', v: 20 }, { n: 'ASML', v: 20 }, { n: 'Lam Research', v: 13 },
+      { n: 'Tokyo Electron', v: 13 }, { n: 'Other', v: 34 },
+    ],
+    caveat: 'The pie is the broad equipment market; the chokepoint is far narrower. In EUV specifically ASML holds 100%, with Zeiss the sole supplier of the optics and TRUMPF the sole supplier of the laser source, so three European firms gate the entire leading edge.',
+    summary: 'This is the only bottleneck on the page with a hard physical ceiling that money cannot move inside a decade. ASML builds roughly fifty to sixty scanners a year, each a 180-tonne machine with about 100,000 parts, and no second supplier exists or is being built anywhere in the world.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'A scanner takes over a year to build and ship, and the chain behind it narrows to a single source at almost every step: Zeiss for mirrors polished to sub-nanometre flatness, TRUMPF for the CO2 laser that vaporises tin droplets fifty thousand times a second. Lift any one of those constraints and the others still bind.' },
+      { h: 'Why it binds', p: 'Throughput improvements move the wrong variable. Newer models push wafers per hour up, but the number of machines in the world grows only as fast as ASML can build them, and total AI silicon output scales with tool count. At roughly 3.5 EUV tools per gigawatt of AI compute, a fleet near 700 scanners by 2030 implies a ceiling around 200 GW.' },
+      { h: 'What breaks it open', p: 'Nothing quickly. High-NA raises resolution but is slower and dearer per wafer, and the fleet only expands incrementally. The realistic relief is architectural: chiplets, advanced packaging and design efficiency that extract more useful compute from each EUV-printed square millimetre.' },
+    ],
+    stats: [
+      { k: 'ASML share of EUV', v: '100%' },
+      { k: 'Scanners built per year', v: '~50–60' },
+      { k: 'Parts per machine', v: '~100,000' },
+      { k: 'Projected fleet by 2030', v: '~700' },
+    ],
+  },
+
+  'Photomask ecosystem': {
+    basis: 'Share of EUV mask blank supply, 2025 (est.)',
+    shares: [{ n: 'Hoya', v: 65 }, { n: 'AGC', v: 30 }, { n: 'Other', v: 5 }],
+    caveat: 'Different links, different monopolies. Mitsui Chemicals is effectively the sole EUV pellicle source, IMS Nanofabrication (owned by Intel) supplies almost every multi-beam mask writer, Lasertec is the only maker of actinic EUV mask-inspection tools, and Photronics is the largest merchant mask shop rather than a blank maker.',
+    summary: 'This is the least-watched chokepoint in the chain and arguably the most fragile. Four separate near-monopolies stack in series, each far smaller than ASML, and a failure at any one of them halts EUV output just as completely as losing a scanner would.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'A mask is the stencil for one layer. It starts as a defect-free quartz blank coated with forty-plus alternating molybdenum and silicon layers, gets patterned by a multi-beam writer, is capped with a pellicle to keep particles off the pattern, then inspected at EUV wavelength. Every one of those steps has one or two qualified suppliers worldwide.' },
+      { h: 'Why it binds', p: 'Layer counts keep rising. Each node adds EUV layers and each layer needs its own perfect mask, so mask demand grows faster than wafer demand does. High-NA makes it worse rather than better by halving the exposure field, which means more masks per design.' },
+      { h: 'What breaks it open', p: 'Hoya and AGC are adding blank lines and merchant mask capacity is broadening, which should ease the volume problem by the late 2020s. The structural risk does not go away: a fire, an earthquake or an export restriction at a single Japanese supplier remains a single point of failure for the entire leading edge.' },
+    ],
+    stats: [
+      { k: 'EUV blank suppliers', v: '2' },
+      { k: 'Actinic inspection suppliers', v: '1' },
+      { k: 'Mo/Si layers per blank', v: '40+' },
+      { k: 'Leading-node mask set', v: '~$20–30M' },
+    ],
+  },
+
+  'Test, metrology & inspection': {
+    basis: 'Share of automated test equipment (ATE) revenue, 2025 (est.)',
+    shares: [{ n: 'Advantest', v: 55 }, { n: 'Teradyne', v: 30 }, { n: 'Other', v: 15 }],
+    caveat: 'The remaining names sit in adjacent segments: KLA holds roughly half of all process-control and inspection revenue, Lasertec is the sole supplier of actinic EUV mask inspection, FormFactor leads probe cards, and Onto and Camtek focus on advanced-packaging metrology.',
+    summary: 'Test used to be an afterthought worth a few percent of cost. With HBM stacks and chiplets it became a capacity gate, because one bad die inside a finished package destroys every expensive component bonded to it, so the industry now tests exhaustively before assembly instead of after.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Known-good-die and known-good-stack testing means each HBM die is verified before stacking and each stack before it meets the logic die. Test time per AI package is measured in minutes rather than seconds, and testers are capital equipment with year-plus lead times, so tester hours turn into a hard throughput limit on the packaging line.' },
+      { h: 'Why it binds', p: 'Advantest owns the high-end SoC and memory test market and has been effectively sold out. Probe cards, burn-in boards and sockets are all custom per design, so every new accelerator generation resets that consumable supply chain from scratch.' },
+      { h: 'What breaks it open', p: 'Capacity additions from Advantest and Teradyne land through 2026 and 2027, and system-level test is being designed in earlier rather than bolted on at the end. The counter-pressure is that HBM4 and higher chiplet counts push test intensity up faster than tester supply grows.' },
+    ],
+    stats: [
+      { k: 'Advantest ATE share', v: '~55%' },
+      { k: 'KLA process-control share', v: '~50%' },
+      { k: 'Test time per AI package', v: 'minutes, not seconds' },
+      { k: 'Actinic inspection suppliers', v: '1' },
+    ],
+  },
+
+  'Advanced packaging (CoWoS)': {
+    basis: 'Share of 2.5D advanced packaging capacity, 2025 (est.)',
+    shares: [{ n: 'TSMC', v: 75 }, { n: 'Amkor', v: 9 }, { n: 'ASE Technology', v: 8 }, { n: 'Other', v: 8 }],
+    caveat: 'BE Semiconductor and Kulicke & Soffa are not packaging houses. They supply the hybrid-bonding and thermocompression tools the packaging houses install, so their leverage is over how fast capacity can be added rather than over who owns it.',
+    summary: 'For most of 2024 the AI shortage was a packaging shortage. The transistors existed and the HBM existed, and the binding constraint was how many interposers TSMC could produce to bond them together. It is the clearest case on this page of a bottleneck sitting downstream of the thing everyone was watching.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'CoWoS bonds several logic dies and a ring of HBM stacks onto a silicon interposer larger than any single reticle can print. Yield falls as area grows, and a defect anywhere scraps every expensive die on the package, so effective output sits well below nameplate capacity.' },
+      { h: 'Why it binds', p: 'One supplier held the qualified process, and qualifying an OSAT second source on a flagship part takes quarters rather than weeks. TSMC roughly doubled CoWoS capacity every year and still could not clear the queue, because each GPU generation consumes more interposer area than the one before it.' },
+      { h: 'What breaks it open', p: 'Three shifts are underway: OSATs qualifying real volume, CoWoS-L replacing the giant silicon slab with an organic interposer plus local silicon bridges, and panel-level packaging moving from round wafers to rectangular panels, which raises usable area per process step by a large multiple.' },
+    ],
+    stats: [
+      { k: 'CoWoS capacity growth', v: '~2x per year' },
+      { k: 'Interposer size vs reticle', v: '3–4x' },
+      { k: 'Qualifying a second source', v: '2–4 quarters' },
+      { k: 'Peak binding period', v: '2024–26' },
+    ],
+  },
+
+  'Substrates & ABF film': {
+    basis: 'Share of ABF flip-chip substrate revenue, 2025 (est.)',
+    shares: [
+      { n: 'Ibiden', v: 25 }, { n: 'Shinko Electric', v: 20 }, { n: 'Unimicron', v: 18 },
+      { n: 'AT&S', v: 8 }, { n: 'Other', v: 29 },
+    ],
+    caveat: 'Ajinomoto is not a substrate maker. It produces the insulating build-up film that essentially every substrate in this pie is constructed from, a near-monopoly one layer further upstream.',
+    summary: 'A processor does not sit on a circuit board directly, it sits on a build-up substrate that fans thousands of microscopic die pads out to solder balls. The insulating film in the middle of that sandwich comes from a Japanese food and seasoning company, which is the strangest concentration risk in the whole AI supply chain.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Ajinomoto Build-up Film began as a by-product of amino-acid chemistry and became the industry standard by being better than anything else at fine-line insulation. Substrate makers laminate twenty-plus layers of it, drill microvias and plate copper, and yields fall steeply as the body gets larger, which is exactly the direction AI packages are heading.' },
+      { h: 'Why it binds', p: 'The scarce commodity is not substrate area in general but the specific oversized, high-layer-count parts AI accelerators need. Warpage, registration and layer-to-layer alignment all worsen with area, so capacity built for ordinary packages does not relieve the grade that is actually short.' },
+      { h: 'What breaks it open', p: 'Glass-core substrates are the structural fix, being flatter and dimensionally stable at large body sizes, with Intel, Samsung and the Japanese makers all running programmes toward roughly 2026 to 2028. Until they arrive it is incremental capacity from Ibiden and Shinko plus slow yield learning.' },
+    ],
+    stats: [
+      { k: 'ABF film supply', v: 'near single-source' },
+      { k: 'Layers in a high-end part', v: '20+' },
+      { k: 'Glass-core substrates', v: '~2026–28' },
+      { k: 'Scarce grade', v: 'oversized, high-layer' },
+    ],
+  },
+
+  'High-end PCB & CCL': {
+    basis: 'Share of low-loss copper-clad laminate for AI servers, 2025 (est.)',
+    shares: [
+      { n: 'Elite Material', v: 35 }, { n: 'Panasonic', v: 20 },
+      { n: 'Taiwan Union Tech', v: 15 }, { n: 'Other', v: 30 },
+    ],
+    caveat: 'Zhen Ding, Gold Circuit and TTM Technologies are board fabricators rather than laminate makers. They buy the material in this pie and turn it into GPU trays, backplanes and switch boards, so their constraint is press and drill capacity, not resin chemistry.',
+    summary: 'This is the layer people forget because it sounds mundane. A 1.6T switch or an NVLink backplane is only as good as the dielectric under its traces, and the ultra-low-loss grades that keep signals intact at those speeds come from a handful of Taiwanese and Japanese resin houses.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Signal loss rises with frequency, so each speed jump forces a lower-loss resin system, currently M8 grade and beyond. Qualifying a new laminate takes about a year of reliability testing, and the resins depend on specialty fillers and low-dielectric glass cloth that have their own limited supply base.' },
+      { h: 'Why it binds', p: 'Volume and grade move together. Going from 800G to 1.6T does not just need more laminate, it needs a scarcer laminate, so capacity added for the previous generation does nothing to relieve the current one.' },
+      { h: 'What breaks it open', p: 'Expansions in Taiwan and Southeast Asia land through 2027 and 2028, and next-generation resin systems are in qualification now. The pattern repeats though, because every fabric speed jump re-tightens the top grade, so this bottleneck oscillates rather than resolving.' },
+    ],
+    stats: [
+      { k: 'Scarce grade', v: 'M8 and above' },
+      { k: 'Laminate qualification', v: '~12 months' },
+      { k: 'Layers on AI boards', v: '20–30+' },
+      { k: 'Re-tightening trigger', v: 'every speed jump' },
+    ],
+  },
+
+  'Board-level power delivery': {
+    basis: 'Share of the AI server power-delivery chain, 2025 (est.)',
+    shares: [
+      { n: 'Monolithic Power', v: 25 }, { n: 'Infineon', v: 22 }, { n: 'Delta Electronics', v: 18 },
+      { n: 'onsemi', v: 9 }, { n: 'Renesas', v: 8 }, { n: 'Other', v: 18 },
+    ],
+    caveat: 'Vicor and Navitas are small by revenue but hold outsized technical positions, Vicor in vertical power delivery modules and Navitas in gallium-nitride devices for 800 VDC architectures, so their share understates their leverage over the transition.',
+    summary: 'Getting a megawatt into a rack is straightforward. Getting two thousand amps at under a volt into a die without the voltage collapsing is the hard part, and that last conversion step has already stopped GPU boards from shipping. The move to 800 VDC racks adds an entirely new bill of materials on top of it.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Power is stepped down repeatedly: grid to 800 VDC at the rack, then to 48 V, then to sub-1 V at the point of load. Each step needs power stages, controllers, magnetics and capacitors, and current at the die is high enough that the copper path itself becomes a design constraint, which is what pushed the industry to vertical power delivery underneath the package.' },
+      { h: 'Why it binds', p: 'Power content per accelerator has multiplied faster than power-semiconductor capacity. DrMOS shortages have already gated accelerator board builds, and the qualification burden is unusually high because a VRM failure destroys the most expensive component in the rack.' },
+      { h: 'What breaks it open', p: 'GaN and SiC capacity is expanding, 800 VDC standardises what used to be bespoke per design, and multiple qualified sources per rail are becoming normal. The offsetting force is that every GPU generation raises power density, so the target keeps moving away from the supply base.' },
+    ],
+    stats: [
+      { k: 'Current delivered at the die', v: '~2,000 A' },
+      { k: 'Rack architecture shift', v: '48 V → 800 VDC' },
+      { k: 'New BOM item', v: 'battery backup units' },
+      { k: 'Peak binding period', v: '2025–27' },
+    ],
+  },
+
+  'Capacitors (MLCC)': {
+    basis: 'Share of global MLCC revenue, 2025 (est.)',
+    shares: [
+      { n: 'Murata', v: 40 }, { n: 'Samsung Electro-Mech', v: 20 }, { n: 'Taiyo Yuden', v: 13 },
+      { n: 'TDK', v: 10 }, { n: 'Yageo', v: 8 }, { n: 'Other', v: 9 },
+    ],
+    caveat: 'Walsin is a capacity story rather than a share story. It is expanding aggressively into AI-grade high-capacitance parts from a smaller commodity base, which is why it turns up in shortage commentary out of proportion to its revenue.',
+    summary: 'An AI server swallows tens of thousands of MLCCs, tiny ceramic capacitors that stabilise voltage next to the die. They cost fractions of a cent each and are in the longest shortage the component has ever seen, because AI needs precisely the high-capacitance grades that are hardest to manufacture.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'A high-capacitance MLCC is hundreds of ceramic and electrode layers stacked into a package smaller than a grain of sand. Thinner layers mean more capacitance and worse yields, and the equipment to make them is specialised and slow to add. A single AI board can carry tens of thousands of these parts.' },
+      { h: 'Why it binds', p: 'The industry entered the AI boom digesting a consumer downturn, so capex for the high-cap grades lagged badly. Suppliers describe the resulting cycle as larger and longer than the 2018 super-cycle, with shortage conditions expected to run through 2027 and 2028.' },
+      { h: 'What breaks it open', p: 'Expansions from Murata, Samsung Electro-Mechanics, Yageo and Walsin land from 2027, and the commodity grades are already comfortable. AI-grade high-cap parts stay premium and allocated even after the broad market rebalances, so the headline shortage ends before the specific one does.' },
+    ],
+    stats: [
+      { k: 'MLCCs per AI server', v: 'tens of thousands' },
+      { k: 'Murata share', v: '~40%' },
+      { k: 'Shortage expected through', v: '2027–28' },
+      { k: 'Layers in a high-cap part', v: 'hundreds' },
+    ],
+  },
+
+  'Optics, lasers & interconnect': {
+    basis: 'Share of datacom optical transceiver revenue, 2025 (est.)',
+    shares: [
+      { n: 'InnoLight', v: 25 }, { n: 'Coherent', v: 15 }, { n: 'Broadcom', v: 12 },
+      { n: 'Lumentum', v: 8 }, { n: 'Other', v: 40 },
+    ],
+    caveat: 'Fabrinet is a contract manufacturer. It assembles modules on behalf of several of the brands in this pie rather than competing with them, so its revenue overlaps theirs instead of adding to it.',
+    summary: 'Every GPU in a cluster talks to every other one, and above a few thousand nodes that traffic has to travel on light. The transceiver market looks competitive at the module level, but the lasers inside the modules come from very few places, and that is where the actual shortage lives.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'An 800G module needs eight lanes, each with its own EML or DFB laser die, plus a DSP. Laser fabs run on indium phosphide rather than silicon, with far smaller wafers and lower volumes, and yields on the highest-speed grades are poor, so laser die supply gates module output regardless of how much assembly capacity exists.' },
+      { h: 'Why it binds', p: 'Optics scale with the square of cluster size rather than linearly with GPU count, so doubling cluster scale can quadruple transceiver demand. Meanwhile each speed generation needs faster laser grades that yield worse than the ones they replace.' },
+      { h: 'What breaks it open', p: 'Co-packaged optics move the light source off the pluggable module and onto the switch package, cutting power and part count but concentrating demand onto external laser sources. Silicon photonics and new indium-phosphide capacity broaden supply from around 2028.' },
+    ],
+    stats: [
+      { k: 'Lasers per 800G module', v: '8' },
+      { k: 'Current fabric generation', v: '1.6T' },
+      { k: 'Laser substrate', v: 'indium phosphide' },
+      { k: 'Peak binding period', v: '2026–29' },
+    ],
+  },
+
+  'Networking & scale-out fabric': {
+    basis: 'Share of AI back-end fabric ports shipped, 2025 (est.)',
+    shares: [
+      { n: 'Nvidia', v: 65 }, { n: 'Broadcom', v: 20 }, { n: 'Arista', v: 6 },
+      { n: 'Cisco', v: 3 }, { n: 'Other', v: 6 },
+    ],
+    caveat: 'Marvell and Astera Labs sell into the same fabric but at the component layer, supplying DSPs, retimers and PCIe and CXL controllers, so neither appears as port share even though both are in the critical path.',
+    summary: 'A frontier training run is one machine made of a hundred thousand chips, and the thing that makes it one machine is the fabric. Past a certain cluster size, bandwidth per GPU rather than GPU count sets how much useful compute you actually have.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Collective operations such as all-reduce force every GPU to exchange gradients on every step. If the fabric is slow, extremely expensive accelerators sit idle waiting for each other, so effective FLOPs are a function of interconnect bandwidth and topology rather than of the accelerator spec sheet.' },
+      { h: 'Why it binds', p: 'Nvidia sells the fabric with the compute. NVLink and NVSwitch are the fastest scale-up path and are only available inside Nvidia systems, which folds the fabric into the same allocation problem as the accelerators themselves.' },
+      { h: 'What breaks it open', p: 'Ultra Ethernet and the broader open-fabric push give hyperscalers a credible alternative, successive Broadcom Tomahawk generations keep raising switch radix, and co-packaged optics lift per-port bandwidth. Interconnect stops being the binding limit but never stops being the core design constraint.' },
+    ],
+    stats: [
+      { k: 'Frontier cluster scale', v: '100k+ GPUs' },
+      { k: 'Competing fabrics', v: 'NVLink, InfiniBand, Ethernet' },
+      { k: 'Effective compute driver', v: 'bandwidth per GPU' },
+      { k: 'Peak binding period', v: '2025–28' },
+    ],
+  },
+
+  'Inter-datacenter bandwidth': {
+    basis: 'Share of fibre and coherent transport supply into AI routes (est.)',
+    shares: [
+      { n: 'Corning', v: 30 }, { n: 'Prysmian', v: 18 }, { n: 'Ciena', v: 15 },
+      { n: 'Nokia', v: 12 }, { n: 'NKT A/S', v: 8 }, { n: 'Other', v: 17 },
+    ],
+    caveat: 'Lumen is not a manufacturer. It is a route owner selling existing dark fibre to AI buyers, and Marvell supplies the coherent DSPs inside several of the systems vendors listed here.',
+    summary: 'Once a campus hits its local power ceiling, the only way to keep scaling a training run is to spread it across sites, and at that point the fibre between them becomes part of the computer. That has turned metro dark fibre from a telecom asset into a strategic AI asset almost overnight.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Distributed training tolerates latency far better than people expected but is unforgiving about bandwidth, so multi-site runs need many terabits between campuses. That is supplied either by lighting existing dark fibre with coherent ZR optics or by trenching new routes, and the second option takes years of permitting.' },
+      { h: 'Why it binds', p: 'On the routes that matter, between the metros where powered land actually exists, the spare fibre has largely been bought. New conduit is a civil-engineering project subject to municipal permitting, so supply cannot flex on the timescale AI demand moves.' },
+      { h: 'What breaks it open', p: 'New long-haul and subsea builds funded specifically for AI light up from around 2028, coherent optics supply broadens, and higher per-fibre capacity extracts more from existing routes. Main corridors ease first and secondary routes stay thin for longer.' },
+    ],
+    stats: [
+      { k: 'Scarce component', v: 'coherent ZR/ZR+ optics' },
+      { k: 'New route lead time', v: 'years, permit-bound' },
+      { k: 'Trigger', v: 'campus power ceiling' },
+      { k: 'Peak binding period', v: '2026–29' },
+    ],
+  },
+
+  'Rack integration & ODM capacity': {
+    basis: 'Share of AI server and rack ODM revenue, 2025 (est.)',
+    shares: [
+      { n: 'Foxconn', v: 35 }, { n: 'Quanta', v: 22 }, { n: 'Wistron', v: 15 },
+      { n: 'Supermicro', v: 12 }, { n: 'Celestica', v: 6 }, { n: 'Other', v: 10 },
+    ],
+    caveat: 'Amphenol is a component supplier rather than an integrator. It is named on the card because the NVLink copper backplane cartridges it makes are near-sole-sourced and have gated rack output directly.',
+    summary: 'The GB200 ramp is the cleanest proof that having the chips is not the same as having the product. Silicon was available and racks still slipped, because a 120 kW liquid-cooled NVL72 is a plumbing, connector and burn-in problem at least as much as a semiconductor one.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'An NVL72 is seventy-two accelerators, a copper backplane carrying enormous aggregate bandwidth, thousands of liquid connections and a power train that has to be leak-tested and burned in before it ships. Integrators measure capacity in racks per week, and enough of the process is manual that it does not scale by adding capital alone.' },
+      { h: 'Why it binds', p: 'Early builds hit backplane and connector problems plus liquid-cooling leaks, and the know-how to fix them lives in a handful of Taiwanese ODM teams. Moving lines to the US and Mexico for supply-chain reasons resets that learning curve at exactly the wrong moment.' },
+      { h: 'What breaks it open', p: 'Integration experience diffuses, rack designs standardise so ODMs can multi-source, and connector supply broadens. Rubin-class racks reset the complexity once more before it settles, which is why this chokepoint peaks early and then eases rather than staying binding.' },
+    ],
+    stats: [
+      { k: 'Rack power', v: '~120 kW' },
+      { k: 'Accelerators per NVL72', v: '72' },
+      { k: 'Capacity measured in', v: 'racks per week' },
+      { k: 'Peak binding period', v: '2024–26' },
+    ],
+  },
+
+  'Critical materials': {
+    basis: 'Share of 300 mm silicon wafer supply, 2025 (est.)',
+    shares: [{ n: 'Shin-Etsu', v: 30 }, { n: 'SUMCO', v: 22 }, { n: 'Other', v: 48 }],
+    caveat: 'This card spans several unrelated markets, so one pie cannot cover it. Tokyo Ohka Kogyo is a leading EUV photoresist supplier, Linde a top electronic-gas supplier and Freeport-McMoRan a copper miner, while China separately controls the majority of gallium, germanium and rare-earth processing.',
+    summary: 'Underneath every chip is a stack of inputs that are individually cheap and collectively impossible to replace quickly. Some are concentrated in two Japanese companies, some in one Chinese processing industry, and one of them, crucible-grade quartz, comes essentially from a single town in North Carolina.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Concentration compounds down the chain. Ultrapure polysilicon becomes ingots pulled in quartz crucibles, sliced into wafers, coated in photoresist and etched using specialty gases. Each stage has two or three qualified global suppliers, and qualification at a leading-edge fab takes a year or more, so substitution is simply not available on demand.' },
+      { h: 'Why it binds', p: 'Materials are political. China has restricted gallium, germanium, scandium and rare-earth exports, and those controls bite immediately because there is no non-Chinese processing capacity to switch to. Hurricane Helene hitting Spruce Pine in 2024 demonstrated the same fragility from a purely physical direction.' },
+      { h: 'What breaks it open', p: 'New wafer capacity, non-Chinese rare-earth processing at MP Materials and Lynas, and fresh copper projects all help, but every one is a multi-year build. Copper is the standout worry, because grids, EVs and data centres are all bidding for the same tonnes at the same time.' },
+    ],
+    stats: [
+      { k: 'Crucible-grade quartz', v: 'Spruce Pine, NC' },
+      { k: 'Top two wafer makers', v: '~50% of supply' },
+      { k: 'China gallium processing', v: 'majority' },
+      { k: 'Materials qualification', v: '12+ months' },
+    ],
+  },
+
+  'Data-center cooling': {
+    basis: 'Share of data-center thermal management revenue, 2025 (est.)',
+    shares: [
+      { n: 'Vertiv', v: 22 }, { n: 'Schneider Electric', v: 18 }, { n: 'Delta Electronics', v: 12 },
+      { n: 'nVent', v: 8 }, { n: 'Munters', v: 5 }, { n: 'Other', v: 35 },
+    ],
+    caveat: '',
+    summary: 'Air cooling stops working somewhere around 50 kW a rack. Blackwell-class racks draw more than twice that, so liquid is no longer an efficiency upgrade, it is the only way the hardware runs at all, and the components that make it work are the scarce part.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Direct-to-chip cooling needs cold plates on every die, manifolds, quick-disconnects that will not leak next to live electronics, and coolant distribution units sized per row. None of it existed at data-center scale three years ago, so the entire supply base is being built while demand is already running at volume.' },
+      { h: 'Why it binds', p: 'CDUs and quick-disconnects are the specific short items and they are safety-critical, which makes qualification slow. Retrofitting an air-cooled hall for liquid is often harder than building new, which pushes demand onto new construction and straight into its own set of constraints.' },
+      { h: 'What breaks it open', p: 'Manufacturing scales through 2027, and immersion plus rear-door heat exchangers broaden the options. Two complications persist: 3M exiting PFAS production removed the standard Novec-class immersion fluids, and large chillers still run past a year of lead time.' },
+    ],
+    stats: [
+      { k: 'Air cooling ceiling', v: '~50 kW/rack' },
+      { k: 'GB200-class rack draw', v: '~120 kW+' },
+      { k: 'Scarce items', v: 'CDUs, quick-disconnects' },
+      { k: 'Large chiller lead time', v: '12+ months' },
+    ],
+  },
+
+  'Water': {
+    basis: 'Share of industrial and ultrapure water treatment supply (est.)',
+    shares: [
+      { n: 'Veolia', v: 20 }, { n: 'Ecolab', v: 18 }, { n: 'Kurita Water', v: 12 },
+      { n: 'Xylem', v: 10 }, { n: 'Organo', v: 5 }, { n: 'Other', v: 35 },
+    ],
+    caveat: '',
+    summary: 'Water is the bottleneck that is never national and always local. There is plenty of it globally and very little of it in exactly the places, Arizona, west Texas, central Taiwan, where the cheapest power and the best fab sites happen to be.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Evaporative cooling is the cheap way to reject heat and it consumes water rather than circulating it, so a large campus can evaporate millions of gallons a day. Fabs need something different again: ultrapure water, produced from municipal supply through a long treatment chain, at enormous volumes per wafer.' },
+      { h: 'Why it binds', p: 'The constraint arrives as a permit rather than a price. Authorities in dry regions increasingly refuse or delay water allocations for data centers regardless of what an operator is willing to pay, and organised local opposition has become a genuine scheduling risk rather than a public-relations one.' },
+      { h: 'What breaks it open', p: 'Closed-loop and air-cooled designs trade water for power and capital, reclaimed-water agreements are becoming standard, and fabs already recycle a large share of their ultrapure supply. The trade never disappears, it just moves the load onto the grid, which is the bottleneck next door.' },
+    ],
+    stats: [
+      { k: 'Large campus draw', v: 'millions of gal/day' },
+      { k: 'Fab requirement', v: 'ultrapure water' },
+      { k: 'Binding form', v: 'permits, not price' },
+      { k: 'Structural workaround', v: 'closed-loop designs' },
+    ],
+  },
+
+  'Energy, grid & transformers': {
+    basis: 'Share of large transformer and grid equipment supply (est.)',
+    shares: [
+      { n: 'Hitachi Energy', v: 22 }, { n: 'Siemens Energy', v: 16 }, { n: 'GE Vernova', v: 14 },
+      { n: 'Eaton', v: 10 }, { n: 'Other', v: 38 },
+    ],
+    caveat: 'Constellation and Quanta Services are on this card for different reasons: Constellation supplies firm nuclear power under long-term contracts to AI campuses, and Quanta Services builds transmission rather than manufacturing the equipment that runs on it. Vertiv sits inside the building, on rack power and thermal.',
+    summary: 'Power is the constraint that will still be binding when every silicon shortage on this page has resolved. It is not primarily about generation, it is about the transformers, switchgear and transmission that connect generation to load, all of which are ordered years ahead from a small number of factories.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'A campus needs a grid connection, and that means large power transformers, high-voltage switchgear and often new transmission. Lead times for large transformers reached roughly 144 weeks, which is longer than it takes to build the data center itself, so the electrical order rather than the concrete determines the schedule.' },
+      { h: 'Why it binds', p: 'Transformer manufacturing was sized for slow grid-replacement demand, and the industry has been cautious about adding capacity for what might be a spike. Grain-oriented electrical steel, bushings and skilled winding labor are each their own sub-constraint, and moving a finished 400-tonne unit needs heavy-haul rigs and crews that are also scarce.' },
+      { h: 'What breaks it open', p: 'New transformer plants are being built in the US and Europe, interconnection queue reform is slowly progressing, and behind-the-meter generation lets campuses bypass the queue entirely. Demand keeps rising underneath all of it: US data-center draw is projected to go from about 371 TWh in 2027 to roughly 606 TWh by 2030.' },
+    ],
+    stats: [
+      { k: 'Large transformer lead time', v: '~144 weeks' },
+      { k: 'US data-center draw, 2030', v: '~606 TWh' },
+      { k: 'Global draw, 2030', v: '~945 TWh' },
+      { k: 'Transformer unit weight', v: 'up to ~400 t' },
+    ],
+  },
+
+  'On-site generation & backup power': {
+    basis: 'Share of heavy-duty gas turbine and prime-power supply (est.)',
+    shares: [
+      { n: 'GE Vernova', v: 30 }, { n: 'Siemens Energy', v: 24 }, { n: 'Mitsubishi Heavy', v: 22 },
+      { n: 'Caterpillar', v: 9 }, { n: 'Cummins', v: 7 }, { n: 'Other', v: 8 },
+    ],
+    caveat: 'Rolls-Royce and Bloom Energy address the same need with different hardware: mtu gensets plus a small modular reactor programme in one case, solid-oxide fuel cells that can be deployed in months in the other.',
+    summary: 'When the grid says no, campuses build their own power plant. That worked as a one-off and then everyone did it at once, so the turbines themselves became the queue. Order books for large gas turbines now run to the end of the decade.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Three manufacturers build the world’s heavy-duty gas turbines, and each has a fixed number of production slots per year. AI campuses are now competing for those slots against utilities and industrial buyers who have been in the queue for years, and slots for 2029 and 2030 are already spoken for.' },
+      { h: 'Why it binds', p: 'Everything around the turbine is short too. Switchgear, UPS systems and gensets run past 100 weeks, so a campus that secures generation can still be held up by the electrical balance of plant. This is a distinct bottleneck from the grid: it binds even on projects that never touch a utility interconnection.' },
+      { h: 'What breaks it open', p: 'Turbine manufacturers are adding capacity, fuel cells offer a genuinely fast path wherever gas is available, and SMR pilots begin contributing late in the decade. Storage plus grid-firming contracts also reduce how much firm on-site capacity a campus actually needs to own.' },
+    ],
+    stats: [
+      { k: 'Turbine order books to', v: '~2029–30' },
+      { k: 'Switchgear / UPS lead times', v: '100+ weeks' },
+      { k: 'Template project', v: 'xAI Memphis' },
+      { k: 'Turbine makers at scale', v: '3' },
+    ],
+  },
+
+  'Shells, land & interconnection': {
+    basis: 'Share of hyperscale data-center capacity owned or developed (est.)',
+    shares: [
+      { n: 'Digital Realty', v: 14 }, { n: 'Equinix', v: 11 }, { n: 'QTS', v: 10 },
+      { n: 'Vantage', v: 7 }, { n: 'Other', v: 58 },
+    ],
+    caveat: 'Blackstone appears here as the capital behind the asset class rather than as an operator. It owns QTS outright and is the largest single financier of shells, so its exposure overlaps the developers listed beside it. The large "other" slice is mostly self-built hyperscaler capacity.',
+    summary: 'Before any of the hardware on this page matters, someone has to own a piece of land that has a grid connection date, a permit and a building on it. That combination, not the building alone, is the scarce asset, and in primary markets it is effectively sold out.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'A developer secures land, applies for interconnection, and waits. Queues run four to seven years in the busiest regions, longer than the construction itself, so the interconnection date rather than the concrete determines when capacity exists. Capacity is routinely pre-leased years before it is built.' },
+      { h: 'Why it binds', p: 'Vacancy in primary markets fell below 1%. At the same time dozens of US jurisdictions have passed moratoria or restrictions in response to local opposition over power prices, water and noise, which removes viable sites from the map faster than new ones open up.' },
+      { h: 'What breaks it open', p: 'Secondary markets, behind-the-meter siting that skips the interconnection queue entirely, and queue reform at the regulator level. None of these is fast, so powered land stays a multi-year lead item even in the optimistic case.' },
+    ],
+    stats: [
+      { k: 'Primary-market vacancy', v: '<1%' },
+      { k: 'Interconnection queue', v: '4–7 years' },
+      { k: 'US jurisdictions restricting', v: 'dozens' },
+      { k: 'The scarce asset', v: 'powered land' },
+    ],
+  },
+
+  'Skilled labor & construction': {
+    basis: 'Share of US data-center mechanical, electrical and site construction revenue (est.)',
+    shares: [
+      { n: 'EMCOR', v: 16 }, { n: 'Quanta Services', v: 15 }, { n: 'Comfort Systems', v: 12 },
+      { n: 'Jacobs', v: 8 }, { n: 'MYR Group', v: 5 }, { n: 'Other', v: 44 },
+    ],
+    caveat: 'Sterling Infrastructure sits in the "other" slice, focused on site development and earthworks rather than the mechanical and electrical scope that dominates this market.',
+    summary: 'You cannot import an electrician on short notice. The trades that build data centers and the technicians that run fabs take years to train, the pipeline was sized for a normal decade, and both TSMC Arizona and Intel Ohio slipped on people rather than on equipment.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'A single hyperscale campus can need thousands of electricians, pipefitters and controls technicians on site simultaneously for eighteen months, in a location that may not have a metro-sized labor pool nearby. Contractors bid the same crews across competing projects, so wage inflation and schedule slippage arrive together.' },
+      { h: 'Why it binds', p: 'A licensed electrician is roughly four to five years of apprenticeship, and a fab process technician needs specialised training that barely exists outside Taiwan and Korea. No amount of capital shortens either, which makes labor one of the very few genuinely inelastic inputs in the whole chain.' },
+      { h: 'What breaks it open', p: 'Apprenticeship expansion, community-college partnerships around each new fab, prefabrication and modular construction that moves work into factories, and automation of repetitive install tasks. These help from about 2028, which is after peak build rather than during it.' },
+    ],
+    stats: [
+      { k: 'Trades on a large campus', v: 'thousands at once' },
+      { k: 'Electrician apprenticeship', v: '4–5 years' },
+      { k: 'Projects delayed by labor', v: 'TSMC AZ, Intel OH' },
+      { k: 'Peak binding period', v: '2025–28' },
+    ],
+  },
+
+  'Capital & financing': {
+    basis: 'Share of announced private capital for AI and data-center infrastructure (est.)',
+    shares: [
+      { n: 'Blackstone', v: 25 }, { n: 'Blue Owl', v: 16 }, { n: 'KKR', v: 14 },
+      { n: 'Apollo', v: 13 }, { n: 'Brookfield', v: 12 }, { n: 'Other', v: 20 },
+    ],
+    caveat: 'Nvidia is on this card as a vendor financier rather than an asset manager. Its equity stakes in and backstops for neoclouds and model labs are what make the circularity concern concrete rather than theoretical.',
+    summary: 'This is the bottleneck that could bind before any physical one does. The build-out needs on the order of $400B to $500B a year, hyperscaler free cash flow no longer covers it, and the marginal dollar now comes from private credit, SPVs and vendor financing that all assume AI revenue arrives roughly on schedule.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Capex has moved off balance sheet. Data centers are financed through SPVs and joint ventures, GPUs are pledged as collateral for asset-backed debt, and suppliers take equity in their own customers. Each structure is individually defensible and collectively creates correlated exposure to a single assumption about AI demand.' },
+      { h: 'Why it binds', p: 'The durations do not match. An accelerator is economically useful for perhaps three to five years, while the debt and the buildings behind it amortise over fifteen to thirty. If utilisation or pricing disappoints, the depreciation treadmill shows up in earnings long before the loans mature.' },
+      { h: 'What breaks it open', p: 'Durable AI revenue is the only real answer, and it is already visible in parts of the market. Short of that, capital reprices: the strongest balance sheets keep building while leveraged neoclouds get consolidated, which slows the build-out without stopping it.' },
+    ],
+    stats: [
+      { k: 'Annual build-out need', v: '~$400–500B' },
+      { k: 'Chip economic life', v: '3–5 years' },
+      { k: 'Financing amortisation', v: '15–30 years' },
+      { k: 'Marginal funding source', v: 'private credit, SPVs' },
+    ],
+  },
+
+  'Training data': {
+    basis: 'Share of AI data labelling, curation and licensing revenue, 2025 (est.)',
+    shares: [
+      { n: 'Surge AI', v: 28 }, { n: 'Scale AI', v: 22 }, { n: 'Reddit', v: 6 },
+      { n: 'Getty Images', v: 3 }, { n: 'Wiley', v: 2 }, { n: 'Other', v: 39 },
+    ],
+    caveat: 'This market is opaque and largely privately held, so the split is a rough estimate. The licensing lines, Reddit, Getty and Wiley, are small in revenue but disproportionate in significance, because they set the precedent for what the remaining corpus costs everybody else.',
+    summary: 'Everything else on this page exists to push tokens through models, and the tokens are running out. Epoch AI puts effective exhaustion of high-quality public text somewhere between 2026 and 2032, and what remains is increasingly behind paywalls, licences and active litigation.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Frontier training consumed the accessible public web. What is left splits three ways: licensed proprietary corpora, human-generated data commissioned specifically for training, and synthetic data. The first is contested in court, the second is expensive and slow, and the third has a cost that is easy to miss.' },
+      { h: 'Why it binds', p: 'Synthetic data does not remove the constraint, it converts it. Generating high-quality synthetic training data requires inference at scale, so the data wall reappears as additional compute demand, which puts you straight back at the top of this page.' },
+      { h: 'What breaks it open', p: 'Multimodal data across video, audio and sensor streams is a genuinely large untapped corpus, and interaction data from deployed agents is the new frontier because it is proprietary, renewable and directly relevant to what the models are being asked to do. Whoever owns real user workflows ends up owning the scarce input.' },
+    ],
+    stats: [
+      { k: 'Public text exhaustion', v: '2026–2032 (Epoch AI)' },
+      { k: 'Synthetic data cost', v: 'paid in compute' },
+      { k: 'New scarce corpus', v: 'agent interaction data' },
+      { k: 'Gating mechanism', v: 'licences and litigation' },
+    ],
+  },
+
+  'Frontier AI talent': {
+    basis: 'Share of frontier-lab research headcount (est.)',
+    shares: [
+      { n: 'Alphabet', v: 30 }, { n: 'Meta', v: 20 }, { n: 'OpenAI', v: 18 },
+      { n: 'Microsoft', v: 15 }, { n: 'Anthropic', v: 12 }, { n: 'Other', v: 5 },
+    ],
+    caveat: 'Headcount is a poor proxy for this bottleneck. The people who can actually lead a frontier training run number in the low thousands worldwide, and they are distributed far more unevenly than any org chart suggests.',
+    summary: 'Capex can double in a year. The number of people who have personally debugged a frontier-scale training run cannot. That mismatch is why compensation reached nine figures and why acqui-hiring replaced acquisition as the standard way to buy capability.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Frontier training is craft knowledge. Knowing which loss spike is recoverable, how to schedule data, what a degrading interconnect looks like in the metrics: none of that is in the papers, and it is only learned by doing it on a cluster that very few organisations own. That makes the skill non-reproducible outside the labs that already have it.' },
+      { h: 'Why it binds', p: 'The pool grows at the rate people can be trained inside frontier labs, which is slow, while demand grows at the rate capital is deployed, which is fast. Immigration policy tightens it further by acting as an export control on the one input that has to physically move to be useful.' },
+      { h: 'What breaks it open', p: 'AI-assisted research is the genuine multiplier, raising output per researcher rather than adding researchers. Open weights and published infrastructure work also spread the craft knowledge outward, but the frontier tier stays small because the frontier itself keeps moving.' },
+    ],
+    stats: [
+      { k: 'Can lead a frontier run', v: 'low thousands' },
+      { k: 'Top-of-market comp', v: 'nine figures' },
+      { k: 'Acquisition mechanism', v: 'acqui-hire' },
+      { k: 'Peak binding period', v: '2025–28' },
+    ],
+  },
+
+  'EDA & chip design': {
+    basis: 'Share of EDA software revenue, 2025 (est.)',
+    shares: [{ n: 'Synopsys', v: 32 }, { n: 'Cadence', v: 30 }, { n: 'Siemens EDA', v: 14 }, { n: 'Other', v: 24 }],
+    caveat: 'Arm licenses processor IP rather than tools, and Alchip and Global Unichip are design-service houses that use these toolchains on customers’ behalf, so none of the three competes for EDA share.',
+    summary: 'Every chip mentioned anywhere on this page was designed in software from three vendors, two of them American. That has already been used as an export-control lever, and it means the second-source hope for every other bottleneck runs through the same three toolchains.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Modern design is inseparable from the tools. Synthesis, place and route, timing closure, verification and sign-off are all vendor-specific flows with foundry-certified rule decks. Migrating a design between toolchains is not a preference, it is a multi-year requalification with the foundry attached.' },
+      { h: 'Why it binds', p: 'Verification rather than design is the real capacity limit. A large accelerator needs enormous simulation and emulation compute plus senior engineers who can decide what is worth verifying, and both are finite while the number of custom AI chip programmes keeps growing.' },
+      { h: 'What breaks it open', p: 'AI-assisted design tools are already lifting productivity meaningfully, and agentic flows should broaden who can produce competitive silicon later in the decade. The concentration itself does not change, which keeps the export-control lever fully intact regardless of how good the tooling gets.' },
+    ],
+    stats: [
+      { k: 'Top three EDA vendors', v: '~76% of revenue' },
+      { k: 'Real capacity limit', v: 'verification' },
+      { k: 'Toolchain migration', v: 'multi-year' },
+      { k: 'Proven policy lever', v: 'China export curbs' },
+    ],
+  },
+
+  'Export controls & geopolitics': {
+    basis: 'Share of global rare-earth processing capacity, 2025 (est.)',
+    shares: [{ n: 'China', v: 85 }, { n: 'Lynas', v: 7 }, { n: 'MP Materials', v: 6 }, { n: 'Other', v: 2 }],
+    caveat: 'The other names on this card are chokepoints in different dimensions rather than participants in this market: TSMC concentrates leading-edge production on one island, ASML sits under Dutch export licensing, and Nvidia and Applied Materials are the firms whose sales are most directly gated by US rules.',
+    summary: 'This is the only bottleneck on the page that can close overnight, because it is not made of physics. A licence decision in The Hague, a rule change in Washington or a ministry notice in Beijing can remove supply that no amount of capex would have replaced.',
+    sections: [
+      { h: 'How the chokepoint works', p: 'Control is exercised at three points: US rules over what may be sold and to whom, Dutch and Japanese rules over equipment, and Chinese rules over processed materials. Each side can reach the other’s critical path, which is precisely why escalation has stayed measured so far.' },
+      { h: 'Why it binds', p: 'The concentration is geographic and not commercially fixable. Roughly nine in ten leading-edge chips come from one island within range of a contested strait, the only EUV machines come from one Dutch company, and the majority of gallium, germanium and rare-earth processing sits in China.' },
+      { h: 'What breaks it open', p: 'Friend-shoring adds capacity in Arizona, Japan, Germany and Korea, and non-Chinese rare-earth processing is being built at MP Materials and Lynas. It adds redundancy rather than independence: the leading edge stays concentrated in the same few hands through 2030.' },
+    ],
+    stats: [
+      { k: 'China rare-earth processing', v: '~85–90%' },
+      { k: 'Leading-edge from Taiwan', v: '~90%' },
+      { k: 'EUV suppliers outside NL', v: '0' },
+      { k: 'Binding mechanism', v: 'policy, not physics' },
+    ],
+  },
+};
+
+      // Categorical slots validated for this dark surface (adjacent-pair CVD and
+      // normal-vision separation); "Other" is deliberately neutral, never a hue.
+      const SLICE = ['#3987e5', '#d95926', '#199e70', '#c98500', '#d55181', '#008300'];
+      const SLICE_OTHER = '#94a3b8';
+      const SURFACE = '#0b0e15';
+      const sliceColor = (name, i) => (name === 'Other' ? SLICE_OTHER : SLICE[i % SLICE.length]);
 
       const grid = document.getElementById('bottleneck-grid');
       if (!grid) return;
+
+      const SEV_LABEL = { 1: 'easing', 2: 'tight', 3: 'severe', 4: 'binding' };
 
       grid.innerHTML = BOTTLENECKS.map((b, bi) => {
         const strip = b.timeline.map((t, i) => `
           <div class="flex-1">
             <div class="h-9 cursor-help rounded-md transition hover:brightness-125"
-                 style="background:${SEV[t.sev]}" title="${YEARS[i]}: ${esc(t.note)}"></div>
+                 style="background:${SEV[t.sev]}" title="${YEARS[i]} (${SEV_LABEL[t.sev]}): ${esc(t.note)}"></div>
             <div class="mt-1 text-center text-[10px] text-slate-500">'${String(YEARS[i]).slice(2)}</div>
           </div>`).join('');
 
@@ -1532,7 +2116,9 @@ const BOTTLENECKS = [
           `<li class="flex gap-2"><span class="mt-0.5 text-slate-600">›</span><span>${m}</span></li>`).join('');
 
         return `
-        <div class="glass rounded-2xl p-5 fade-up sm:p-7" style="animation-delay:${0.05 * bi}s">
+        <div class="bn-card glass group cursor-pointer rounded-2xl p-5 fade-up transition hover:border-white/20 sm:p-7"
+             style="animation-delay:${0.05 * bi}s" data-bi="${bi}" role="button" tabindex="0"
+             aria-label="${esc(b.name)}: open the market-share and deep-dive breakdown">
           <div class="flex items-start justify-between gap-3">
             <div>
               <div class="flex items-center gap-2">
@@ -1553,8 +2139,199 @@ const BOTTLENECKS = [
             <p class="text-xs uppercase tracking-wider text-slate-500">Companies with leverage</p>
             <div class="mt-2.5 flex flex-wrap gap-1.5">${pills}</div>
           </div>
+
+          <div class="mt-5 flex items-center gap-1.5 text-xs font-medium text-sky-400/80 transition group-hover:text-sky-300">
+            Market share &amp; deep dive
+            <span aria-hidden="true" class="transition group-hover:translate-x-0.5">→</span>
+          </div>
         </div>`;
       }).join('');
+
+      // ---------- detail modal ----------
+      const modal = document.createElement('div');
+      modal.id = 'bn-modal';
+      modal.className = 'fixed inset-0 z-50 hidden';
+      modal.innerHTML = `
+        <div data-close class="absolute inset-0 bg-black/75 backdrop-blur-sm"></div>
+        <div data-close class="absolute inset-0 overflow-y-auto">
+          <div data-close class="flex min-h-full items-start justify-center p-3 py-6 sm:p-8">
+            <div id="bn-panel" role="dialog" aria-modal="true" aria-labelledby="bn-title"
+                 class="glass relative w-full max-w-4xl rounded-2xl shadow-2xl shadow-black/50"></div>
+          </div>
+        </div>`;
+      document.body.appendChild(modal);
+      const panel = modal.querySelector('#bn-panel');
+
+      let chart = null;
+      let lastFocus = null;
+
+      function renderModal(bi) {
+        const b = BOTTLENECKS[bi];
+        const d = DEEP[b.name];
+        const roleOf = (n) => {
+          if (n === 'Other') return 'Everyone else in this market';
+          const c = b.companies.find((x) => x.name === n);
+          return c ? c.role : '';
+        };
+        const tickerOf = (n) => {
+          const c = b.companies.find((x) => x.name === n);
+          return c && c.ticker !== 'private' ? c.ticker : '';
+        };
+
+        const shares = d ? d.shares : [];
+        const lead = shares.length ? shares.reduce((a, x) => (x.v > a.v && x.n !== 'Other' ? x : a), shares[0]) : null;
+
+        const legend = shares.map((s, i) => `
+          <li class="flex items-start gap-2.5 border-b border-white/5 py-2 last:border-0">
+            <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-sm" style="background:${sliceColor(s.n, i)}"></span>
+            <span class="min-w-0 flex-1">
+              <span class="flex items-baseline justify-between gap-3">
+                <span class="text-sm font-medium text-slate-200">${s.n}${tickerOf(s.n) ? `<span class="ml-1.5 text-xs font-normal text-slate-500">${tickerOf(s.n)}</span>` : ''}</span>
+                <span class="font-display text-sm text-white" style="font-variant-numeric:tabular-nums">${s.v}%</span>
+              </span>
+              ${roleOf(s.n) ? `<span class="mt-0.5 block text-xs leading-relaxed text-slate-500">${roleOf(s.n)}</span>` : ''}
+            </span>
+          </li>`).join('');
+
+        const stats = d ? d.stats.map((s) => `
+          <div class="rounded-xl border border-white/5 bg-white/[0.03] p-3">
+            <p class="text-[11px] uppercase tracking-wider text-slate-500">${s.k}</p>
+            <p class="mt-1 font-display text-base leading-snug text-white">${s.v}</p>
+          </div>`).join('') : '';
+
+        const sections = d ? d.sections.map((s) => `
+          <div>
+            <h4 class="font-display text-sm font-semibold text-white">${s.h}</h4>
+            <p class="mt-1.5 text-sm leading-relaxed text-slate-400">${s.p}</p>
+          </div>`).join('') : '';
+
+        const trajectory = b.timeline.map((t, i) => `
+          <div class="flex items-start gap-3 border-b border-white/5 py-2 last:border-0">
+            <span class="mt-1 h-2.5 w-6 shrink-0 rounded-sm" style="background:${SEV[t.sev]}"></span>
+            <span class="w-9 shrink-0 font-display text-sm text-slate-300">${YEARS[i]}</span>
+            <span class="w-16 shrink-0 text-xs uppercase tracking-wide text-slate-500">${SEV_LABEL[t.sev]}</span>
+            <span class="flex-1 text-sm leading-relaxed text-slate-400">${t.note}</span>
+          </div>`).join('');
+
+        panel.innerHTML = `
+          <div class="sticky top-0 z-10 flex items-start justify-between gap-3 rounded-t-2xl border-b border-white/10 bg-[#0b0e15]/90 px-5 py-4 backdrop-blur sm:px-7">
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">${b.icon}</span>
+              <div>
+                <h3 id="bn-title" class="font-display text-lg font-semibold text-white sm:text-xl">${b.name}</h3>
+                <p class="text-xs font-semibold" style="color:${b.peakColor}">${b.peak}</p>
+              </div>
+            </div>
+            <button type="button" data-close-btn aria-label="Close"
+                    class="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-slate-300 transition hover:border-white/25 hover:text-white">
+              Close ✕
+            </button>
+          </div>
+
+          <div class="space-y-7 px-5 py-6 sm:px-7">
+            <p class="text-sm leading-relaxed text-slate-300">${d ? d.summary : b.thesis}</p>
+
+            <div>
+              <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <h4 class="font-display text-base font-semibold text-white">Who holds this market</h4>
+                <span class="text-xs text-slate-500">${d ? d.basis : ''}</span>
+              </div>
+              <div class="mt-4 grid items-center gap-6 md:grid-cols-2">
+                <div class="relative mx-auto h-[240px] w-full max-w-[280px]">
+                  <canvas id="bn-pie"></canvas>
+                  ${lead ? `
+                  <div class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <span class="font-display text-2xl font-semibold text-white">${lead.v}%</span>
+                    <span class="max-w-[7rem] text-[11px] leading-tight text-slate-500">${lead.n}</span>
+                  </div>` : ''}
+                </div>
+                <ul class="min-w-0">${legend}</ul>
+              </div>
+              ${d && d.caveat ? `<p class="mt-4 rounded-xl border border-white/5 bg-white/[0.03] p-3 text-xs leading-relaxed text-slate-400"><span class="font-semibold text-slate-300">Read this alongside the pie:</span> ${d.caveat}</p>` : ''}
+            </div>
+
+            ${stats ? `<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">${stats}</div>` : ''}
+
+            ${sections ? `<div class="space-y-5 border-t border-white/5 pt-6">${sections}</div>` : ''}
+
+            <div class="border-t border-white/5 pt-6">
+              <h4 class="font-display text-base font-semibold text-white">How binding, year by year</h4>
+              <div class="mt-3">${trajectory}</div>
+            </div>
+
+            <p class="border-t border-white/5 pt-5 text-xs leading-relaxed text-slate-600">
+              Shares are approximate industry estimates for the basis stated above, rounded to whole
+              percent and normalised to 100, and several of these markets are privately held or
+              segment-reported, so treat them as orders of magnitude rather than precise splits.
+              Illustrative, not investment advice.
+            </p>
+          </div>`;
+
+        const canvas = panel.querySelector('#bn-pie');
+        if (canvas && window.Chart && shares.length) {
+          chart = new Chart(canvas, {
+            type: 'doughnut',
+            data: {
+              labels: shares.map((s) => s.n),
+              datasets: [{
+                data: shares.map((s) => s.v),
+                backgroundColor: shares.map((s, i) => sliceColor(s.n, i)),
+                borderColor: SURFACE,
+                borderWidth: 2,
+                hoverOffset: 6,
+              }],
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false, cutout: '62%',
+              animation: { duration: 500 },
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  backgroundColor: '#0b0e15', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+                  padding: 10, cornerRadius: 8, titleColor: '#fff', bodyColor: '#cbd5e1',
+                  callbacks: { label: (c) => ` ${c.label}: ${c.parsed}%` },
+                },
+              },
+            },
+          });
+        }
+      }
+
+      function openModal(bi) {
+        lastFocus = document.activeElement;
+        renderModal(bi);
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        const btn = panel.querySelector('[data-close-btn]');
+        if (btn) btn.focus();
+      }
+
+      function closeModal() {
+        if (chart) { chart.destroy(); chart = null; }
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        panel.innerHTML = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      grid.addEventListener('click', (e) => {
+        const card = e.target.closest('.bn-card');
+        if (card) openModal(Number(card.dataset.bi));
+      });
+      grid.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const card = e.target.closest('.bn-card');
+        if (!card) return;
+        e.preventDefault();
+        openModal(Number(card.dataset.bi));
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target.hasAttribute('data-close') || e.target.closest('[data-close-btn]')) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+      });
     })();
   </script>
 
@@ -1682,6 +2459,7 @@ const BOTTLENECKS = [
         { co: 'SK Hynix', seg: 'Memory', val: 22, note: 'Ramping hard for HBM, up from ~$14B in 2024 to close the memory-supply gap.' },
         { co: 'Intel', seg: 'IDM / foundry', val: 18, note: 'Pulled back from ~$24B (2024 gross) as the foundry ramp is paced to demand.' },
         { co: 'Micron', seg: 'Memory', val: 14, note: 'FY2025 (ends Aug), up from ~$8B: HBM plus new US fabs in Idaho & New York.' },
+        { co: 'CXMT', seg: 'Memory (China)', val: 6, note: 'ChangXin Memory: ~$5–6B of 2026 equipment procurement, funded by the $8.6B Shanghai STAR listing on 27 Jul 2026.' },
         { co: 'Texas Instruments', seg: 'Analog IDM', val: 5, note: 'Building analog megafabs in Texas & Utah under the CHIPS Act.' },
         { co: 'ASML', seg: 'Litho equipment', val: 2.5, note: 'Equipment maker, its own capex is small; its ~€28B revenue is the mirror of everyone else’s capex.' },
         { co: 'AMD', seg: 'Fabless GPU / CPU', val: 0.8, note: 'Fabless: it buys TSMC capacity rather than building fabs, so ~$8B of annual R&D, not capex, is the real spend behind MI300 / MI400.' },
@@ -1701,11 +2479,12 @@ const BOTTLENECKS = [
         },
         {
           icon: '💾', name: 'Memory & HBM', tag: 'Chasing the memory wall',
-          thesis: 'High-bandwidth memory is the tightest link in the chain, so the three makers are lifting capex sharply to close a ~20% supply gap, after years of underinvestment through the last downturn.',
+          thesis: 'High-bandwidth memory is the tightest link in the chain, so the incumbent three are lifting capex sharply to close a ~20% supply gap after years of underinvestment through the last downturn. A newly public Chinese fourth entrant is now piling into commodity DRAM underneath them.',
           items: [
             { label: 'Samsung', sub: '$35B', note: 'Semiconductor division: memory-led, racing into HBM3E / HBM4.' },
             { label: 'SK Hynix', sub: '$22B', note: 'HBM market leader; capex up sharply to feed Nvidia demand.' },
             { label: 'Micron', sub: '$14B', note: 'Only US HBM maker; FY2025 capex nearly doubled on HBM + US fabs.' },
+            { label: 'CXMT', sub: '~$6B', note: 'China’s largest DRAM maker, listed in Shanghai 27 Jul 2026 in an $8.6B IPO; ~8% of global DRAM and heading for ~350k wafer starts a month, though its prospectus carries no HBM project.' },
           ],
         },
         {
