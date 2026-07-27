@@ -1251,6 +1251,7 @@ const BOTTLENECKS = [
       { name: 'Vertiv', ticker: 'VRT', role: 'Thermal management & CDUs' },
       { name: 'nVent', ticker: 'NVT', role: 'Liquid cooling & cold plates' },
       { name: 'Schneider Electric', ticker: 'SU.PA', role: 'Data-center cooling & power' },
+      { name: 'Daikin', ticker: '6367.T', role: 'Chillers & air handling; direct-to-chip via Chilldyne/DDC' },
       { name: 'Delta Electronics', ticker: '2308.TW', role: 'Cooling & power systems' },
       { name: 'Munters', ticker: 'MTRS.ST', role: 'Data-center cooling' },
     ],
@@ -1865,15 +1866,15 @@ const DEEP = {
   'Data-center cooling': {
     basis: 'Share of data-center thermal management revenue, 2025 (est.)',
     shares: [
-      { n: 'Vertiv', v: 22 }, { n: 'Schneider Electric', v: 18 }, { n: 'Delta Electronics', v: 12 },
-      { n: 'nVent', v: 8 }, { n: 'Munters', v: 5 }, { n: 'Other', v: 35 },
+      { n: 'Vertiv', v: 22 }, { n: 'Schneider Electric', v: 18 }, { n: 'Delta Electronics', v: 11 },
+      { n: 'Daikin', v: 10 }, { n: 'nVent', v: 7 }, { n: 'Munters', v: 4 }, { n: 'Other', v: 28 },
     ],
-    caveat: '',
+    caveat: 'This market spans two layers. Vertiv, nVent and Delta lead on the acute shortage items, the CDUs, cold plates and quick-disconnects; Schneider and Daikin are facility-cooling and chiller giants. Daikin is the newcomer to direct-to-chip specifically, having bought DDC Solutions and Chilldyne in 2025 to move a chiller franchise into the liquid-cooling layer.',
     summary: 'Air cooling stops working somewhere around 50 kW a rack. Blackwell-class racks draw more than twice that, so liquid is no longer an efficiency upgrade, it is the only way the hardware runs at all, and the components that make it work are the scarce part.',
     sections: [
       { h: 'How the chokepoint works', p: 'Direct-to-chip cooling needs cold plates on every die, manifolds, quick-disconnects that will not leak next to live electronics, and coolant distribution units sized per row. None of it existed at data-center scale three years ago, so the entire supply base is being built while demand is already running at volume.' },
       { h: 'Why it binds', p: 'CDUs and quick-disconnects are the specific short items and they are safety-critical, which makes qualification slow. Retrofitting an air-cooled hall for liquid is often harder than building new, which pushes demand onto new construction and straight into its own set of constraints.' },
-      { h: 'What breaks it open', p: 'Manufacturing scales through 2027, and immersion plus rear-door heat exchangers broaden the options. Two complications persist: 3M exiting PFAS production removed the standard Novec-class immersion fluids, and large chillers still run past a year of lead time.' },
+      { h: 'What breaks it open', p: 'Manufacturing scales through 2027, immersion plus rear-door heat exchangers broaden the options, and the chiller giants are buying their way into the acute layer, with Daikin acquiring DDC Solutions and Chilldyne in 2025 to pair its facility cooling with direct-to-chip. Two complications persist: 3M exiting PFAS production removed the standard Novec-class immersion fluids, and large chillers still run past a year of lead time.' },
     ],
     stats: [
       { k: 'Air cooling ceiling', v: '~50 kW/rack' },
