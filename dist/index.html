@@ -1334,6 +1334,7 @@ const BOTTLENECKS = [
       { name: 'Cummins', ticker: 'CMI', role: 'Gensets & power systems' },
       { name: 'Rolls-Royce', ticker: 'RR.L', role: 'mtu gensets + SMR push' },
       { name: 'Bloom Energy', ticker: 'BE', role: 'Fuel cells for fast power' },
+      { name: 'Solaris', ticker: 'SEI', role: 'Behind-the-meter turbine power as a service' },
     ],
   },
   {
@@ -1359,6 +1360,8 @@ const BOTTLENECKS = [
       { name: 'QTS', ticker: 'private', role: 'Hyperscale campuses (Blackstone)' },
       { name: 'Vantage', ticker: 'private', role: 'Hyperscale developer' },
       { name: 'Blackstone', ticker: 'BX', role: 'Biggest owner / financier of shells' },
+      { name: 'IREN', ticker: 'IREN', role: 'Ex-Bitcoin miner converting powered sites to AI' },
+      { name: 'Riot Platforms', ticker: 'RIOT', role: 'Miner with large Texas powered land & interconnect' },
     ],
   },
   {
@@ -1411,6 +1414,8 @@ const BOTTLENECKS = [
       { name: 'Blue Owl', ticker: 'OWL', role: 'Data-center lending & SPVs' },
       { name: 'KKR', ticker: 'KKR', role: 'DC platforms & credit' },
       { name: 'Nvidia', ticker: 'NVDA', role: 'Vendor financing / anchor investor' },
+      { name: 'CoreWeave', ticker: 'CRWV', role: 'Neocloud borrower; the circularity in one name' },
+      { name: 'Nebius', ticker: 'NBIS', role: 'Neocloud scaling on GPU-backed financing' },
     ],
   },
   {
@@ -1932,7 +1937,7 @@ const DEEP = {
       { n: 'GE Vernova', v: 30 }, { n: 'Siemens Energy', v: 24 }, { n: 'Mitsubishi Heavy', v: 22 },
       { n: 'Caterpillar', v: 9 }, { n: 'Cummins', v: 7 }, { n: 'Other', v: 8 },
     ],
-    caveat: 'Rolls-Royce and Bloom Energy address the same need with different hardware: mtu gensets plus a small modular reactor programme in one case, solid-oxide fuel cells that can be deployed in months in the other.',
+    caveat: 'Rolls-Royce and Bloom Energy address the same need with different hardware: mtu gensets plus a small modular reactor programme in one case, solid-oxide fuel cells that can be deployed in months in the other. Solaris Energy Infrastructure sits one layer downstream of the pie: it builds no turbines but buys delivery slots from these OEMs and leases roughly 3 GW of behind-the-meter capacity to data centers by 2029, so it is a customer of the shortage that helps relieve it rather than a maker within it.',
     summary: 'When the grid says no, campuses build their own power plant. That worked as a one-off and then everyone did it at once, so the turbines themselves became the queue. Order books for large gas turbines now run to the end of the decade.',
     sections: [
       { h: 'How the chokepoint works', p: 'Three manufacturers build the world’s heavy-duty gas turbines, and each has a fixed number of production slots per year. AI campuses are now competing for those slots against utilities and industrial buyers who have been in the queue for years, and slots for 2029 and 2030 are already spoken for.' },
@@ -1953,7 +1958,7 @@ const DEEP = {
       { n: 'Digital Realty', v: 14 }, { n: 'Equinix', v: 11 }, { n: 'QTS', v: 10 },
       { n: 'Vantage', v: 7 }, { n: 'Other', v: 58 },
     ],
-    caveat: 'Blackstone appears here as the capital behind the asset class rather than as an operator. It owns QTS outright and is the largest single financier of shells, so its exposure overlaps the developers listed beside it. The large "other" slice is mostly self-built hyperscaler capacity.',
+    caveat: 'Blackstone appears here as the capital behind the asset class rather than as an operator. It owns QTS outright and is the largest single financier of shells, so its exposure overlaps the developers listed beside it. The large "other" slice is mostly self-built hyperscaler capacity. IREN and Riot Platforms come at this from a different angle: former Bitcoin miners that already hold powered land with signed interconnection, now repurposing it for AI, so their leverage is the scarce grid connection they sit on rather than colocation revenue, which is why they are not in the developer-share pie.',
     summary: 'Before any of the hardware on this page matters, someone has to own a piece of land that has a grid connection date, a permit and a building on it. That combination, not the building alone, is the scarce asset, and in primary markets it is effectively sold out.',
     sections: [
       { h: 'How the chokepoint works', p: 'A developer secures land, applies for interconnection, and waits. Queues run four to seven years in the busiest regions, longer than the construction itself, so the interconnection date rather than the concrete determines when capacity exists. Capacity is routinely pre-leased years before it is built.' },
@@ -1995,7 +2000,7 @@ const DEEP = {
       { n: 'Blackstone', v: 25 }, { n: 'Blue Owl', v: 16 }, { n: 'KKR', v: 14 },
       { n: 'Apollo', v: 13 }, { n: 'Brookfield', v: 12 }, { n: 'Other', v: 20 },
     ],
-    caveat: 'Nvidia is on this card as a vendor financier rather than an asset manager. Its equity stakes in and backstops for neoclouds and model labs are what make the circularity concern concrete rather than theoretical.',
+    caveat: 'Nvidia is on this card as a vendor financier rather than an asset manager. Its equity stakes in and backstops for neoclouds and model labs are what make the circularity concern concrete rather than theoretical. CoreWeave and Nebius are on the other side of that trade: they are the neocloud borrowers, not capital providers, so they do not appear in the pie of financiers. They are here because their GPU-collateralised debt and Nvidia-backed balance sheets are the clearest live example of the circular financing the card describes.',
     summary: 'This is the bottleneck that could bind before any physical one does. The build-out needs on the order of $400B to $500B a year, hyperscaler free cash flow no longer covers it, and the marginal dollar now comes from private credit, SPVs and vendor financing that all assume AI revenue arrives roughly on schedule.',
     sections: [
       { h: 'How the chokepoint works', p: 'Capex has moved off balance sheet. Data centers are financed through SPVs and joint ventures, GPUs are pledged as collateral for asset-backed debt, and suppliers take equity in their own customers. Each structure is individually defensible and collectively creates correlated exposure to a single assumption about AI demand.' },
