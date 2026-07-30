@@ -565,16 +565,19 @@
 
       <div class="mt-10 glass rounded-2xl p-5 sm:p-7">
         <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <h3 class="font-display text-lg text-white">Capex, the neoclouds that report it</h3>
-          <span class="text-xs uppercase tracking-wider text-slate-500">$B · 2023–2026 (2026 guided)</span>
+          <h3 class="font-display text-lg text-white">Capex: the neoclouds and the converted miners</h3>
+          <span class="text-xs uppercase tracking-wider text-slate-500">$B · 2023–2026 · dashed = estimated</span>
         </div>
         <div class="mt-5 h-[340px]"><canvas id="chart-microscaler-capex"></canvas></div>
         <p class="mt-4 text-xs leading-relaxed text-slate-500">
-          CoreWeave alone now out-spends the entire rest of the listed-neocloud field, and its curve is
-          steeper than any single hyperscaler's early ramp. Nebius, the next public name, is an order of
-          magnitude smaller. The private neoclouds (Crusoe, Lambda, Together) do not disclose capex, so
-          they are covered below rather than plotted. Solid lines are reported figures through 2025;
-          dashed segments are 2026 guidance or estimates.
+          CoreWeave alone still out-spends the entire rest of the field, and its curve is steeper than any
+          single hyperscaler's early ramp. The converted miners (IREN, Applied Digital, Core Scientific,
+          TeraWulf, Cipher) enter only in 2025, when their AI pivots began, and are drawn fully dashed
+          because their numbers are total company capex that blends mining and AI, much of it customer
+          financed, on fiscal years that do not line up with the calendar. IREN is the outlier: its 2026
+          spike is the roughly $5.8B of Microsoft GPUs plus further orders. Solid lines are CoreWeave and
+          Nebius reported figures through 2025; every dashed point is guidance or an estimate. The private
+          neoclouds (Crusoe, Lambda, Together) still do not disclose capex, so they are not plotted.
         </p>
       </div>
 
@@ -629,7 +632,10 @@
         company announcements: IREN's ~$9.7B Microsoft cloud deal (Nov 2025), Applied Digital's ~$11B
         CoreWeave leases at Ellendale, Core Scientific hosting CoreWeave after its holders rejected
         CoreWeave's buyout (Oct 2025), and the Google-backstopped Fluidstack leases at TeraWulf and
-        Cipher. Contract and backlog figures are the parties' announced numbers, are multi-year lifetime
+        Cipher. The converted miners' capex points on the chart above (2025 and 2026, dashed) are
+        editorial estimates of total company capex, not reported AI-only figures, since these companies
+        report on differing fiscal years and blend mining with AI spend; much of that spend is customer
+        financed. Contract and backlog figures are the parties' announced numbers, are multi-year lifetime
         totals rather than annual, and can include options and later phases. Illustrative, not investment
         advice.
       </p>
@@ -639,10 +645,18 @@
         const YRS = [2023, 2024, 2025, 2026];
         // Capex, $B/year. The final point (2026) is guidance/estimate and is drawn dashed.
         const LINES = [
-          { co: 'CoreWeave', color: '#38bdf8', data: [1.9, 8.7, 23, 30] },
-          { co: 'Nebius',    color: '#fb7185', data: [0.1, 0.5, 2.0, 4.5] },
+          { co: 'CoreWeave',       color: '#38bdf8', data: [1.9, 8.7, 23, 30],  est: false },
+          { co: 'Nebius',          color: '#fb7185', data: [0.1, 0.5, 2.0, 4.5], est: false },
+          // Converted miners: total company capex (mining + AI), heavily customer-financed and
+          // immaterial before the 2025 AI pivot, so the lines start at 2025 and are drawn fully
+          // dashed to mark them as estimates rather than clean reported AI capex.
+          { co: 'IREN',            color: '#fbbf24', data: [null, null, 1.5, 8],   est: true },
+          { co: 'Applied Digital', color: '#a78bfa', data: [null, null, 1.5, 3],   est: true },
+          { co: 'Core Scientific', color: '#34d399', data: [null, null, 0.8, 1.5], est: true },
+          { co: 'TeraWulf',        color: '#fb923c', data: [null, null, 1.2, 2.5], est: true },
+          { co: 'Cipher Mining',   color: '#94a3b8', data: [null, null, 0.7, 1.5], est: true },
         ];
-        const LAST_ACTUAL = 2; // 2025 is index 2; the 2025->2026 segment is dashed
+        const LAST_ACTUAL = 2; // 2025 is index 2; for the neoclouds the 2025->2026 segment is dashed
 
         const summary = [
           { label: 'CoreWeave capex, 2025', value: '~$23B', sub: 'up from $1.9B in 2023' },
@@ -667,10 +681,12 @@
             data: {
               labels: YRS,
               datasets: LINES.map((l) => ({
-                label: l.co, data: l.data,
+                label: l.co, data: l.data, spanGaps: false,
                 borderColor: l.color, backgroundColor: l.color,
-                tension: 0.35, borderWidth: 2.5, pointRadius: 3, pointHoverRadius: 5,
-                segment: { borderDash: (ctx) => (ctx.p1DataIndex > LAST_ACTUAL ? [6, 6] : undefined) },
+                tension: 0.35, borderWidth: l.est ? 2 : 2.5, pointRadius: 3, pointHoverRadius: 5,
+                // neoclouds: solid, with only the 2025->2026 segment dashed; miners: fully dashed estimate
+                borderDash: l.est ? [6, 4] : undefined,
+                segment: l.est ? undefined : { borderDash: (ctx) => (ctx.p1DataIndex > LAST_ACTUAL ? [6, 6] : undefined) },
               })),
             },
             options: {
