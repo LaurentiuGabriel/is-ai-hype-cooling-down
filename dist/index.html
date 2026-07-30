@@ -595,12 +595,29 @@
 
       <div id="ms-clients" class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
 
+      <div class="mt-12 max-w-3xl">
+        <h3 class="font-display text-xl font-semibold text-white">The converted miners</h3>
+        <p class="mt-3 text-slate-400">
+          A whole cohort of former Bitcoin miners has worked out that its real asset was never the
+          hashrate, it was the powered land: gigawatts of grid interconnection and cheap energy that now
+          take years for anyone else to permit. Most of them do not build a cloud of their own; they lease
+          that capacity to the neoclouds and hyperscalers, increasingly with Google or Nvidia backstopping
+          the financing. It is the same chokepoint the "shells, land and interconnection" card further
+          down tracks, seen from the supply side. IREN is the exception that went all the way and now runs
+          its own GPU cloud.
+        </p>
+      </div>
+
+      <div id="ms-miners" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+
       <p class="mt-8 max-w-3xl text-sm leading-relaxed text-slate-400">
         Two names sit behind almost everything here: OpenAI on the demand side and Nvidia on the
         supply-and-financing side, the same loop the funding section flags, since Nvidia invests in the
-        neoclouds that buy its chips to serve the labs it also backs. The conspicuous absence is
-        Anthropic, which leans on Google TPUs and Amazon Trainium rather than renting neocloud GPUs, so
-        this tier tilts heavily toward OpenAI and the open-model world.
+        neoclouds that buy its chips to serve the labs it also backs. The converted miners add a second
+        version of that loop, with Google and Nvidia backstopping the leases and taking equity in the very
+        hosts they rent from. The conspicuous absence is Anthropic, which leans on Google TPUs and Amazon
+        Trainium rather than renting neocloud GPUs, so this tier tilts heavily toward OpenAI and the
+        open-model world.
       </p>
 
       <p class="mt-8 max-w-3xl text-xs leading-relaxed text-slate-600">
@@ -608,9 +625,13 @@
         hyperscalers above. Capex: CoreWeave and Nebius from company filings and guidance (CoreWeave 2025
         capex guided to about $20–23B); the 2026 points are guidance or estimates and are drawn dashed.
         Crusoe, Lambda and Together are private, so no capex line is shown for them; their entries
-        reflect disclosed funding rounds and announced customer deals. Contract and backlog figures are
-        the parties' announced numbers and can include options and later phases. Illustrative, not
-        investment advice.
+        reflect disclosed funding rounds and announced customer deals. Converted-miner figures are from
+        company announcements: IREN's ~$9.7B Microsoft cloud deal (Nov 2025), Applied Digital's ~$11B
+        CoreWeave leases at Ellendale, Core Scientific hosting CoreWeave after its holders rejected
+        CoreWeave's buyout (Oct 2025), and the Google-backstopped Fluidstack leases at TeraWulf and
+        Cipher. Contract and backlog figures are the parties' announced numbers, are multi-year lifetime
+        totals rather than annual, and can include options and later phases. Illustrative, not investment
+        advice.
       </p>
     </section>
     <script>
@@ -741,6 +762,41 @@
                     <span class="text-slate-500">${c.d}</span>
                   </div>`).join('')}
               </div>
+            </div>`).join('');
+        }
+
+        // ---------- converted miners (powered-land hosts; not plotted on the capex chart) ----------
+        const MINERS = [
+          { co: 'IREN', tk: 'IREN', anchor: 'Microsoft',
+            note: 'The furthest along. A Bitcoin miner now running its own GPU cloud (IREN AI Cloud) on its 750MW Childress, Texas campus.',
+            detail: '~$9.7B five-year GB300 cloud deal (Nov 2025); Nvidia partner on up to 5 GW; fleet heading toward 150k GPUs.' },
+          { co: 'Core Scientific', tk: 'CORZ', anchor: 'CoreWeave',
+            note: 'A large US miner that stayed independent after its shareholders rejected CoreWeave\'s ~$9B buyout in October 2025.',
+            detail: 'Hosts CoreWeave GPUs across roughly 1.3 GW of converted data-center power.' },
+          { co: 'Applied Digital', tk: 'APLD', anchor: 'CoreWeave',
+            note: 'A data-center developer that pivoted from crypto hosting to building AI campuses and leasing them out.',
+            detail: 'Ellendale, North Dakota: 250MW plus 150MW of leases worth about $11B over roughly 15 years.' },
+          { co: 'TeraWulf', tk: 'WULF', anchor: 'Fluidstack',
+            note: 'Converting its Lake Mariner, New York site to AI hosting, financed with a Google backstop.',
+            detail: '200MW plus a 168MW JV, up to ~$9.5B contracted; Google backstops the lease and took ~8% equity.' },
+          { co: 'Cipher Mining', tk: 'CIFR', anchor: 'Fluidstack',
+            note: 'Converting its Barber Lake, Texas site to AI hosting under the same Google-backstopped model.',
+            detail: '300MW leased over 10 years (about $3B); Google backstops roughly $1.7B of the obligations.' },
+        ];
+        const minersEl = document.getElementById('ms-miners');
+        if (minersEl) {
+          minersEl.innerHTML = MINERS.map((m) => `
+            <div class="glass rounded-2xl p-5 sm:p-6">
+              <div class="flex items-baseline justify-between gap-3">
+                <h4 class="font-display text-base font-semibold text-white">${m.co}</h4>
+                <span class="text-xs uppercase tracking-wider text-sky-300">${m.tk}</span>
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">${m.note}</p>
+              <div class="mt-3 flex items-center gap-2">
+                <span class="text-xs uppercase tracking-wider text-slate-500">Anchor</span>
+                <span class="inline-flex rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-xs font-medium text-slate-200">${m.anchor}</span>
+              </div>
+              <p class="mt-2 text-xs leading-relaxed text-slate-500">${m.detail}</p>
             </div>`).join('');
         }
       })();
