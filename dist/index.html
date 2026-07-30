@@ -441,6 +441,213 @@
       })();
     </script>
 
+    <!-- ============ MICROSCALERS / NEOCLOUDS ============ -->
+    <!-- Editorial: neocloud capex + customer mapping, hand-entered from filings, guidance and
+         announced deals. Outside the __DATA__ block so the build never overwrites it. No em dash. -->
+    <section id="microscalers" class="scroll-mt-16 py-16">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-semibold text-white sm:text-3xl">The microscalers</h2>
+        <p class="mt-3 text-slate-400">
+          The hyperscalers are not the only ones building. A second tier has grown up beneath them:
+          specialist GPU clouds like CoreWeave, Nebius, Crusoe and Lambda that do essentially one thing,
+          rent out Nvidia accelerators at scale. Call them microscalers, or neoclouds. They own no
+          consumer platform and throw off almost no cash flow of their own, so they borrow against the
+          chips themselves and pre-sell the capacity on multiyear contracts, then plow the proceeds
+          straight back into more chips. Their capex curve is the steepest on this page, and their
+          customer lists read like a directory of the AI labs, plus the hyperscalers who still cannot
+          build fast enough on their own.
+        </p>
+        <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+          <span class="uppercase tracking-wider">Neocloud capex and customers</span>
+          <span class="text-slate-600">from filings, guidance and announced deals</span>
+        </div>
+      </div>
+
+      <div id="ms-summary" class="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 lg:grid-cols-4"></div>
+
+      <div class="mt-10 glass rounded-2xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-display text-lg text-white">Capex, the neoclouds that report it</h3>
+          <span class="text-xs uppercase tracking-wider text-slate-500">$B · 2023–2026 (2026 guided)</span>
+        </div>
+        <div class="mt-5 h-[340px]"><canvas id="chart-microscaler-capex"></canvas></div>
+        <p class="mt-4 text-xs leading-relaxed text-slate-500">
+          CoreWeave alone now out-spends the entire rest of the listed-neocloud field, and its curve is
+          steeper than any single hyperscaler's early ramp. Nebius, the next public name, is an order of
+          magnitude smaller. The private neoclouds (Crusoe, Lambda, Together) do not disclose capex, so
+          they are covered below rather than plotted. Solid lines are reported figures through 2025;
+          dashed segments are 2026 guidance or estimates.
+        </p>
+      </div>
+
+      <div class="mt-12 max-w-3xl">
+        <h3 class="font-display text-xl font-semibold text-white">Who they build for</h3>
+        <p class="mt-3 text-slate-400">
+          This is the part that ties the neoclouds back to the frontier. The capacity is not speculative:
+          most of it is pre-sold to named AI labs and to the hyperscalers themselves, who rent burst
+          compute from the neoclouds rather than wait on their own construction.
+        </p>
+      </div>
+
+      <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-400">
+        <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm border border-amber-400/40 bg-amber-400/20"></span>AI lab</span>
+        <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm border border-sky-400/40 bg-sky-400/20"></span>Hyperscaler</span>
+        <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm border border-white/15 bg-white/10"></span>Investor / enterprise</span>
+      </div>
+
+      <div id="ms-clients" class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+      <p class="mt-8 max-w-3xl text-sm leading-relaxed text-slate-400">
+        Two names sit behind almost everything here: OpenAI on the demand side and Nvidia on the
+        supply-and-financing side, the same loop the funding section flags, since Nvidia invests in the
+        neoclouds that buy its chips to serve the labs it also backs. The conspicuous absence is
+        Anthropic, which leans on Google TPUs and Amazon Trainium rather than renting neocloud GPUs, so
+        this tier tilts heavily toward OpenAI and the open-model world.
+      </p>
+
+      <p class="mt-8 max-w-3xl text-xs leading-relaxed text-slate-600">
+        Microscaler here means a specialist GPU cloud (also called a neocloud), distinct from the
+        hyperscalers above. Capex: CoreWeave and Nebius from company filings and guidance (CoreWeave 2025
+        capex guided to about $20–23B); the 2026 points are guidance or estimates and are drawn dashed.
+        Crusoe, Lambda and Together are private, so no capex line is shown for them; their entries
+        reflect disclosed funding rounds and announced customer deals. Contract and backlog figures are
+        the parties' announced numbers and can include options and later phases. Illustrative, not
+        investment advice.
+      </p>
+    </section>
+    <script>
+      (function () {
+        const YRS = [2023, 2024, 2025, 2026];
+        // Capex, $B/year. The final point (2026) is guidance/estimate and is drawn dashed.
+        const LINES = [
+          { co: 'CoreWeave', color: '#38bdf8', data: [1.9, 8.7, 23, 30] },
+          { co: 'Nebius',    color: '#fb7185', data: [0.1, 0.5, 2.0, 4.5] },
+        ];
+        const LAST_ACTUAL = 2; // 2025 is index 2; the 2025->2026 segment is dashed
+
+        const summary = [
+          { label: 'CoreWeave capex, 2025', value: '~$23B', sub: 'up from $1.9B in 2023' },
+          { label: 'CoreWeave revenue, 2024', value: '$1.9B', sub: 'about 8x the prior year' },
+          { label: 'Contracted backlog', value: '~$30B+', sub: 'revenue signed, not yet earned' },
+          { label: 'Anchor customers', value: 'OpenAI + MSFT', sub: 'one AI lab, one hyperscaler' },
+        ];
+        const sumEl = document.getElementById('ms-summary');
+        if (sumEl) {
+          sumEl.innerHTML = summary.map((s) => `
+            <div class="bg-[#0a0c12] p-5 sm:p-6">
+              <p class="text-xs uppercase tracking-wider text-slate-500">${s.label}</p>
+              <p class="mt-2 font-display text-3xl font-bold text-white" style="font-variant-numeric:tabular-nums">${s.value}</p>
+              <p class="mt-1 text-sm text-slate-400">${s.sub}</p>
+            </div>`).join('');
+        }
+
+        const cv = document.getElementById('chart-microscaler-capex');
+        if (cv && window.Chart) {
+          new Chart(cv, {
+            type: 'line',
+            data: {
+              labels: YRS,
+              datasets: LINES.map((l) => ({
+                label: l.co, data: l.data,
+                borderColor: l.color, backgroundColor: l.color,
+                tension: 0.35, borderWidth: 2.5, pointRadius: 3, pointHoverRadius: 5,
+                segment: { borderDash: (ctx) => (ctx.p1DataIndex > LAST_ACTUAL ? [6, 6] : undefined) },
+              })),
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              interaction: { mode: 'index', intersect: false },
+              plugins: {
+                legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8, padding: 14 } },
+                tooltip: {
+                  backgroundColor: '#0b0e15', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+                  padding: 10, cornerRadius: 8, titleColor: '#fff', bodyColor: '#cbd5e1',
+                  callbacks: {
+                    title: (items) => String(items[0].label) + (Number(items[0].label) >= 2026 ? ' (guided/est.)' : ''),
+                    label: (c) => ` ${c.dataset.label}: $${c.parsed.y}B`,
+                  },
+                },
+              },
+              scales: {
+                x: { grid: { display: false } },
+                y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true, ticks: { callback: (v) => '$' + v + 'B' } },
+              },
+            },
+          });
+        }
+
+        const KIND = {
+          lab:   'border-amber-400/30 bg-amber-400/10 text-amber-200',
+          hyper: 'border-sky-400/30 bg-sky-400/10 text-sky-200',
+          other: 'border-white/10 bg-white/5 text-slate-300',
+        };
+        const MS = [
+          {
+            co: 'CoreWeave', tag: 'CRWV · public', priv: false,
+            note: 'The largest neocloud by far. Revenue went from $229M in 2023 to $1.9B in 2024; 2025 capex guided to roughly $20–23B, funded largely by debt secured against the GPUs themselves.',
+            clients: [
+              { n: 'OpenAI', k: 'lab', d: '~$12B initial deal, expanded toward ~$22B' },
+              { n: 'Mistral', k: 'lab', d: 'European frontier lab' },
+              { n: 'Microsoft', k: 'hyper', d: 'largest customer in 2024, about 62% of revenue' },
+              { n: 'Nvidia', k: 'other', d: 'investor and chip supplier' },
+              { n: 'IBM · Meta · Cohere', k: 'other', d: 'enterprise and model builders' },
+            ],
+          },
+          {
+            co: 'Nebius', tag: 'NBIS · public', priv: false,
+            note: 'Rebuilt from Yandex non-Russian assets and relisted on Nasdaq in 2024. Nvidia is a strategic investor; the build-out is anchored by one very large hyperscaler contract.',
+            clients: [
+              { n: 'Microsoft', k: 'hyper', d: 'up to ~$17–19B capacity deal (2025)' },
+              { n: 'AI labs & startups', k: 'lab', d: 'via the Nebius AI Cloud' },
+              { n: 'Nvidia', k: 'other', d: 'strategic investor' },
+            ],
+          },
+          {
+            co: 'Crusoe', tag: 'private', priv: true,
+            note: 'Builds the Abilene, Texas campus at the center of the Stargate project, powered partly by otherwise-stranded gas. It is the builder of the site more than its operator.',
+            clients: [
+              { n: 'OpenAI', k: 'lab', d: 'ultimate tenant of Stargate' },
+              { n: 'Oracle', k: 'hyper', d: 'leases and operates the capacity' },
+            ],
+          },
+          {
+            co: 'Lambda', tag: 'private', priv: true,
+            note: 'A GPU cloud that began by serving individual researchers and now signs hyperscaler-scale supply deals of its own.',
+            clients: [
+              { n: 'Microsoft', k: 'hyper', d: 'reported multibillion-dollar deal (2025)' },
+              { n: 'AI research labs & startups', k: 'lab', d: 'its original customer base' },
+            ],
+          },
+          {
+            co: 'Together AI', tag: 'private', priv: true,
+            note: 'Training and inference cloud built around open-weight models, popular across the open-source AI ecosystem.',
+            clients: [
+              { n: 'Open-model labs & startups', k: 'lab', d: 'the open-weight ecosystem' },
+              { n: 'Enterprises', k: 'other', d: 'inference at scale' },
+            ],
+          },
+        ];
+        const clientsEl = document.getElementById('ms-clients');
+        if (clientsEl) {
+          clientsEl.innerHTML = MS.map((m) => `
+            <div class="glass rounded-2xl p-5 sm:p-6">
+              <div class="flex items-baseline justify-between gap-3">
+                <h4 class="font-display text-base font-semibold text-white">${m.co}</h4>
+                <span class="text-xs uppercase tracking-wider ${m.priv ? 'text-slate-500' : 'text-sky-300'}">${m.tag}</span>
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-slate-400">${m.note}</p>
+              <div class="mt-4 space-y-2">
+                ${m.clients.map((c) => `
+                  <div class="flex items-start gap-2 text-sm">
+                    <span class="inline-flex shrink-0 rounded-md border px-2 py-0.5 text-xs font-medium ${KIND[c.k]}">${c.n}</span>
+                    <span class="text-slate-500">${c.d}</span>
+                  </div>`).join('')}
+              </div>
+            </div>`).join('');
+        }
+      })();
+    </script>
+
     <!-- ============ SUPPLY-CHAIN CAPEX ============ -->
     <section id="supply-capex" class="scroll-mt-16 py-16">
       <div class="max-w-3xl">
