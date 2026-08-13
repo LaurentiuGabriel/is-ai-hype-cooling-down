@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-24T19:12:47.893Z",
-  "dataThrough": "2026-03-31",
+  "generatedAt": "2026-08-13T09:28:13.331Z",
+  "dataThrough": "2026-06-30",
   "infraUpdated": "Jun 30, 2026, 9:14 AM UTC",
   "verdict": {
-    "heat": 92,
+    "heat": 93,
     "answer": "No.",
     "tag": "It's still accelerating",
     "tone": "hot"
@@ -12,23 +12,23 @@
     {
       "label": "Infrastructure investment",
       "blurb": "Combined quarterly capital spending by the five largest platform operators, versus a year earlier.",
-      "value": "$148B / qtr",
-      "change": "+91%",
+      "value": "$181B / qtr",
+      "change": "+86%",
       "score": 100
     },
     {
       "label": "Spending momentum",
       "blurb": "Whether that investment is still climbing quarter-on-quarter or has started to roll over.",
-      "value": "+14% vs prior qtr",
-      "change": "+14%",
-      "score": 95
+      "value": "+22% vs prior qtr",
+      "change": "+22%",
+      "score": 100
     },
     {
       "label": "Platform demand",
       "blurb": "Combined top-line revenue growth, the paying demand that the build-out is meant to serve.",
-      "value": "$448B / qtr",
-      "change": "+20%",
-      "score": 75
+      "value": "$490B / qtr",
+      "change": "+21%",
+      "score": 77
     },
     {
       "label": "Data-center power pipeline",
@@ -46,12 +46,12 @@
     }
   ],
   "headline": {
-    "combinedQuarterlyCapex": 148.4,
-    "combinedCapexYoY": 91,
-    "combinedTTMCapex": 482,
-    "combinedTTMCapexYoY": 78,
-    "combinedQuarterlyRevenue": 448,
-    "combinedRevenueYoY": 20,
+    "combinedQuarterlyCapex": 181.5,
+    "combinedCapexYoY": 86,
+    "combinedTTMCapex": 566,
+    "combinedTTMCapexYoY": 81,
+    "combinedQuarterlyRevenue": 490,
+    "combinedRevenueYoY": 21,
     "dcActiveCapacityGw": 82.1,
     "dcActiveRequests": 569,
     "dcCapacityYoY": 172,
@@ -61,10 +61,6 @@
   },
   "charts": {
     "capexCombined": [
-      {
-        "end": "2023-03-31",
-        "val": 36.6
-      },
       {
         "end": "2023-06-30",
         "val": 35.3
@@ -112,6 +108,10 @@
       {
         "end": "2026-03-31",
         "val": 148.4
+      },
+      {
+        "end": "2026-06-30",
+        "val": 181.5
       }
     ],
     "companies": [
@@ -119,10 +119,6 @@
         "name": "Microsoft",
         "color": "#22d3ee",
         "capex": [
-          {
-            "end": "2023-03-31",
-            "val": 6.6
-          },
           {
             "end": "2023-06-30",
             "val": 8.9
@@ -170,18 +166,18 @@
           {
             "end": "2026-03-31",
             "val": 30.9
+          },
+          {
+            "end": "2026-06-30",
+            "val": 35.8
           }
         ],
-        "latestYoY": 84
+        "latestYoY": 110
       },
       {
         "name": "Alphabet",
         "color": "#a78bfa",
         "capex": [
-          {
-            "end": "2023-03-31",
-            "val": 6.3
-          },
           {
             "end": "2023-06-30",
             "val": 6.9
@@ -229,18 +225,18 @@
           {
             "end": "2026-03-31",
             "val": 35.7
+          },
+          {
+            "end": "2026-06-30",
+            "val": 44.9
           }
         ],
-        "latestYoY": 107
+        "latestYoY": 100
       },
       {
         "name": "Amazon",
         "color": "#f59e0b",
         "capex": [
-          {
-            "end": "2023-03-31",
-            "val": 14.2
-          },
           {
             "end": "2023-06-30",
             "val": 11.5
@@ -288,18 +284,18 @@
           {
             "end": "2026-03-31",
             "val": 44.2
+          },
+          {
+            "end": "2026-06-30",
+            "val": 54.2
           }
         ],
-        "latestYoY": 77
+        "latestYoY": 68
       },
       {
         "name": "Meta",
         "color": "#34d399",
         "capex": [
-          {
-            "end": "2023-03-31",
-            "val": 6.8
-          },
           {
             "end": "2023-06-30",
             "val": 6.1
@@ -347,18 +343,18 @@
           {
             "end": "2026-03-31",
             "val": 19
+          },
+          {
+            "end": "2026-06-30",
+            "val": 30.1
           }
         ],
-        "latestYoY": 47
+        "latestYoY": 82
       },
       {
         "name": "Oracle",
         "color": "#f43f5e",
         "capex": [
-          {
-            "end": "2023-03-31",
-            "val": 2.6
-          },
           {
             "end": "2023-06-30",
             "val": 1.9
@@ -406,6 +402,10 @@
           {
             "end": "2026-03-31",
             "val": 18.6
+          },
+          {
+            "end": "2026-06-30",
+            "val": 16.5
           }
         ],
         "latestYoY": 82
