@@ -1043,6 +1043,47 @@
       </p>
     </section>
 
+    <!-- ============ SUPPLY-CHAIN MAP (editorial; reuses the bottleneck data + modal) ============ -->
+    <section id="bottleneck-map" class="scroll-mt-16 py-16">
+      <div class="max-w-3xl">
+        <h2 class="font-display text-2xl font-semibold text-white sm:text-3xl">How the chokepoints connect</h2>
+        <p class="mt-3 text-slate-400">
+          The same constraints, drawn as a supply chain instead of a list. At the center sit the buyers, the
+          frontier labs and the hyperscalers that host them. They buy accelerators; the accelerators are printed
+          by a foundry and fed by stacked memory; the foundry runs on lithography, masks and materials; the racks
+          need boards, optics and power; the sites need grid, water and people. Each bubble is one market. Its
+          color is how binding that link is in the year you pick below, anywhere from 2024 to 2030; its size is how
+          concentrated the market is, the share held by the single largest supplier. Tap any bubble to see who
+          dominates it.
+        </p>
+        <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-500">
+          <span class="uppercase tracking-wider">How binding</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full" style="background:#34d399"></span>easing</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full" style="background:#eab308"></span>tight</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full" style="background:#f97316"></span>severe</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full" style="background:#ef4444"></span>binding</span>
+          <span class="text-slate-600">· bigger bubble = more concentrated market · hover to trace a link · tap for market share</span>
+        </div>
+      </div>
+
+      <div class="glass mt-8 overflow-hidden rounded-2xl p-2 sm:p-4">
+        <div class="mb-1 flex flex-wrap items-center gap-2 px-2 pt-1 sm:mb-2">
+          <span class="mr-1 text-xs uppercase tracking-wider text-slate-500">Year</span>
+          <div id="bn-years" class="flex flex-wrap gap-1"></div>
+        </div>
+        <div class="w-full overflow-x-auto">
+          <svg id="bn-map" viewBox="0 0 1000 780" class="mx-auto block h-auto w-full" style="min-width:680px"
+               role="group" aria-label="AI supply-chain chokepoint map: bubbles are markets, colored by how binding each link is in 2026"></svg>
+        </div>
+      </div>
+      <p class="mt-4 max-w-3xl text-xs leading-relaxed text-slate-600">
+        A schematic of the primary buy-and-supply links, not every relationship. Color follows the selected year's
+        column of the trajectories above; concentration is the estimated share of the largest supplier in each chokepoint, an
+        order of magnitude rather than a precise split. Dashed links (capital, export controls) gate the whole flow
+        rather than feeding one node.
+      </p>
+    </section>
+
     <!-- ============ BOTTLENECK PORTFOLIO (editorial; independent of the data blob) ============ -->
     <section id="bottleneck-portfolio" class="scroll-mt-16 py-16">
       <div class="max-w-3xl">
@@ -2941,6 +2982,203 @@ const DEEP = {
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
       });
+
+      // ---------- supply-chain map (reuses BOTTLENECKS / DEEP / SEV / openModal) ----------
+      (function () {
+        const svg = document.getElementById('bn-map');
+        if (!svg) return;
+        const NS = 'http://www.w3.org/2000/svg';
+        const cx = 500, cy = 384;
+        const RX = { 1: 150, 2: 298, 3: 420 };
+        const RY = { 1: 118, 2: 228, 3: 322 };
+
+        // bi -> ring (radius band), a (angle deg, 0=east, clockwise), c (est. share
+        // of the #1 supplier in that specific chokepoint; drives bubble size).
+        const P = {
+          0: { r: 1, a: 270, c: 85 }, 15: { r: 1, a: 6, c: 40 }, 19: { r: 1, a: 90, c: 25 },
+          3: { r: 1, a: 198, c: 43 }, 24: { r: 1, a: 158, c: 30 },
+          1: { r: 2, a: 283, c: 90 }, 2: { r: 2, a: 301, c: 60 }, 7: { r: 2, a: 262, c: 90 },
+          13: { r: 2, a: 13, c: 50 }, 12: { r: 2, a: 34, c: 30 }, 14: { r: 2, a: 350, c: 30 },
+          20: { r: 2, a: 69, c: 35 }, 17: { r: 2, a: 107, c: 30 }, 21: { r: 2, a: 129, c: 20 },
+          25: { r: 2, a: 150, c: 25 }, 23: { r: 2, a: 185, c: 15 },
+          4: { r: 3, a: 293, c: 100 }, 5: { r: 3, a: 306, c: 65 }, 6: { r: 3, a: 319, c: 55 },
+          8: { r: 3, a: 250, c: 95 }, 26: { r: 3, a: 236, c: 35 }, 16: { r: 3, a: 222, c: 90 },
+          9: { r: 3, a: 47, c: 35 }, 10: { r: 3, a: 27, c: 30 }, 11: { r: 3, a: 9, c: 40 },
+          18: { r: 3, a: 108, c: 20 }, 22: { r: 3, a: 132, c: 15 }, 27: { r: 3, a: 205, c: 20 },
+        };
+        const SHORT = {
+          0: 'GPUs', 1: 'Foundry', 2: 'HBM / DRAM', 3: 'Storage', 4: 'EUV', 5: 'Masks', 6: 'Test',
+          7: 'Packaging', 8: 'Substrates', 9: 'PCB', 10: 'Board power', 11: 'MLCC', 12: 'Optics',
+          13: 'Network', 14: 'Inter-DC', 15: 'Racks', 16: 'Materials', 17: 'Cooling', 18: 'Water',
+          19: 'Grid', 20: 'On-site power', 21: 'Land', 22: 'Labor', 23: 'Capital', 24: 'Data',
+          25: 'Talent', 26: 'EDA', 27: 'Export rules',
+        };
+        // [supplier bi, buyer bi]; 'H' is the hub of buyers at the center.
+        const EDGES = [
+          [0, 'H'], [15, 'H'], [19, 'H'], [3, 'H'], [24, 'H'], [25, 'H'], [23, 'H'], [27, 'H'],
+          [14, 'H'], [17, 'H'], [20, 'H'], [21, 'H'],
+          [1, 0], [2, 0], [7, 0],
+          [4, 1], [5, 1], [6, 1], [16, 1], [26, 1],
+          [8, 7],
+          [12, 13], [13, 15], [9, 15], [10, 15], [11, 15],
+          [18, 17], [22, 21],
+        ];
+
+        const rd = (deg) => (deg * Math.PI) / 180;
+        const pos = (bi) => { const p = P[bi]; return { x: cx + RX[p.r] * Math.cos(rd(p.a)), y: cy + RY[p.r] * Math.sin(rd(p.a)) }; };
+        const bubR = (bi) => 15 + (P[bi].c / 100) * 24;
+        const topHolder = (bi) => {
+          const d = DEEP[BOTTLENECKS[bi].name];
+          if (!d || !d.shares || !d.shares.length) return null;
+          return d.shares.reduce((a, x) => (x.v > a.v && x.n !== 'Other' ? x : a), d.shares[0]);
+        };
+
+        const mk = (tag, attrs) => {
+          const el = document.createElementNS(NS, tag);
+          for (const k in attrs) el.setAttribute(k, attrs[k]);
+          return el;
+        };
+
+        // defs: arrowhead + hub glow
+        const defs = mk('defs', {});
+        const marker = mk('marker', { id: 'bn-arrow', viewBox: '0 0 10 10', refX: '8.5', refY: '5', markerWidth: '6.5', markerHeight: '6.5', orient: 'auto-start-reverse' });
+        marker.appendChild(mk('path', { d: 'M0,0 L10,5 L0,10 z', fill: 'rgba(148,163,184,0.5)' }));
+        defs.appendChild(marker);
+        const glow = mk('radialGradient', { id: 'bn-hub-glow' });
+        glow.appendChild(mk('stop', { offset: '0%', 'stop-color': 'rgba(56,189,248,0.35)' }));
+        glow.appendChild(mk('stop', { offset: '100%', 'stop-color': 'rgba(56,189,248,0)' }));
+        defs.appendChild(glow);
+        svg.appendChild(defs);
+
+        // ---- edges (drawn first, behind everything) ----
+        const edgeLayer = mk('g', {});
+        svg.appendChild(edgeLayer);
+        const edgeEls = [];
+        EDGES.forEach(([from, to]) => {
+          const a = pos(from);
+          const b = to === 'H' ? { x: cx, y: cy } : pos(to);
+          const rB = to === 'H' ? 56 : bubR(to);
+          const rA = bubR(from);
+          const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+          const ux = dx / len, uy = dy / len;
+          const dashed = from === 23 || from === 27;
+          const line = mk('line', {
+            x1: a.x + ux * (rA + 2), y1: a.y + uy * (rA + 2),
+            x2: b.x - ux * (rB + 7), y2: b.y - uy * (rB + 7),
+            stroke: 'rgba(148,163,184,0.24)', 'stroke-width': '1.5', 'marker-end': 'url(#bn-arrow)',
+          });
+          if (dashed) line.setAttribute('stroke-dasharray', '4 5');
+          line.dataset.from = from; line.dataset.to = to; line.dataset.dashed = dashed ? '1' : '';
+          edgeLayer.appendChild(line);
+          edgeEls.push(line);
+        });
+
+        // ---- hub ----
+        const hub = mk('g', {});
+        hub.appendChild(mk('circle', { cx, cy, r: 84, fill: 'url(#bn-hub-glow)' }));
+        hub.appendChild(mk('circle', { cx, cy, r: 56, fill: '#0b0e15', stroke: 'rgba(255,255,255,0.3)', 'stroke-width': '1.5' }));
+        const htitle = mk('title', {});
+        htitle.textContent = 'The demand side: frontier AI labs and the hyperscalers that host them. Everything on this map exists to supply them.';
+        hub.appendChild(htitle);
+        const hicon = mk('text', { x: cx, y: cy - 20, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': '22' });
+        hicon.textContent = '🧠'; hub.appendChild(hicon);
+        [['AI labs', 6], ['& hyperscalers', 22]].forEach(([t, dy]) => {
+          const tx = mk('text', { x: cx, y: cy + dy, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': '13', 'font-weight': '700', fill: '#f8fafc' });
+          tx.textContent = t; hub.appendChild(tx);
+        });
+        const hsub = mk('text', { x: cx, y: cy + 40, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': '10.5', fill: '#64748b' });
+        hsub.textContent = 'the buyers'; hub.appendChild(hsub);
+        svg.appendChild(hub);
+
+        // ---- nodes ----
+        const nodeLayer = mk('g', {});
+        svg.appendChild(nodeLayer);
+        const recs = [];
+        Object.keys(P).map(Number).forEach((bi) => {
+          const b = BOTTLENECKS[bi]; const p = pos(bi); const r = bubR(bi);
+          const g = mk('g', { class: 'bn-node', 'data-bi': bi, tabindex: '0', role: 'button', cursor: 'pointer' });
+          const ttl = mk('title', {}); g.appendChild(ttl);
+          const halo = mk('circle', { cx: p.x, cy: p.y, r: r + 5, opacity: '0.16' });
+          const disc = mk('circle', { cx: p.x, cy: p.y, r, 'fill-opacity': '0.9', stroke: 'rgba(255,255,255,0.55)', 'stroke-width': '1' });
+          g.appendChild(halo); g.appendChild(disc);
+          const emo = mk('text', { x: p.x, y: p.y, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': String(r * 0.92) });
+          emo.textContent = b.icon; emo.style.pointerEvents = 'none'; g.appendChild(emo);
+          const cap = mk('text', {
+            x: p.x + Math.cos(rd(P[bi].a)) * (r + 14), y: p.y + Math.sin(rd(P[bi].a)) * (r + 14),
+            'text-anchor': 'middle', 'dominant-baseline': 'middle', 'font-size': '12.5', 'font-weight': '600', fill: '#e2e8f0',
+          });
+          cap.textContent = SHORT[bi]; cap.style.pointerEvents = 'none'; g.appendChild(cap);
+          nodeLayer.appendChild(g);
+          recs.push({ bi, halo, disc, ttl, g });
+        });
+
+        // ---- year selector: recolors every bubble by that year's severity ----
+        const YEARS = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
+        const yearBar = document.getElementById('bn-years');
+        function paint(y) {
+          recs.forEach((rec) => {
+            const s = BOTTLENECKS[rec.bi].timeline[y].sev;
+            const col = SEV[s];
+            rec.halo.setAttribute('fill', col);
+            rec.disc.setAttribute('fill', col);
+            const h = topHolder(rec.bi);
+            rec.ttl.textContent = `${BOTTLENECKS[rec.bi].name} · ${SEV_LABEL[s]} in ${YEARS[y]}${h ? ` · ${h.n} ~${h.v}%` : ''}`;
+            rec.g.setAttribute('aria-label', `${BOTTLENECKS[rec.bi].name}, ${SEV_LABEL[s]} in ${YEARS[y]}${h ? `, led by ${h.n} at about ${h.v} percent` : ''}. Activate for market share.`);
+          });
+          pills.forEach((btn, i) => {
+            const on = i === y;
+            btn.style.borderColor = on ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.1)';
+            btn.style.background = on ? 'rgba(255,255,255,0.1)' : 'transparent';
+            btn.style.color = on ? '#f8fafc' : '#94a3b8';
+            btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+        }
+        const pills = YEARS.map((yr, y) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = String(yr);
+          btn.className = 'rounded-full border px-2.5 py-1 text-xs font-medium transition';
+          btn.style.borderColor = 'rgba(255,255,255,0.1)';
+          btn.style.color = '#94a3b8';
+          btn.addEventListener('click', () => paint(y));
+          if (yearBar) yearBar.appendChild(btn);
+          return btn;
+        });
+        paint(2); // default to 2026
+
+        // ---- interaction: hover/focus traces a link; click opens the market modal ----
+        const nodes = Array.from(nodeLayer.querySelectorAll('.bn-node'));
+        function highlight(bi) {
+          const active = new Set([bi]);
+          edgeEls.forEach((l) => {
+            const f = Number(l.dataset.from);
+            const t = l.dataset.to === 'H' ? 'H' : Number(l.dataset.to);
+            const on = f === bi || t === bi;
+            l.setAttribute('stroke', on ? 'rgba(56,189,248,0.85)' : 'rgba(148,163,184,0.07)');
+            l.setAttribute('stroke-width', on ? '2.4' : '1.2');
+            if (on) { active.add(f); if (t !== 'H') active.add(t); }
+          });
+          nodes.forEach((g) => { g.style.opacity = active.has(Number(g.dataset.bi)) ? '1' : '0.26'; });
+        }
+        function clearHi() {
+          edgeEls.forEach((l) => {
+            l.setAttribute('stroke', 'rgba(148,163,184,0.24)');
+            l.setAttribute('stroke-width', '1.5');
+          });
+          nodes.forEach((g) => { g.style.opacity = '1'; });
+        }
+        nodes.forEach((g) => {
+          const bi = Number(g.dataset.bi);
+          g.addEventListener('mouseenter', () => highlight(bi));
+          g.addEventListener('mouseleave', clearHi);
+          g.addEventListener('focus', () => highlight(bi));
+          g.addEventListener('blur', clearHi);
+          g.addEventListener('click', () => openModal(bi));
+          g.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(bi); }
+          });
+        });
+      })();
     })();
   </script>
 
