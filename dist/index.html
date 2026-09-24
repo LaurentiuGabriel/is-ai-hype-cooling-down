@@ -1138,8 +1138,10 @@
         500's +19.5% (the Nasdaq-100 returned about the same). The line worth staring at is at the bottom.
         Nvidia, the face of the whole trade, trailed the index, because over this particular year the
         binding constraint, and the money, moved downstream to memory, power and the tools. Which is the
-        point of the section above: the bottleneck keeps moving. Source: 52-week price change per
-        stockanalysis.com, as of Jul 31, 2026.
+        point of the section above: the bottleneck keeps moving. And it kept moving: by late September 2026
+        Nvidia had recovered to roughly a +27% trailing-year return, near its 52-week high and no longer the
+        laggard. The snapshot tiles above are frozen at Jul 31, 2026. Source: 52-week price change per
+        stockanalysis.com.
       </p>
 
       <script>
@@ -1440,19 +1442,19 @@ const BOTTLENECKS = [
     timeline: [
       { sev: 4, note: 'H100 sold out; access gated by Nvidia allocation, not price.' },
       { sev: 4, note: 'Blackwell booked ~12 months out; Nvidia at ~90% share of AI silicon.' },
-      { sev: 3, note: 'Supply eases as CoWoS/HBM loosen, but concentration & CUDA moat persist.' },
+      { sev: 3, note: 'Allocation broadens as CoWoS eases and custom silicon ramps; HBM stays tight, CUDA moat persists.' },
       { sev: 3, note: 'Custom silicon (TPU, Trainium, Maia, MI) diversifies supply meaningfully.' },
       { sev: 2, note: 'Merchant + in-house capacity broadens; hardware scarcity fades.' },
       { sev: 2, note: 'Second-source options common; allocation rarely the binding limit.' },
       { sev: 2, note: 'Silicon is abundant, but CUDA software lock-in remains the durable moat.' },
     ],
     milestones: [
-      'Nvidia holds <strong>~80–90%</strong> of AI accelerators; access is allocation-gated.',
+      'Nvidia holds <strong>~80–85%</strong> of AI accelerators; access is allocation-gated.',
       'The real moat is <strong>CUDA</strong> software, not the die, hardest chokepoint to route around.',
       'Hyperscaler custom silicon (TPU / Trainium / Maia) + AMD MI are the main relief valve by ~2027.',
     ],
     companies: [
-      { name: 'Nvidia', ticker: 'NVDA', role: '~90% share; sets AI compute allocation' },
+      { name: 'Nvidia', ticker: 'NVDA', role: '~83% share; sets AI compute allocation' },
       { name: 'AMD', ticker: 'AMD', role: 'Instinct MI, lead merchant challenger' },
       { name: 'Broadcom', ticker: 'AVGO', role: 'Custom accelerator ASICs (XPUs)' },
       { name: 'Google TPU', ticker: 'GOOGL', role: 'Largest in-house AI silicon' },
@@ -1474,7 +1476,7 @@ const BOTTLENECKS = [
     ],
     milestones: [
       'Leading-edge (N3/N2) is booked years out; AI wins priority allocation.',
-      'TSMC’s <strong>~$40B+/yr</strong> capex + Arizona fabs add supply on a multi-year lag.',
+      'TSMC’s <strong>~$60–64B</strong> 2026 capex + Arizona fabs add supply on a multi-year lag.',
       '2 nm (N2) volume from 2025–26; A16 ~2026–27, each node starts oversubscribed.',
     ],
     companies: [
@@ -1486,11 +1488,11 @@ const BOTTLENECKS = [
   },
   {
     icon: '💾', name: 'HBM / DRAM', peak: 'Peak 2026–27', peakColor: '#f87171',
-    thesis: 'Every AI accelerator is fed by stacked high-bandwidth memory, and wafer supply is running roughly 20% behind demand.',
+    thesis: 'Every AI accelerator is fed by stacked high-bandwidth memory, and by 2026 the squeeze had spread to all of DRAM: wafer supply runs roughly 20% behind demand and contract prices have roughly doubled in a single quarter.',
     timeline: [
       { sev: 2, note: 'Tightening begins; AI demand shifts the DRAM mix toward HBM.' },
       { sev: 3, note: 'Global memory-shortage era starts, a multi-year AI-driven DRAM/HBM squeeze.' },
-      { sev: 4, note: 'Clear crisis: wafer supply ~20% below demand; scarce until ~2030 (SK Group).' },
+      { sev: 4, note: 'Crisis: DRAM contract prices roughly double in a quarter; HBM4 hits mass production; scarce to ~2030 (SK Group).' },
       { sev: 4, note: 'Still structurally tight; capacity expansions keep chasing demand.' },
       { sev: 3, note: 'Shortage begins to moderate, but large players still warn of tightness.' },
       { sev: 3, note: 'Still tight, wafer and equipment limits extend the shortage.' },
@@ -1499,13 +1501,14 @@ const BOTTLENECKS = [
     milestones: [
       '2025 opens the multi-year AI memory-shortage era across DRAM and HBM.',
       'SK Group: HBM stays scarce until <strong>~2030</strong>, wafer supply ~20% under demand.',
+      'HBM4 hit mass production in early 2026; Nvidia qualified <strong>all three</strong> makers for Rubin, at 288 GB per GPU.',
       'Relief may begin ~2028, but capacity keeps chasing demand.',
       'CXMT’s <strong>$8.6B Shanghai IPO</strong> (Jul 2026) funds a fourth DRAM source, but not an HBM one.',
     ],
     companies: [
-      { name: 'SK Hynix', ticker: '000660.KS', role: 'HBM market leader; Nvidia’s lead supplier' },
-      { name: 'Micron', ticker: 'MU', role: 'Only US HBM maker; HBM3E/4 ramp' },
-      { name: 'Samsung', ticker: '005930.KS', role: 'DRAM scale racing into HBM' },
+      { name: 'SK Hynix', ticker: '000660.KS', role: 'HBM leader; bulk of Nvidia’s Rubin HBM4' },
+      { name: 'Micron', ticker: 'MU', role: 'Only US HBM maker; HBM4 in volume, Rubin-qualified' },
+      { name: 'Samsung', ticker: '005930.KS', role: 'DRAM revenue #1; HBM4 qualified for Rubin' },
       { name: 'CXMT', ticker: '688825.SS', role: 'China’s DRAM champion; listed Jul 2026' },
       { name: 'Hanmi Semi', ticker: '042700.KS', role: 'TC bonders for HBM stacking' },
     ],
@@ -1827,8 +1830,8 @@ const BOTTLENECKS = [
     timeline: [
       { sev: 3, note: 'GB200 NVL72 bring-up issues delay shipments despite chip supply.' },
       { sev: 4, note: 'Liquid-cooled rack integration & test capacity the gating step.' },
-      { sev: 3, note: 'ODMs scale US / Mexico lines; copper backplane supply tight.' },
-      { sev: 3, note: 'Rubin-class racks reset integration complexity again.' },
+      { sev: 3, note: 'Rubin NVL144 ramps in 2H; ODMs scale US / Mexico lines, copper backplane tight.' },
+      { sev: 3, note: 'Rubin Ultra NVL576 resets integration complexity again.' },
       { sev: 2, note: 'Integration know-how spreads; capacity broadly adequate.' },
       { sev: 2, note: 'Standardized rack designs ease multi-sourcing.' },
       { sev: 1, note: 'Mature; rack assembly rarely the binding step.' },
@@ -1860,7 +1863,7 @@ const BOTTLENECKS = [
       { sev: 4, note: 'Copper & critical-mineral gap widens as electrification + AI collide.' },
     ],
     milestones: [
-      'China controls the bulk of <strong>gallium, scandium, germanium & rare-earth</strong> processing.',
+      'China controls the bulk of <strong>gallium, scandium, germanium & rare-earth</strong> processing, and in 2026 cut gallium and germanium shipments to Japan to near zero.',
       'EUV photoresist & specialty gases are concentrated in a few Japanese suppliers.',
       'Copper faces a structural deficit as grids, EVs and data centers all compete.',
       'Nearly all crucible-grade <strong>high-purity quartz</strong> comes from one site, Spruce Pine, NC; Hurricane Helene exposed it.',
@@ -2036,7 +2039,7 @@ const BOTTLENECKS = [
   },
   {
     icon: '💰', name: 'Capital & financing', peak: 'Peak 2026–28', peakColor: '#f87171',
-    thesis: 'The build-out needs roughly half a trillion dollars a year, and hyperscaler free cash flow no longer covers it. The marginal dollar now comes from debt, private credit and circular vendor financing, so if credit tightens or AI revenue disappoints, money becomes the binding constraint before physics does.',
+    thesis: 'The build-out now runs well past half a trillion dollars a year, and at the frontier it has outgrown the cash. The five biggest operators still self-fund in aggregate, but two of them already spend more than they earn, and the marginal dollar comes from debt, private credit and circular vendor financing, so if credit tightens or AI revenue disappoints, money becomes the binding constraint before physics does.',
     timeline: [
       { sev: 1, note: 'Build-out funded from hyperscaler cash flow; cost of capital benign.' },
       { sev: 2, note: 'Capex guides shock markets; neoclouds lean on GPU-backed debt.' },
@@ -2047,9 +2050,10 @@ const BOTTLENECKS = [
       { sev: 3, note: 'Structural: AI capex competes with grids & reshoring for capital.' },
     ],
     milestones: [
-      'The build-out needs on the order of <strong>$400–500B/year</strong>, beyond hyperscaler free cash flow.',
+      'The five largest operators alone now spend <strong>$586B/year</strong> on capex; the global build-out runs higher, past what free cash flow covers at the frontier.',
       'GPU-backed debt, SPVs and <strong>circular vendor financing</strong> fund the marginal data center.',
       '3–5 year chip depreciation versus 15–30 year financing is the structural mismatch.',
+      'Oracle is the live case: <strong>$28.5B of capex in one quarter</strong> (Q1 FY27) on negative free cash flow, funded by debt, with no timetable back to positive.',
     ],
     companies: [
       { name: 'Blackstone', ticker: 'BX', role: 'Largest DC infra investor' },
@@ -2154,6 +2158,7 @@ const BOTTLENECKS = [
       'One island (Taiwan) and one Dutch firm (ASML) sit astride the entire leading edge.',
       'China controls the majority of <strong>gallium, germanium and rare-earth</strong> processing.',
       'Export bans and counter-controls can throttle supply overnight: policy, not physics.',
+      'By 2026 the US–China advanced-chip trade had effectively frozen: Nvidia booked <strong>no H20 sales</strong> to China even after licences, as Beijing steered buyers to domestic silicon.',
     ],
     companies: [
       { name: 'TSMC', ticker: 'TSM', role: 'Taiwan concentration is the core risk' },
@@ -2174,9 +2179,9 @@ const BOTTLENECKS = [
 // pre-revenue, or a supplier to the market rather than a participant in it).
 const DEEP = {
   'AI accelerators & allocation': {
-    basis: 'Share of AI accelerator value shipped, 2025 (est.)',
+    basis: 'Share of AI accelerator value shipped, 2026 (est.)',
     shares: [
-      { n: 'Nvidia', v: 85 }, { n: 'Google TPU', v: 6 }, { n: 'AMD', v: 4 },
+      { n: 'Nvidia', v: 83 }, { n: 'Google TPU', v: 6 }, { n: 'AMD', v: 6 },
       { n: 'Amazon Trainium', v: 3 }, { n: 'Cerebras / Groq', v: 1 }, { n: 'Other', v: 1 },
     ],
     caveat: 'Broadcom sells no accelerator under its own badge. It co-designs and manufactures the Google TPU and Meta MTIA parts, so its economics sit inside the custom-silicon slices rather than beside them.',
@@ -2187,7 +2192,7 @@ const DEEP = {
       { h: 'What breaks it open', p: 'In-house silicon is the only relief valve that has actually worked. Google TPU, AWS Trainium and Meta MTIA sidestep the allocation queue entirely because their owners buy fab capacity directly, and the software problem is tractable when you also control the workload. AMD ROCm and the compiler layer, Triton and the PyTorch and JAX backends, chip at the moat from the other side.' },
     ],
     stats: [
-      { k: 'Nvidia share of AI silicon', v: '~85–90%' },
+      { k: 'Nvidia share of AI silicon', v: '~80–85%' },
       { k: 'CUDA in the field since', v: '2007' },
       { k: 'Lead time, top-end systems', v: '~6–12 months' },
       { k: 'Custom ASIC share by 2028', v: '~15–20% (est.)' },
@@ -2208,28 +2213,28 @@ const DEEP = {
       { k: 'TSMC leading-edge share', v: '~90%' },
       { k: 'Cost of one leading-edge fab', v: '~$20B+' },
       { k: 'Groundbreaking to output', v: '~4 years' },
-      { k: 'TSMC 2025 capex', v: '~$40B' },
+      { k: 'TSMC 2026 capex', v: '~$60–64B' },
     ],
   },
 
   'HBM / DRAM': {
-    basis: 'Share of global DRAM revenue, Q1 2026 (est.)',
+    basis: 'Share of global DRAM revenue, Q2 2026 (est.)',
     shares: [
-      { n: 'Samsung', v: 38 }, { n: 'SK Hynix', v: 29 }, { n: 'Micron', v: 22 },
-      { n: 'CXMT', v: 8 }, { n: 'Other', v: 3 },
+      { n: 'Samsung', v: 39 }, { n: 'SK Hynix', v: 25 }, { n: 'Micron', v: 23 },
+      { n: 'CXMT', v: 7 }, { n: 'Other', v: 6 },
     ],
-    caveat: 'CXMT’s share is DRAM only. In HBM specifically SK Hynix holds roughly 60%, with Micron and Samsung splitting most of the rest, and CXMT’s IPO prospectus contains no HBM project at all. Hanmi Semiconductor is not a memory maker: it supplies the thermocompression bonders used to stack HBM dies.',
-    summary: 'Every accelerator is bandwidth-starved without stacked memory beside it, and the industry entered the AI boom having just cut capex through the worst downturn in a decade. Wafer supply now runs roughly 20% behind demand, and SK Group has said publicly that it expects scarcity to persist to around 2030.',
+    caveat: 'CXMT’s share is DRAM only, and the ranking flips in HBM: there SK Hynix leads with roughly 55–60% overall and around 60–70% of Nvidia’s Rubin HBM4 orders, while Samsung and Micron both cleared Rubin HBM4 qualification in 2026 and split most of the rest. CXMT’s IPO prospectus contains no HBM project at all, and Hanmi Semiconductor is not a memory maker: it supplies the thermocompression bonders used to stack HBM dies.',
+    summary: 'Every accelerator is bandwidth-starved without stacked memory beside it, and the industry entered the AI boom having just cut capex through the worst downturn in a decade. Wafer supply now runs roughly 20% behind demand, SK Group expects scarcity to persist to around 2030, and by early 2026 the squeeze had spread well beyond HBM: conventional DRAM contract prices roughly doubled in a single quarter.',
     sections: [
-      { h: 'How the chokepoint works', p: 'One Blackwell-class part carries 192 GB or more of HBM. Because HBM consumes roughly three times the wafer area per bit of standard DRAM and takes far longer to test, every bit shifted into HBM removes several bits of conventional supply. That is why an AI shortage drained the commodity memory market alongside it and put DRAM prices into the steepest run in the industry’s history.' },
+      { h: 'How the chokepoint works', p: 'A Blackwell-class part carries 192 GB of HBM and Rubin lifts that to 288 GB, so the memory content per accelerator keeps climbing. Because HBM consumes roughly three times the wafer area per bit of standard DRAM and takes far longer to test, every bit shifted into HBM removes several bits of conventional supply. That is why an AI shortage drained the commodity memory market alongside it and put DRAM prices into the steepest run in the industry’s history.' },
       { h: 'Why it binds', p: 'Memory capacity is committed a year ahead and takes two to three years to add. The 2023 capex cuts landed exactly when the AI orders were forming, so the supply that would have relieved 2026 was cancelled in 2023. Nothing in the current cycle can undo that timing.' },
-      { h: 'What breaks it open', p: 'Three things: HBM4 lifting bandwidth per stack so fewer stacks are needed per accelerator, new fabs at Cheongju, Pyeongtaek and Idaho reaching volume, and CXMT converting Chinese domestic DDR5 output into real commodity relief. The last of those is the newest variable, and because CXMT is not building HBM it will show up in DRAM prices well before it shows up in AI.' },
+      { h: 'What breaks it open', p: 'Three things: HBM4, in mass production since early 2026, lifting bandwidth per stack so fewer stacks are needed per accelerator; new fabs at Cheongju, Pyeongtaek and Idaho reaching volume; and CXMT converting Chinese domestic DDR5 output into real commodity relief. The last is the newest variable, and because CXMT is not building HBM it will show up in DRAM prices well before it shows up in AI.' },
     ],
     stats: [
+      { k: 'HBM per GPU', v: '192 → 288 GB (Rubin)' },
+      { k: 'DDR5 vs pre-crisis', v: '~3–5× the price' },
       { k: 'Wafer supply vs demand', v: '~20% short' },
-      { k: 'HBM per Blackwell-class GPU', v: '192 GB+' },
-      { k: 'CXMT wafer starts, end-2026', v: '~350k/month' },
-      { k: 'CXMT IPO, 27 Jul 2026', v: '$8.6B raised' },
+      { k: 'HBM4 mass production', v: 'early 2026, all three' },
     ],
   },
 
@@ -2645,14 +2650,14 @@ const DEEP = {
       { n: 'Apollo', v: 13 }, { n: 'Brookfield', v: 12 }, { n: 'Other', v: 20 },
     ],
     caveat: 'Nvidia is on this card as a vendor financier rather than an asset manager. Its equity stakes in and backstops for neoclouds and model labs are what make the circularity concern concrete rather than theoretical. CoreWeave and Nebius are on the other side of that trade: they are the neocloud borrowers, not capital providers, so they do not appear in the pie of financiers. They are here because their GPU-collateralised debt and Nvidia-backed balance sheets are the clearest live example of the circular financing the card describes.',
-    summary: 'This is the bottleneck that could bind before any physical one does. The build-out needs on the order of $400B to $500B a year, hyperscaler free cash flow no longer covers it, and the marginal dollar now comes from private credit, SPVs and vendor financing that all assume AI revenue arrives roughly on schedule.',
+    summary: 'This is the bottleneck that could bind before any physical one does. The build-out runs well past half a trillion dollars a year, the frontier operators no longer fund it from cash, and the marginal dollar now comes from private credit, SPVs and vendor financing that all assume AI revenue arrives roughly on schedule.',
     sections: [
       { h: 'How the chokepoint works', p: 'Capex has moved off balance sheet. Data centers are financed through SPVs and joint ventures, GPUs are pledged as collateral for asset-backed debt, and suppliers take equity in their own customers. Each structure is individually defensible and collectively creates correlated exposure to a single assumption about AI demand.' },
       { h: 'Why it binds', p: 'The durations do not match. An accelerator is economically useful for perhaps three to five years, while the debt and the buildings behind it amortise over fifteen to thirty. If utilisation or pricing disappoints, the depreciation treadmill shows up in earnings long before the loans mature.' },
       { h: 'What breaks it open', p: 'Durable AI revenue is the only real answer, and it is already visible in parts of the market. Short of that, capital reprices: the strongest balance sheets keep building while leveraged neoclouds get consolidated, which slows the build-out without stopping it.' },
     ],
     stats: [
-      { k: 'Annual build-out need', v: '~$400–500B' },
+      { k: 'Annual build-out need', v: '$600B+' },
       { k: 'Chip economic life', v: '3–5 years' },
       { k: 'Financing amortisation', v: '15–30 years' },
       { k: 'Marginal funding source', v: 'private credit, SPVs' },
