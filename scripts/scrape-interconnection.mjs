@@ -15,9 +15,18 @@ async function resolveBuildId() {
 }
 
 function extractLastUpdated(html) {
-  // e.g. "Jun 30, 2026, 9:14 AM UTC"
-  const m = html.match(/[A-Z][a-z]{2} \d{1,2}, \d{4}, \d{1,2}:\d{2} [AP]M UTC/);
-  return m ? m[0] : null;
+  // Older builds printed an absolute stamp, e.g. "Jun 30, 2026, 9:14 AM UTC".
+  const abs = html.match(/[A-Z][a-z]{2} \d{1,2}, \d{4}, \d{1,2}:\d{2} [AP]M UTC/);
+  if (abs) return abs[0];
+  // Current builds print a relative badge instead ("Data last updated today",
+  // "yesterday", "3 days ago"); resolve it against the scrape time.
+  const rel = html.match(/last updated\s+(today|yesterday|(\d+)\s+days?\s+ago)/i);
+  if (!rel) return null;
+  const word = rel[1].toLowerCase();
+  const daysAgo = word === "today" ? 0 : word === "yesterday" ? 1 : Number(rel[2]);
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() - daysAgo);
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }) + " UTC";
 }
 
 /** Query the data endpoint for a given filter set, following internal redirects. */

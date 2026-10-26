@@ -4,7 +4,7 @@ A self-updating static page that answers one question — **is the AI hype cooli
 down?** — from hard numbers rather than headlines. The answer sits at the top of
 the page; the signals that produced it are laid out below.
 
-The current reading: **No — it's still accelerating** (heat index 90/100).
+The current reading: **No — it's still accelerating** (heat index 93/100).
 
 ## How it works
 
