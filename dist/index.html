@@ -243,12 +243,12 @@
         <p class="mt-4 max-w-3xl text-xs leading-relaxed text-slate-600">
           Nvidia is the supplier whose revenue is the mirror of everyone else's capex: $107.6B of
           data-center sales in a single quarter, set against the $230B the five operators spent in the
-          September quarter. Revenue more than doubled for the third quarter running, GAAP diluted EPS was
+          September quarter. Revenue more than doubled from a year earlier, GAAP diluted EPS was
           $2.70, and the next-quarter guide of $130B (plus or minus 3%) includes an extra week in the
           quarter. The outlook assumes no data-center compute revenue from China. The print landed five
           days after Nvidia announced that Jensen Huang had resigned as president, chief executive and
           director, with chief financial officer Colette Kress named interim chief executive while the
-          board searches for a successor and Harvey Jones becomes its first independent chair; the company
+          board searches for a successor and Harvey Jones becomes its first chair of the board; the company
           gave no reason. Source: Nvidia Q3 fiscal 2027 earnings release (quarter ended Oct 25, 2026),
           reported Nov 17, 2026, and Nvidia's Form 8-K of Nov 12, 2026.
         </p>
@@ -346,9 +346,10 @@
         <p class="mt-4 max-w-3xl text-xs leading-relaxed text-slate-600">
           Google Cloud's revenue doubled to $30.7B and its operating income tripled to $11.1B, a 36% margin
           against 24% a year ago; management put the cloud backlog at $561B on the earnings call. Reported
-          net income fell to $26.5B ($2.12 a share) from $35.0B, but that is distorted the other way from
-          the last two quarters: it includes an $8.7B loss on equity securities (the CFO tied about $8.2B
-          of it to an unrealized markdown of the SpaceX stake), against a $10.7B gain a year earlier.
+          net income fell to $26.5B ($2.12 a share) from $35.0B, but that is distorted by non-operating
+          items: it includes an $8.7B loss on equity securities (on the call the CFO attributed an $8.2B
+          other-income loss to an unrealized markdown of the SpaceX stake), against a $10.7B gain a year
+          earlier.
           Operating income ($40.6B, +30%) is the clean read. The 2026 capex guide was held at $195–205B
           and management said 2027 spend will increase significantly, with detail promised on the fourth-quarter
           call. Source: Alphabet Q3 2026 earnings release (quarter ended Sep 30, 2026), reported
@@ -396,8 +397,8 @@
         </div>
         <p class="mt-4 max-w-3xl text-xs leading-relaxed text-slate-600">
           Azure growing 48% and a $677B commercial backlog are the demand signals; the $45.2B of quarterly
-          capex (cash for property and equipment $39.4B plus $7.4B of finance leases, about three-quarters of
-          it short-lived assets such as GPUs and CPUs) is the spend. Microsoft reorganized its reporting
+          capex, which includes $7.4B of finance leases (cash purchases of property and equipment were
+          $39.4B) and went about three-quarters to short-lived assets such as GPUs and CPUs, is the spend. Microsoft reorganized its reporting
           segments in September, so the old Intelligent Cloud line is gone and the closest comparison is
           Agents and Infra. GAAP diluted EPS of $4.92 (+32%) includes a $0.03 net gain from its OpenAI
           investment, against a $0.41 loss a year earlier; non-GAAP EPS of $4.89 excludes it. On the call
@@ -808,7 +809,7 @@
         <p class="mt-4 text-xs leading-relaxed text-slate-500">
           CoreWeave alone still out-spends the entire rest of the field, and its curve is steeper than any
           single hyperscaler's early ramp: $14.9B of capex in 2025 and a 2026 guide of $37–39B, raised
-          twice this year. Nebius has gone from $4.1B in 2025 to about $27B planned for 2026, with roughly
+          more than once this year. Nebius has gone from $4.1B in 2025 to about $27B planned for 2026, with roughly
           $15B spent in the first nine months, and has put out a first 2027 plan of $40–45B. The converted miners (IREN, Applied Digital, Core Scientific, TeraWulf,
           Cipher) enter only in 2025, when their AI pivots began, and are drawn fully dashed because their
           numbers are total company capex that blends mining and AI, much of it customer financed, on
@@ -964,7 +965,7 @@
         const MS = [
           {
             co: 'CoreWeave', tag: 'CRWV · public', priv: false,
-            note: 'The largest neocloud by far. Revenue went from $1.9B in 2024 to $5.1B in 2025 and $3.7B in the September 2026 quarter alone; 2026 capex is guided to $37–39B, funded largely by debt secured against the GPUs themselves ($46.9B of total debt at Sep 30) plus convertible notes, upsized to about $4.2B, and customer prepayments of roughly $9B expected within three months.',
+            note: 'The largest neocloud by far. Revenue went from $1.9B in 2024 to $5.1B in 2025 and $3.7B in the September 2026 quarter alone; 2026 capex is guided to $37–39B, funded largely by debt secured against the GPUs themselves ($46.9B of total debt at Sep 30) plus convertible notes (its Q3 release cites an upsized offering of about $4.2B) and customer prepayments of roughly $9B expected within three months.',
             clients: [
               { n: 'Microsoft', k: 'hyper', d: '67% of 2025 revenue; 36% in Q2 2026, and not named in the Q3 filing' },
               { n: 'OpenAI', k: 'lab', d: 'up to ~$22.4B of contracts signed in 2025' },
@@ -1286,8 +1287,8 @@
         Micron has given back more than half of a +628% year, Vertiv has gone from +70% to about +10%, and
         Broadcom, the custom-silicon and networking proxy, has slid further below zero. Nvidia has moved
         the other way from a month ago, when it had edged past the index: it is now down about 10% over the
-        year, trailing the S&amp;P 500 despite a record quarter and the resignation of its chief executive
-        on Nov 12. Which is the point of the section above: the bottleneck keeps moving, and so does the
+        year, trailing the S&amp;P 500 despite a record quarter, and after the resignation of its chief
+        executive on Nov 12. Which is the point of the section above: the bottleneck keeps moving, and so does the
         money. Source: daily closing prices via Yahoo Finance.
       </p>
 
@@ -1651,10 +1652,10 @@ const BOTTLENECKS = [
     milestones: [
       '2025 opens the multi-year AI memory-shortage era across DRAM and HBM.',
       'SK Group: HBM stays scarce until <strong>~2030</strong>, wafer supply ~20% under demand.',
-      'HBM4 hit mass production in early 2026; Nvidia qualified <strong>all three</strong> makers for Rubin, at 288 GB per GPU.',
+      'HBM4 reached volume from early 2026, at 288 GB per GPU on Rubin; Samsung was first to finish validation and ship, SK Hynix followed in the third quarter, and Micron is expected on mid-tier parts.',
       'Relief may begin ~2028, but capacity keeps chasing demand.',
       'CXMT’s <strong>$8.6B Shanghai IPO</strong> (Jul 2026) funds a fourth DRAM source, and an early, low-yield HBM3E effort.',
-      'The squeeze is easing in rate, not level: conventional DRAM contract prices rose <strong>93–98%</strong> in Q1 2026, then 58–63%, 13–18% and a guided 10–15% in Q4 (TrendForce, Sep 30), a view it lifted to about 20% on Oct 20; Samsung and Micron both see supply tight through 2028.',
+      'The squeeze is easing in rate, not level: conventional DRAM contract prices rose <strong>93–98%</strong> in Q1 2026, then 58–63%, 13–18% and a guided 10–15% in Q4 (TrendForce, Sep 30); Samsung and Micron both see supply tight through 2028.',
     ],
     companies: [
       { name: 'SK Hynix', ticker: '000660.KS', role: 'HBM leader; bulk of Nvidia’s Rubin HBM4' },
@@ -2388,7 +2389,7 @@ const DEEP = {
       { k: 'HBM per GPU', v: '192 → 288 GB (Rubin)' },
       { k: 'DDR5 vs pre-crisis', v: '~3–5× the price' },
       { k: 'Wafer supply vs demand', v: '~20% short' },
-      { k: 'HBM4 mass production', v: 'early 2026, all three' },
+      { k: 'HBM4 mass production', v: 'from early 2026' },
     ],
   },
 
@@ -3499,8 +3500,8 @@ const DEEP = {
           thesis: 'The toolmakers’ own capex is modest, their leverage runs the other way. Every dollar of fab capex above flows to them, so their record revenue is the truest gauge of how hard the build-out is running.',
           items: [
             { label: 'ASML', sub: '€44–45B rev', note: 'Sole maker of EUV; 2026 sales guided to €44–45B from €32.7B in 2025, a direct read on leading-edge fab spend.' },
-            { label: 'Applied Materials', sub: '$34.5B rev', note: 'Broadest wafer-fab equipment franchise; fiscal 2026 revenue of $34.5B (from $28.4B in fiscal 2025) and a record $10.4B September quarter, up 53%.' },
-            { label: 'Lam Research', sub: '$23.2B rev', note: 'Etch & deposition, heavily levered to 3D memory / HBM; fiscal 2026 revenue up 26% to $23.2B, then a record $8.2B September quarter and a $8.6B guide for December; it sees wafer-fab equipment spending above $200B in 2027.' },
+            { label: 'Applied Materials', sub: '$34.5B rev', note: 'Broadest wafer-fab equipment franchise; fiscal 2026 revenue of $34.5B (from $28.4B in fiscal 2025) and a $10.4B fiscal fourth quarter, up 53% from a year earlier.' },
+            { label: 'Lam Research', sub: '$23.2B rev', note: 'Etch & deposition, heavily levered to 3D memory / HBM; fiscal 2026 revenue up 26% to $23.2B, then a record $8.2B September quarter and an $8.6B guide for December; it sees wafer-fab equipment spending above $200B in 2027.' },
             { label: 'Tokyo Electron', sub: '¥3.7tn guide', note: 'Coat/develop, etch and bonding tools around EUV & packaging; fiscal 2026 sales ¥2.44tn, and after a strong second quarter fiscal 2027 is guided to ¥3.7tn.' },
           ],
         },
