@@ -27,6 +27,34 @@ function scoreFromGrowth(g, hot = 40) {
 
 const fmtPct = (g) => (g == null ? "n/a" : `${g >= 0 ? "+" : ""}${g.toFixed(0)}%`);
 
+// ---- GPU spot history -------------------------------------------------------
+
+// Monthly archive readings plus today's live one, reshaped into one aligned
+// array per cloud and chip: { dates: [...], series: { aws: { h100: [..] } } }.
+function gpuHistorySeries(live, archive) {
+  if (!archive?.points?.length) return null;
+  const points = archive.points.map((p) => ({ date: p.date, prices: p.prices }));
+  const today = live.scrapedAt.slice(0, 10);
+  if (today > points.at(-1).date) {
+    const prices = {};
+    for (const p of live.providers) {
+      if (archive.points.some((pt) => pt.prices[p.key])) prices[p.key] = p.chips;
+    }
+    points.push({ date: today, prices });
+  }
+  const series = {};
+  points.forEach((pt, i) => {
+    for (const [prov, chips] of Object.entries(pt.prices)) {
+      for (const [chip, v] of Object.entries(chips)) {
+        series[prov] ??= {};
+        series[prov][chip] ??= new Array(points.length).fill(null);
+        series[prov][chip][i] = v.spot;
+      }
+    }
+  });
+  return { dates: points.map((p) => p.date), series };
+}
+
 // ---- combined hyperscaler series -------------------------------------------
 
 // Sum a metric across companies per calendar-quarter end date, keeping only the
@@ -192,9 +220,10 @@ function build() {
     // GPU rental prices: context only, deliberately not part of the heat index.
     gpuSpot: gpuSpot && {
       scrapedAt: gpuSpot.scrapedAt,
-      source: gpuSpot.source,
-      regionCount: gpuSpot.regionBasket.length,
-      gpus: gpuSpot.gpus,
+      chips: gpuSpot.chips,
+      providers: gpuSpot.providers,
+      azureRegions: gpuSpot.gpus.map((g) => ({ key: g.key, regions: g.regions })),
+      history: gpuHistorySeries(gpuSpot, readOptional("gpu-spot-history.json")),
     },
     // Shared quarter axis so every operator's line lines up on the same dates,
     // even when one (e.g. Oracle) has already reported a quarter the others haven't.

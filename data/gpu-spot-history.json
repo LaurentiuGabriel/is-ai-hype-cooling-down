@@ -1,0 +1,1896 @@
+{
+  "source": "github.com/skypilot-org/skypilot-catalog (git history)",
+  "note": "One spot reading per month: catalog state at 00:00 UTC on the 1st. USD per GPU-hour; median across regions of the cheapest offer per region.",
+  "points": [
+    {
+      "date": "2022-12-01",
+      "commit": "a5b8d9a90575",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.162,
+            "regions": 4
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 1.58,
+            "regions": 1
+          },
+          "t4": {
+            "spot": 0.15,
+            "regions": 6
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-01-01",
+      "commit": "39cfb5964515",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.187,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 3.165,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.15,
+            "regions": 6
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-02-01",
+      "commit": "c7469e082555",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.187,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 3.165,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.15,
+            "regions": 6
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-03-01",
+      "commit": "e5233683a409",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.188,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 3.165,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.15,
+            "regions": 6
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-04-01",
+      "commit": "0d6e6f9c10e1",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.192,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 3.165,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.15,
+            "regions": 6
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-05-01",
+      "commit": "86a84f353dda",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.191,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 1.859,
+            "regions": 4
+          },
+          "t4": {
+            "spot": 0.15,
+            "regions": 6
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-06-01",
+      "commit": "e362fc0d2b86",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.187,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 1.733,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.156,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-07-01",
+      "commit": "1f00b9bac748",
+      "prices": {
+        "aws": {
+          "t4": {
+            "spot": 0.189,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 1.766,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.159,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-08-01",
+      "commit": "61713574f129",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.603,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.191,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.007,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.18,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-09-01",
+      "commit": "5e5a1870016f",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.603,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.193,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.007,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.18,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-10-01",
+      "commit": "49e909a85222",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.603,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.192,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.187,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-11-01",
+      "commit": "ac9b8593ed5e",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.997,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.196,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2023-12-01",
+      "commit": "85a457ca107a",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.759,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.179,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-01-01",
+      "commit": "15758014a645",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.973,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.174,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-02-01",
+      "commit": "062441be3283",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.834,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.175,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-03-01",
+      "commit": "0f3f770cbd25",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 8.615,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.201,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-04-01",
+      "commit": "44a9c380cfff",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 6.728,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.213,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 8.233,
+            "regions": 6
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-05-01",
+      "commit": "93d54022ea30",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 5.097,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.215,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 8.624,
+            "regions": 8
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-06-01",
+      "commit": "1fadbb597d55",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 4.205,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.217,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 7.744,
+            "regions": 9
+          },
+          "a100": {
+            "spot": 1.989,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.183,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-07-01",
+      "commit": "f731f3186041",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 4.273,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.209,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 8.135,
+            "regions": 10
+          },
+          "a100": {
+            "spot": 1.989,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.183,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-08-01",
+      "commit": "47d1f1f77802",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 5.004,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.217,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 6.801,
+            "regions": 10
+          },
+          "a100": {
+            "spot": 2.114,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.187,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-09-01",
+      "commit": "5819840f4d2e",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 4.564,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.203,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 6.801,
+            "regions": 10
+          },
+          "a100": {
+            "spot": 2.114,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.187,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-10-01",
+      "commit": "0f1519d96e42",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 4.512,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.199,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 6.801,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.181,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-11-01",
+      "commit": "c33c7d5b11b7",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 4.281,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.196,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 4.946,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.182,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2024-12-01",
+      "commit": "ad9722e1da95",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 4.129,
+            "regions": 3
+          },
+          "t4": {
+            "spot": 0.205,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 4.946,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.182,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-01-01",
+      "commit": "7594d17479f2",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 2.558,
+            "regions": 10
+          },
+          "t4": {
+            "spot": 0.207,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 4.946,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.182,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-02-01",
+      "commit": "33ed0b0bb733",
+      "prices": {
+        "aws": {
+          "h100": {
+            "spot": 3.367,
+            "regions": 10
+          },
+          "t4": {
+            "spot": 0.199,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 4.836,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.193,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-03-01",
+      "commit": "e3795c75632d",
+      "prices": {
+        "aws": {
+          "h200": {
+            "spot": 2.261,
+            "regions": 4
+          },
+          "h100": {
+            "spot": 4.182,
+            "regions": 10
+          },
+          "t4": {
+            "spot": 0.21,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 4.836,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.193,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-04-01",
+      "commit": "3a24449fd636",
+      "prices": {
+        "aws": {
+          "h200": {
+            "spot": 1.538,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.417,
+            "regions": 10
+          },
+          "t4": {
+            "spot": 0.2,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 2.554,
+            "regions": 13
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.198,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-05-01",
+      "commit": "2403f6153144",
+      "prices": {
+        "aws": {
+          "h200": {
+            "spot": 1.874,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.569,
+            "regions": 10
+          },
+          "a100": {
+            "spot": 0.543,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.187,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h100": {
+            "spot": 2.525,
+            "regions": 13
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.197,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-06-01",
+      "commit": "e4edbe5600c9",
+      "prices": {
+        "aws": {
+          "h200": {
+            "spot": 2.962,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.401,
+            "regions": 10
+          },
+          "a100": {
+            "spot": 1.264,
+            "regions": 2
+          },
+          "t4": {
+            "spot": 0.198,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h200": {
+            "spot": 4.139,
+            "regions": 6
+          },
+          "h100": {
+            "spot": 2.525,
+            "regions": 13
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.197,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-07-01",
+      "commit": "b7a01b4044df",
+      "prices": {
+        "aws": {
+          "h200": {
+            "spot": 1.411,
+            "regions": 8
+          },
+          "h100": {
+            "spot": 1.973,
+            "regions": 10
+          },
+          "a100": {
+            "spot": 0.929,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.21,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.332,
+            "regions": 13
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.199,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-08-01",
+      "commit": "deb2134741f9",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 1.584,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.069,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 1.955,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.498,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.213,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.332,
+            "regions": 13
+          },
+          "a100": {
+            "spot": 2.011,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.199,
+            "regions": 23
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-09-01",
+      "commit": "5be85fb04d31",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 4.1,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.328,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.311,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.426,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.22,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.31,
+            "regions": 14
+          },
+          "a100": {
+            "spot": 2.05,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.201,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-10-01",
+      "commit": "0c5f15efd425",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 3.865,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.516,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.486,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 3.187,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.218,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.31,
+            "regions": 14
+          },
+          "a100": {
+            "spot": 2.203,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.199,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-11-01",
+      "commit": "4ed2b6b2f922",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.518,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.841,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.591,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.482,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.225,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.332,
+            "regions": 15
+          },
+          "a100": {
+            "spot": 2.203,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.199,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 1
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2025-12-01",
+      "commit": "6315fc3d518e",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 3.099,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.338,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.443,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.354,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.185,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 3.222,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.332,
+            "regions": 15
+          },
+          "a100": {
+            "spot": 2.203,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.204,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 1
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-01-01",
+      "commit": "1316dae8e2ac",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 3.898,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.586,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 3.058,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.59,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.2,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 3.222,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 4.161,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.312,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.203,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.204,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-02-01",
+      "commit": "890254b7a80e",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.22,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 1.555,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.434,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.293,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.194,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 3.705,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 4.689,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 2.613,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.313,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.215,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-03-01",
+      "commit": "8510d7264337",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.189,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 2.003,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 1.654,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.608,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.192,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.076,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 5.207,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.008,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.447,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.216,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-04-01",
+      "commit": "4599d836e06c",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.98,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 1.738,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.025,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.782,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.205,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.076,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 5.264,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.344,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.514,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.217,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-05-01",
+      "commit": "57098aed605e",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.98,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 1.738,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.025,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.782,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.205,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.076,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 5.307,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.519,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.514,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.217,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-06-01",
+      "commit": "658d4f01eb93",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.98,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 1.738,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.025,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.782,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.205,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.28,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 5.597,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 3.747,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.514,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.22,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 2.9,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 1.25,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-07-01",
+      "commit": "992ef0117409",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 2.98,
+            "regions": 3
+          },
+          "h200": {
+            "spot": 1.738,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.025,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 1.782,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.205,
+            "regions": 20
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.494,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 5.881,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 4.117,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.601,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.232,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 3.95,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 2.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 2.15,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-08-01",
+      "commit": "c06dc60423f6",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 5.26,
+            "regions": 4
+          },
+          "h200": {
+            "spot": 3.14,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.564,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.512,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.232,
+            "regions": 19
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.606,
+            "regions": 10
+          },
+          "h200": {
+            "spot": 6.171,
+            "regions": 7
+          },
+          "h100": {
+            "spot": 4.424,
+            "regions": 16
+          },
+          "a100": {
+            "spot": 2.738,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.229,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 3.95,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 2.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 2.15,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-09-01",
+      "commit": "339eb8e1c15a",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 5.213,
+            "regions": 4
+          },
+          "h200": {
+            "spot": 3.058,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.752,
+            "regions": 11
+          },
+          "a100": {
+            "spot": 2.709,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.203,
+            "regions": 19
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.902,
+            "regions": 11
+          },
+          "h200": {
+            "spot": 6.463,
+            "regions": 5
+          },
+          "h100": {
+            "spot": 5.843,
+            "regions": 19
+          },
+          "a100": {
+            "spot": 2.659,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.274,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 3.95,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 2.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 2.15,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-10-01",
+      "commit": "7e12ee6d2b88",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 5.232,
+            "regions": 6
+          },
+          "h200": {
+            "spot": 3.136,
+            "regions": 10
+          },
+          "h100": {
+            "spot": 2.552,
+            "regions": 12
+          },
+          "a100": {
+            "spot": 2.981,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.238,
+            "regions": 19
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 4.954,
+            "regions": 12
+          },
+          "h200": {
+            "spot": 6.504,
+            "regions": 5
+          },
+          "h100": {
+            "spot": 6.571,
+            "regions": 19
+          },
+          "a100": {
+            "spot": 2.746,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.262,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 3.95,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 2.45,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 2.15,
+            "regions": 1
+          }
+        }
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "commit": "d92db3600e6c",
+      "prices": {
+        "aws": {
+          "b200": {
+            "spot": 5.916,
+            "regions": 7
+          },
+          "h200": {
+            "spot": 3.64,
+            "regions": 12
+          },
+          "h100": {
+            "spot": 2.772,
+            "regions": 12
+          },
+          "a100": {
+            "spot": 2.466,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.237,
+            "regions": 19
+          }
+        },
+        "gcp": {
+          "b200": {
+            "spot": 5.078,
+            "regions": 12
+          },
+          "h200": {
+            "spot": 6.499,
+            "regions": 5
+          },
+          "h100": {
+            "spot": 5.563,
+            "regions": 19
+          },
+          "a100": {
+            "spot": 2.984,
+            "regions": 5
+          },
+          "t4": {
+            "spot": 0.278,
+            "regions": 23
+          }
+        },
+        "nebius": {
+          "b200": {
+            "spot": 1.675,
+            "regions": 2
+          },
+          "h200": {
+            "spot": 1.7,
+            "regions": 3
+          },
+          "h100": {
+            "spot": 0.79,
+            "regions": 1
+          }
+        }
+      }
+    }
+  ]
+}

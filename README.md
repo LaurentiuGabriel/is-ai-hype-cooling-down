@@ -14,7 +14,8 @@ A handful of plain Node scripts, no framework, no build toolchain:
 scripts/
   scrape-interconnection.mjs   → data/interconnection.json   (physical build-out)
   scrape-hyperscalers.mjs      → data/hyperscalers.json      (platform economics)
-  scrape-gpu-spot.mjs          → data/gpu-spot.json          (GPU rental prices)
+  scrape-gpu-spot.mjs          → data/gpu-spot.json          (GPU rental prices, today)
+  backfill-gpu-history.mjs     → data/gpu-spot-history.json  (GPU spot prices, monthly archive)
   build.mjs                    → data/combined.json + dist/index.html
 ```
 
@@ -63,15 +64,34 @@ and the charts all move on their own.
 
 ## GPU spot prices
 
-`scrape-gpu-spot.mjs` reads spot and on-demand rates for four Nvidia generations
-(H200, H100, A100, T4) from the public [Azure Retail Prices API](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices),
-which needs no key, and normalizes them to USD per GPU-hour across a fixed basket of
-nine regions. The page shows the spot discount per generation: a deep discount means
-spare chips, a spot price pinned at list means none.
+The page tracks spot and on-demand rates for five Nvidia generations (B200, H200,
+H100, A100, T4) on four clouds, in USD per GPU-hour. Both sources are public and
+need no key:
+
+- **Azure**: the [Azure Retail Prices API](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices),
+  across a fixed basket of nine regions.
+- **AWS, Google Cloud, Nebius**: the [SkyPilot catalog](https://github.com/skypilot-org/skypilot-catalog),
+  CSV price lists that bots refresh from each cloud's pricing API several times a day.
+
+`scrape-gpu-spot.mjs` reads today's prices into `data/gpu-spot.json`.
+`backfill-gpu-history.mjs` walks the catalog's git history and stores one spot
+reading per month in `data/gpu-spot-history.json` (back to late 2022 for the older
+chips). It needs a local clone of the catalog:
+
+```bash
+git clone --filter=blob:none --no-checkout https://github.com/skypilot-org/skypilot-catalog /tmp/skypilot-catalog
+npm run backfill:gpu -- /tmp/skypilot-catalog          # add missing months
+npm run backfill:gpu -- /tmp/skypilot-catalog --full   # rebuild everything
+```
+
+Each figure is the median across regions of the cheapest way to rent the chip in
+that region. The history holds spot only: the catalog's on-demand column for Google
+Cloud is wrong for long stretches, so it is not charted. Azure has no history
+because its API only returns current prices.
 
 The section is context only and does not feed the heat index. The deploy workflow
-refetches the prices on every deploy and once a day on a schedule; if the fetch
-fails, the committed `data/gpu-spot.json` snapshot is used instead.
+refetches prices and tops up the history on every deploy and once a day; if either
+step fails, the committed files are used instead.
 
 ## Notes on the data plumbing
 

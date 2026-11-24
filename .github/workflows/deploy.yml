@@ -34,10 +34,19 @@ jobs:
           node-version: 20
 
       # No dependencies to install: the scripts use only Node built-ins.
-      # GPU spot prices are fetched live at deploy time from a public, keyless API.
+      # GPU spot prices are fetched live at deploy time from public, keyless sources.
       # If the fetch fails, the build falls back to the committed data/gpu-spot.json.
       - name: Refresh GPU spot prices
         run: npm run scrape:gpu
+        continue-on-error: true
+
+      # Adds any month that has passed since the last committed reading, read from
+      # the git history of the SkyPilot price catalog. A no-op most days.
+      - name: Top up GPU spot price history
+        run: |
+          git clone --quiet --filter=blob:none --no-checkout \
+            https://github.com/skypilot-org/skypilot-catalog "$RUNNER_TEMP/skypilot-catalog"
+          node scripts/backfill-gpu-history.mjs "$RUNNER_TEMP/skypilot-catalog"
         continue-on-error: true
 
       # Rebuilds dist/index.html from data/*.json so the deployed page always

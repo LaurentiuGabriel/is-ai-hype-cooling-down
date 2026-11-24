@@ -1,8 +1,171 @@
 {
-  "scrapedAt": "2026-11-24T21:29:57.346Z",
-  "source": "Azure Retail Prices API",
+  "scrapedAt": "2026-11-24T21:43:51.906Z",
+  "source": "Azure Retail Prices API + SkyPilot catalog",
   "sourceUrl": "https://prices.azure.com/api/retail/prices",
   "unit": "USD per GPU-hour, Linux",
+  "chips": [
+    {
+      "key": "b200",
+      "name": "B200",
+      "launched": 2025
+    },
+    {
+      "key": "h200",
+      "name": "H200",
+      "launched": 2024
+    },
+    {
+      "key": "h100",
+      "name": "H100",
+      "launched": 2022
+    },
+    {
+      "key": "a100",
+      "name": "A100 80GB",
+      "launched": 2020
+    },
+    {
+      "key": "t4",
+      "name": "T4",
+      "launched": 2018
+    }
+  ],
+  "providers": [
+    {
+      "key": "azure",
+      "name": "Azure",
+      "color": "#38bdf8",
+      "source": "Azure Retail Prices API",
+      "chips": {
+        "h200": {
+          "spot": 13.25,
+          "onDemand": 13.25,
+          "discountPct": 0,
+          "regions": 7
+        },
+        "h100": {
+          "spot": 1.677,
+          "onDemand": 8.725,
+          "discountPct": 79.7,
+          "regions": 9
+        },
+        "a100": {
+          "spot": 0.933,
+          "onDemand": 4.591,
+          "discountPct": 79.7,
+          "regions": 9
+        },
+        "t4": {
+          "spot": 0.192,
+          "onDemand": 0.587,
+          "discountPct": 68.8,
+          "regions": 9
+        }
+      }
+    },
+    {
+      "key": "aws",
+      "name": "AWS",
+      "color": "#fbbf24",
+      "source": "SkyPilot catalog",
+      "chips": {
+        "b200": {
+          "spot": 5.354,
+          "onDemand": 17.905,
+          "discountPct": 70.1,
+          "regions": 7
+        },
+        "h200": {
+          "spot": 4.042,
+          "onDemand": 9.494,
+          "discountPct": 57.4,
+          "regions": 13
+        },
+        "h100": {
+          "spot": 3.493,
+          "onDemand": 8.6,
+          "discountPct": 59.4,
+          "regions": 13
+        },
+        "a100": {
+          "spot": 4.117,
+          "onDemand": 4.117,
+          "discountPct": 0,
+          "regions": 5
+        },
+        "t4": {
+          "spot": 0.253,
+          "onDemand": 0.616,
+          "discountPct": 58.9,
+          "regions": 19
+        }
+      }
+    },
+    {
+      "key": "gcp",
+      "name": "Google Cloud",
+      "color": "#34d399",
+      "source": "SkyPilot catalog",
+      "chips": {
+        "b200": {
+          "spot": 5.313,
+          "onDemand": 11.277,
+          "discountPct": 52.9,
+          "regions": 12
+        },
+        "h200": {
+          "spot": 6.499,
+          "onDemand": 10.845,
+          "discountPct": 40.1,
+          "regions": 5
+        },
+        "h100": {
+          "spot": 6.119,
+          "onDemand": 12.713,
+          "discountPct": 51.9,
+          "regions": 19
+        },
+        "a100": {
+          "spot": 3.017,
+          "onDemand": 5.536,
+          "discountPct": 45.5,
+          "regions": 5
+        },
+        "t4": {
+          "spot": 0.293,
+          "onDemand": 0.614,
+          "discountPct": 52.2,
+          "regions": 23
+        }
+      }
+    },
+    {
+      "key": "nebius",
+      "name": "Nebius",
+      "color": "#fb7185",
+      "source": "SkyPilot catalog",
+      "chips": {
+        "b200": {
+          "spot": 2.85,
+          "onDemand": 8.5,
+          "discountPct": 66.5,
+          "regions": 2
+        },
+        "h200": {
+          "spot": 2,
+          "onDemand": 5.4,
+          "discountPct": 63,
+          "regions": 3
+        },
+        "h100": {
+          "spot": 2,
+          "onDemand": 4.5,
+          "discountPct": 55.6,
+          "regions": 1
+        }
+      }
+    }
+  ],
   "regionBasket": [
     "eastus",
     "eastus2",

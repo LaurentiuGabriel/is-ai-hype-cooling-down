@@ -1,5 +1,8 @@
-// Pulls live GPU rental prices (spot vs. on-demand) from the Azure Retail Prices
-// API, a public endpoint that needs no key. Writes data/gpu-spot.json.
+// Pulls live GPU rental prices (spot vs. on-demand) from two public, keyless
+// sources and writes data/gpu-spot.json:
+//   - Azure: the Azure Retail Prices API, with region-level detail.
+//   - AWS, Google Cloud, Nebius: the SkyPilot catalog on GitHub, which bots
+//     refresh from each cloud's own pricing API several times a day.
 //
 // Why spot: on-demand list prices almost never move, but spot is repriced against
 // spare capacity. A deep spot discount means idle chips; a spot price pinned at the
@@ -7,7 +10,14 @@
 //
 // Offline use: GPU_SPOT_RAW=path/to/response.json replays a saved API response.
 import { readFileSync } from "node:fs";
-import { fetchJSON, writeData, log } from "./lib.mjs";
+import { fetchJSON, fetchText, writeData, log } from "./lib.mjs";
+import {
+  CHIPS, CATALOG_PROVIDERS, CATALOG_REPO, CATALOG_BRANCH, summarizeCatalog, catalogPath,
+} from "./gpu-catalog.mjs";
+
+const CATALOG_VERSION = "v8";
+const rawUrl = (providerKey) =>
+  `https://raw.githubusercontent.com/${CATALOG_REPO}/${CATALOG_BRANCH}/${catalogPath(CATALOG_VERSION, providerKey)}`;
 
 const API = "https://prices.azure.com/api/retail/prices";
 
@@ -108,22 +118,54 @@ export function summarize(items) {
   }).filter((g) => g.regions.length);
 }
 
+/** One cloud failing must not take the others down: it is just left out. */
+async function fetchCatalogProviders() {
+  const out = [];
+  for (const p of CATALOG_PROVIDERS) {
+    try {
+      const chips = summarizeCatalog(p.key, await fetchText(rawUrl(p.key)));
+      if (!Object.keys(chips).length) throw new Error("no tracked chips in catalog");
+      out.push({ key: p.key, name: p.name, color: p.color, source: "SkyPilot catalog", chips });
+      log(`  ${p.name}: ${Object.entries(chips).map(([k, v]) => `${k} $${v.spot}`).join(" · ")}`);
+    } catch (err) {
+      log(`  ! ${p.name} skipped: ${err.message}`);
+    }
+  }
+  return out;
+}
+
 async function main() {
   log("→ Fetching GPU spot + on-demand prices…");
   const items = await fetchItems();
   const gpus = summarize(items);
   if (!gpus.length) throw new Error("No GPU price rows matched; the SKU list may be stale");
 
+  const azure = {
+    key: "azure",
+    name: "Azure",
+    color: "#38bdf8",
+    source: "Azure Retail Prices API",
+    chips: Object.fromEntries(
+      gpus.map((g) => [g.key, {
+        spot: g.spotMedian, onDemand: g.onDemandMedian, discountPct: g.discountMedianPct, regions: g.regions.length,
+      }])
+    ),
+  };
+  const providers = [azure, ...(await fetchCatalogProviders())];
+
   writeData("gpu-spot.json", {
     scrapedAt: new Date().toISOString(),
-    source: "Azure Retail Prices API",
+    source: "Azure Retail Prices API + SkyPilot catalog",
     sourceUrl: API,
     unit: "USD per GPU-hour, Linux",
+    chips: CHIPS.map(({ key, name, launched }) => ({ key, name, launched })),
+    providers,
+    // Azure region-level detail, for the region table.
     regionBasket: REGIONS,
     gpus,
   });
   log(
-    "✓ gpu-spot.json — " +
+    `✓ gpu-spot.json — ${providers.length} clouds · Azure: ` +
       gpus.map((g) => `${g.name} $${g.spotMedian} spot (${g.discountMedianPct}% off)`).join(" · ")
   );
 }

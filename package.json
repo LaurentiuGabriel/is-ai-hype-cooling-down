@@ -8,6 +8,7 @@
     "scrape:infra": "node scripts/scrape-interconnection.mjs",
     "scrape:capex": "node scripts/scrape-hyperscalers.mjs",
     "scrape:gpu": "node scripts/scrape-gpu-spot.mjs",
+    "backfill:gpu": "node scripts/backfill-gpu-history.mjs",
     "scrape": "npm run scrape:infra && npm run scrape:capex && npm run scrape:gpu",
     "build": "node scripts/build.mjs",
     "update": "npm run scrape && npm run build"
