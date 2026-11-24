@@ -6,6 +6,9 @@ on:
     branches: [main]
   # ...and allow manual runs from the Actions tab.
   workflow_dispatch:
+  # ...and once a day, so the GPU spot prices on the page stay current.
+  schedule:
+    - cron: "17 5 * * *"
 
 # Least-privilege token scoped for Pages deployment via OIDC.
 permissions:
@@ -30,9 +33,15 @@ jobs:
         with:
           node-version: 20
 
-      # Rebuilds dist/index.html from the committed data/*.json so the deployed
-      # page always reflects the latest figures in the repo. No dependencies to
-      # install — the scripts use only Node built-ins.
+      # No dependencies to install: the scripts use only Node built-ins.
+      # GPU spot prices are fetched live at deploy time from a public, keyless API.
+      # If the fetch fails, the build falls back to the committed data/gpu-spot.json.
+      - name: Refresh GPU spot prices
+        run: npm run scrape:gpu
+        continue-on-error: true
+
+      # Rebuilds dist/index.html from data/*.json so the deployed page always
+      # reflects the latest figures.
       - name: Build static page
         run: npm run build
 

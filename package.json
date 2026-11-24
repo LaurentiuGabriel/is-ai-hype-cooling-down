@@ -7,7 +7,8 @@
   "scripts": {
     "scrape:infra": "node scripts/scrape-interconnection.mjs",
     "scrape:capex": "node scripts/scrape-hyperscalers.mjs",
-    "scrape": "npm run scrape:infra && npm run scrape:capex",
+    "scrape:gpu": "node scripts/scrape-gpu-spot.mjs",
+    "scrape": "npm run scrape:infra && npm run scrape:capex && npm run scrape:gpu",
     "build": "node scripts/build.mjs",
     "update": "npm run scrape && npm run build"
   },

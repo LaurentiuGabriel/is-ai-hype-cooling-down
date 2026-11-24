@@ -6,6 +6,16 @@ import { readData, writeData, pctChange, DIST_DIR, log } from "./lib.mjs";
 
 const QUARTERS_ON_CHART = 13; // ~3 years + a quarter
 
+// Optional datasets feed their own section but never the verdict, so a missing
+// file just hides that section instead of failing the build.
+function readOptional(name) {
+  try {
+    return readData(name);
+  } catch {
+    return null;
+  }
+}
+
 // ---- scoring helpers --------------------------------------------------------
 
 // Map a year-over-year growth % onto a 0..100 "heat" score.
@@ -56,6 +66,7 @@ function lastCompleteYearPair(byYear, currentYear) {
 function build() {
   const infra = readData("interconnection.json");
   const hyper = readData("hyperscalers.json");
+  const gpuSpot = readOptional("gpu-spot.json");
   const currentYear = new Date(hyper.scrapedAt).getUTCFullYear();
 
   // Combined hyperscaler capex + revenue.
@@ -177,6 +188,13 @@ function build() {
       genActiveCapacityGw: Math.round(gen.totalCapacityMw / 100) / 10,
       genCapacityYoY: genCapacityYoY == null ? null : Math.round(genCapacityYoY),
       totalQueueAllTime: infra.totalRequestsAllTime,
+    },
+    // GPU rental prices: context only, deliberately not part of the heat index.
+    gpuSpot: gpuSpot && {
+      scrapedAt: gpuSpot.scrapedAt,
+      source: gpuSpot.source,
+      regionCount: gpuSpot.regionBasket.length,
+      gpus: gpuSpot.gpus,
     },
     // Shared quarter axis so every operator's line lines up on the same dates,
     // even when one (e.g. Oracle) has already reported a quarter the others haven't.

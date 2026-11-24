@@ -8,12 +8,13 @@ The current reading: **No — it's still accelerating** (heat index 92/100).
 
 ## How it works
 
-Three plain Node scripts, no framework, no build toolchain:
+A handful of plain Node scripts, no framework, no build toolchain:
 
 ```
 scripts/
   scrape-interconnection.mjs   → data/interconnection.json   (physical build-out)
   scrape-hyperscalers.mjs      → data/hyperscalers.json      (platform economics)
+  scrape-gpu-spot.mjs          → data/gpu-spot.json          (GPU rental prices)
   build.mjs                    → data/combined.json + dist/index.html
 ```
 
@@ -28,7 +29,7 @@ The page is styled with Tailwind and draws its charts with Chart.js (both via CD
 ## Usage
 
 ```bash
-npm run scrape   # refresh both datasets
+npm run scrape   # refresh every dataset
 npm run build    # recompute the verdict and rewrite the page
 npm run update   # scrape + build in one go
 ```
@@ -59,6 +60,18 @@ average — the **heat index** — and maps it to a plain-language answer:
 
 Everything is data-driven: rerun the pipeline and the answer, the gauge, the cards,
 and the charts all move on their own.
+
+## GPU spot prices
+
+`scrape-gpu-spot.mjs` reads spot and on-demand rates for four Nvidia generations
+(H200, H100, A100, T4) from the public [Azure Retail Prices API](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices),
+which needs no key, and normalizes them to USD per GPU-hour across a fixed basket of
+nine regions. The page shows the spot discount per generation: a deep discount means
+spare chips, a spot price pinned at list means none.
+
+The section is context only and does not feed the heat index. The deploy workflow
+refetches the prices on every deploy and once a day on a schedule; if the fetch
+fails, the committed `data/gpu-spot.json` snapshot is used instead.
 
 ## Notes on the data plumbing
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T19:53:25.085Z",
+  "generatedAt": "2026-11-24T21:31:17.078Z",
   "dataThrough": "2026-09-30",
   "infraUpdated": "Nov 24, 2026 UTC",
   "verdict": {
@@ -58,6 +58,315 @@
     "genActiveCapacityGw": 1910.9,
     "genCapacityYoY": 67,
     "totalQueueAllTime": 44722
+  },
+  "gpuSpot": {
+    "scrapedAt": "2026-11-24T21:29:57.346Z",
+    "source": "Azure Retail Prices API",
+    "regionCount": 9,
+    "gpus": [
+      {
+        "key": "h200",
+        "name": "H200",
+        "launched": 2024,
+        "sku": "Standard_ND96isr_H200_v5",
+        "gpusPerVm": 8,
+        "spotMedian": 13.25,
+        "onDemandMedian": 13.25,
+        "discountMedianPct": 0,
+        "cheapestSpot": {
+          "region": "eastus2",
+          "price": 10.6
+        },
+        "regions": [
+          {
+            "region": "eastus2",
+            "spot": 10.6,
+            "onDemand": 10.6,
+            "discountPct": 0,
+            "spotSince": "2025-04-01"
+          },
+          {
+            "region": "westus2",
+            "spot": 10.6,
+            "onDemand": 10.6,
+            "discountPct": 0,
+            "spotSince": "2025-04-01"
+          },
+          {
+            "region": "northeurope",
+            "spot": 12.72,
+            "onDemand": 12.72,
+            "discountPct": 0,
+            "spotSince": "2025-07-01"
+          },
+          {
+            "region": "swedencentral",
+            "spot": 13.784,
+            "onDemand": 13.784,
+            "discountPct": 0,
+            "spotSince": "2025-04-01"
+          },
+          {
+            "region": "uksouth",
+            "spot": 13.25,
+            "onDemand": 13.25,
+            "discountPct": 0,
+            "spotSince": "2025-05-01"
+          },
+          {
+            "region": "japaneast",
+            "spot": 13.25,
+            "onDemand": 13.25,
+            "discountPct": 0,
+            "spotSince": "2025-04-01"
+          },
+          {
+            "region": "southeastasia",
+            "spot": 13.78,
+            "onDemand": 13.78,
+            "discountPct": 0,
+            "spotSince": "2025-07-01"
+          }
+        ]
+      },
+      {
+        "key": "h100",
+        "name": "H100",
+        "launched": 2022,
+        "sku": "Standard_NC40ads_H100_v5",
+        "gpusPerVm": 1,
+        "spotMedian": 1.677,
+        "onDemandMedian": 8.725,
+        "discountMedianPct": 79.7,
+        "cheapestSpot": {
+          "region": "eastus",
+          "price": 1.418
+        },
+        "regions": [
+          {
+            "region": "eastus",
+            "spot": 1.418,
+            "onDemand": 6.98,
+            "discountPct": 79.7,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "eastus2",
+            "spot": 3.537,
+            "onDemand": 6.98,
+            "discountPct": 49.3,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "westus2",
+            "spot": 3.537,
+            "onDemand": 6.98,
+            "discountPct": 49.3,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "westeurope",
+            "spot": 3.681,
+            "onDemand": 9.08,
+            "discountPct": 59.5,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "northeurope",
+            "spot": 1.548,
+            "onDemand": 8.376,
+            "discountPct": 81.5,
+            "spotSince": "2026-02-01"
+          },
+          {
+            "region": "swedencentral",
+            "spot": 1.677,
+            "onDemand": 9.074,
+            "discountPct": 81.5,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "uksouth",
+            "spot": 1.612,
+            "onDemand": 8.725,
+            "discountPct": 81.5,
+            "spotSince": "2026-09-01"
+          },
+          {
+            "region": "japaneast",
+            "spot": 3.611,
+            "onDemand": 10.121,
+            "discountPct": 64.3,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "southeastasia",
+            "spot": 1.677,
+            "onDemand": 9.074,
+            "discountPct": 81.5,
+            "spotSince": "2026-09-01"
+          }
+        ]
+      },
+      {
+        "key": "a100",
+        "name": "A100 80GB",
+        "launched": 2020,
+        "sku": "Standard_NC24ads_A100_v4",
+        "gpusPerVm": 1,
+        "spotMedian": 0.933,
+        "onDemandMedian": 4.591,
+        "discountMedianPct": 79.7,
+        "cheapestSpot": {
+          "region": "eastus",
+          "price": 0.679
+        },
+        "regions": [
+          {
+            "region": "eastus",
+            "spot": 0.679,
+            "onDemand": 3.673,
+            "discountPct": 81.5,
+            "spotSince": "2026-07-01"
+          },
+          {
+            "region": "eastus2",
+            "spot": 0.746,
+            "onDemand": 3.673,
+            "discountPct": 79.7,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "westus2",
+            "spot": 0.746,
+            "onDemand": 3.673,
+            "discountPct": 79.7,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "westeurope",
+            "spot": 0.97,
+            "onDemand": 4.775,
+            "discountPct": 79.7,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "northeurope",
+            "spot": 0.815,
+            "onDemand": 4.408,
+            "discountPct": 81.5,
+            "spotSince": "2026-06-01"
+          },
+          {
+            "region": "swedencentral",
+            "spot": 1.031,
+            "onDemand": 4.775,
+            "discountPct": 78.4,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "uksouth",
+            "spot": 0.933,
+            "onDemand": 4.591,
+            "discountPct": 79.7,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "japaneast",
+            "spot": 0.984,
+            "onDemand": 5.326,
+            "discountPct": 81.5,
+            "spotSince": "2026-06-01"
+          },
+          {
+            "region": "southeastasia",
+            "spot": 0.97,
+            "onDemand": 4.775,
+            "discountPct": 79.7,
+            "spotSince": "2026-11-01"
+          }
+        ]
+      },
+      {
+        "key": "t4",
+        "name": "T4",
+        "launched": 2018,
+        "sku": "Standard_NC4as_T4_v3",
+        "gpusPerVm": 1,
+        "spotMedian": 0.192,
+        "onDemandMedian": 0.587,
+        "discountMedianPct": 68.8,
+        "cheapestSpot": {
+          "region": "eastus",
+          "price": 0.164
+        },
+        "regions": [
+          {
+            "region": "eastus",
+            "spot": 0.164,
+            "onDemand": 0.526,
+            "discountPct": 68.8,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "eastus2",
+            "spot": 0.303,
+            "onDemand": 0.526,
+            "discountPct": 42.4,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "westus2",
+            "spot": 0.177,
+            "onDemand": 0.526,
+            "discountPct": 66.4,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "westeurope",
+            "spot": 0.322,
+            "onDemand": 0.658,
+            "discountPct": 51.1,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "northeurope",
+            "spot": 0.183,
+            "onDemand": 0.587,
+            "discountPct": 68.8,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "swedencentral",
+            "spot": 0.174,
+            "onDemand": 0.558,
+            "discountPct": 68.8,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "uksouth",
+            "spot": 0.192,
+            "onDemand": 0.615,
+            "discountPct": 68.8,
+            "spotSince": "2026-11-01"
+          },
+          {
+            "region": "japaneast",
+            "spot": 0.201,
+            "onDemand": 0.71,
+            "discountPct": 71.6,
+            "spotSince": "2026-09-01"
+          },
+          {
+            "region": "southeastasia",
+            "spot": 0.209,
+            "onDemand": 0.736,
+            "discountPct": 71.6,
+            "spotSince": "2026-09-01"
+          }
+        ]
+      }
+    ]
   },
   "charts": {
     "capexCombined": [
