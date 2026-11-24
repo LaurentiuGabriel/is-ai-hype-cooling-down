@@ -1,12 +1,12 @@
 {
-  "scrapedAt": "2026-10-26T08:07:27.879Z",
-  "sourceLastUpdated": "Oct 26, 2026 UTC",
-  "totalRequestsAllTime": 44281,
+  "scrapedAt": "2026-11-24T19:52:36.724Z",
+  "sourceLastUpdated": "Nov 24, 2026 UTC",
+  "totalRequestsAllTime": 44722,
   "minYear": 1995,
   "maxYear": 2026,
   "dataCenters": {
-    "totalActiveRequests": 581,
-    "totalCapacityMw": 90844,
+    "totalActiveRequests": 591,
+    "totalCapacityMw": 92322,
     "byYear": [
       {
         "year": 2004,
@@ -116,29 +116,29 @@
       {
         "year": 2025,
         "requests": 82,
-        "capacityMw": 23990
+        "capacityMw": 23960
       },
       {
         "year": 2026,
-        "requests": 47,
-        "capacityMw": 17478
+        "requests": 57,
+        "capacityMw": 18986
       }
     ],
     "topStates": [
       {
         "state": "WA",
-        "requests": 266,
-        "capacityMw": 40596
+        "requests": 276,
+        "capacityMw": 42104
       },
       {
         "state": "OR",
-        "requests": 184,
-        "capacityMw": 31906
+        "requests": 183,
+        "capacityMw": 29681
       },
       {
         "state": "NY",
         "requests": 71,
-        "capacityMw": 16891
+        "capacityMw": 16861
       },
       {
         "state": "CA",
@@ -168,8 +168,8 @@
     ]
   },
   "generation": {
-    "totalActiveRequests": 8395,
-    "totalCapacityMw": 1890020,
+    "totalActiveRequests": 8176,
+    "totalCapacityMw": 1910877,
     "byYear": [
       {
         "year": 1998,
@@ -258,63 +258,63 @@
       },
       {
         "year": 2015,
-        "requests": 58,
-        "capacityMw": 11752
+        "requests": 57,
+        "capacityMw": 11750
       },
       {
         "year": 2016,
-        "requests": 127,
-        "capacityMw": 18379
+        "requests": 115,
+        "capacityMw": 16819
       },
       {
         "year": 2017,
-        "requests": 225,
-        "capacityMw": 37474
+        "requests": 216,
+        "capacityMw": 36020
       },
       {
         "year": 2018,
-        "requests": 280,
-        "capacityMw": 57730
+        "requests": 275,
+        "capacityMw": 55369
       },
       {
         "year": 2019,
-        "requests": 475,
-        "capacityMw": 80674
+        "requests": 461,
+        "capacityMw": 78966
       },
       {
         "year": 2020,
-        "requests": 535,
-        "capacityMw": 94167
+        "requests": 514,
+        "capacityMw": 92688
       },
       {
         "year": 2021,
-        "requests": 761,
-        "capacityMw": 156302
+        "requests": 719,
+        "capacityMw": 153471
       },
       {
         "year": 2022,
-        "requests": 941,
-        "capacityMw": 185547
+        "requests": 764,
+        "capacityMw": 155771
       },
       {
         "year": 2023,
-        "requests": 756,
-        "capacityMw": 146707
+        "requests": 717,
+        "capacityMw": 138998
       },
       {
         "year": 2024,
-        "requests": 1071,
-        "capacityMw": 228139
+        "requests": 1050,
+        "capacityMw": 225223
       },
       {
         "year": 2025,
-        "requests": 1444,
-        "capacityMw": 381153
+        "requests": 1387,
+        "capacityMw": 375624
       },
       {
         "year": 2026,
-        "requests": 1499,
-        "capacityMw": 459770
+        "requests": 1649,
+        "capacityMw": 524736
       }
     ]
   }
