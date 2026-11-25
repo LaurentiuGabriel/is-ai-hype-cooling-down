@@ -130,7 +130,7 @@
     .toc-menu-button[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
     .toc-menu {
       position: fixed; z-index: 55; inset: 0; overflow: hidden; padding: 1rem 1.25rem 1.5rem;
-      background: rgba(5,6,10,.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      background: #05060a;
       opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility 0s linear .25s;
     }
     .toc-menu.is-open { opacity: 1; visibility: visible; transition: opacity .25s ease; }
@@ -140,7 +140,14 @@
       min-height: 2.75rem; display: flex; align-items: center; padding-right: 3.5rem;
       font-family: 'Space Grotesk', Inter, sans-serif; font-size: 1.125rem; font-weight: 600; line-height: 1.25; color: #fff;
     }
-    .toc-menu-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 1.25rem; }
+    .toc-menu-body { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 1.25rem; }
+    /* Fade the bottom of the list while there is more of it to scroll to */
+    .toc-menu-body::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4.5rem; pointer-events: none;
+      background: linear-gradient(to top, #05060a, rgba(5,6,10,0));
+      opacity: 0; transition: opacity .2s ease;
+    }
+    .toc-menu-body.has-more::after { opacity: 1; }
     .toc-menu ol {
       flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
       margin: 1rem 0 0; padding: 0; list-style: none; border-left: 1px solid rgba(255,255,255,.12);
@@ -4196,7 +4203,25 @@ const DEEP = {
         document.body.classList.toggle('toc-menu-open', open);
         button.setAttribute('aria-expanded', String(open));
         button.setAttribute('aria-label', open ? 'Close the table of contents' : 'Open the table of contents');
+        if (open) {
+          // Bring the current section into view inside the list, then refresh the fade.
+          const cur = menuList.querySelector('a.is-current');
+          if (cur) {
+            const li = cur.parentElement;
+            const below = li.offsetTop + li.offsetHeight - (menuList.scrollTop + menuList.clientHeight);
+            if (below > 0) menuList.scrollTop += below + menuList.clientHeight / 3;
+          }
+          updateMenuFade();
+        }
       }
+      // Fade the bottom of the list while it can still scroll further down.
+      const menuBody = menu.querySelector('.toc-menu-body');
+      function updateMenuFade() {
+        const remaining = menuList.scrollHeight - menuList.clientHeight - menuList.scrollTop;
+        menuBody.classList.toggle('has-more', remaining > 2);
+      }
+      menuList.addEventListener('scroll', updateMenuFade, { passive: true });
+      window.addEventListener('resize', updateMenuFade);
       button.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
       menu.addEventListener('click', (e) => { if (e.target.closest('ol a')) setMenu(false); });
       document.addEventListener('keydown', (e) => {
