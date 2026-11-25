@@ -59,17 +59,25 @@
     canvas { max-width: 100%; }
 
     /* Collapsible methodology / source notes under charts and tiles */
+    /* Collapsed: the note's first line, truncated, followed by "Read more". Open: the full note. */
     .detail-note > summary {
-      display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; list-style: none;
-      font-size: .75rem; color: #64748b; transition: color .15s;
+      display: flex; align-items: center; gap: .75rem; cursor: pointer; list-style: none;
+      font-size: .75rem; line-height: 1.25rem; color: #64748b;
     }
     .detail-note > summary::-webkit-details-marker { display: none; }
-    .detail-note > summary::before {
-      content: ''; width: .4rem; height: .4rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-      transform: rotate(-45deg); transition: transform .2s;
+    .detail-preview { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .detail-note[open] .detail-preview { display: none; }
+    .detail-toggle {
+      flex: none; display: inline-flex; align-items: center; gap: .3rem; font-weight: 500; color: #94a3b8;
+      transition: color .15s;
     }
-    .detail-note[open] > summary::before { transform: rotate(45deg); }
-    .detail-note > summary:hover, .detail-note > summary:focus-visible { color: #e2e8f0; }
+    .detail-note > summary:hover .detail-toggle, .detail-note > summary:focus-visible .detail-toggle { color: #fff; }
+    .detail-note > summary:focus-visible { outline: none; }
+    .detail-toggle .when-open, .detail-note[open] .detail-toggle .when-closed { display: none; }
+    .detail-note[open] .detail-toggle .when-open { display: inline; }
+    .detail-chevron { display: block; width: .75rem; height: .75rem; transition: transform .2s; }
+    .detail-note[open] .detail-chevron { transform: rotate(180deg); }
+    .detail-note > p { margin-top: .5rem; }
 
     /* ---- Table of contents ----------------------------------------------------------------
        Wide screens (>=1440px, where the gutter beside the 72rem column has room): a quiet rail
@@ -179,7 +187,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .toc-viewport, .toc-indicator, .toc-rail ol, .toc-rail a, .toc-more, .toc-menu, .toc-menu-button span,
-      .detail-note > summary::before { transition: none; }
+      .detail-chevron { transition: none; }
     }
   </style>
 </head>
@@ -365,8 +373,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           Nvidia is the supplier whose revenue is the mirror of everyone else's capex: $107.6B of
           data-center sales in a single quarter, set against the $230B the five operators spent in the
           September quarter. Revenue more than doubled from a year earlier, GAAP diluted EPS was
@@ -422,8 +430,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           Amazon is where the build most visibly outran the cash. Purchases of property and equipment of
           $77.3B were more than double a year earlier (trailing twelve months: $215.2B against $120.1B),
           and free cash flow, as Amazon defines it, fell to an outflow of $42.4B over the year from an
@@ -476,8 +484,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           Google Cloud's revenue doubled to $30.7B and its operating income tripled to $11.1B, a 36% margin
           against 24% a year ago; management put the cloud backlog at $561B on the earnings call. Reported
           net income fell to $26.5B ($2.12 a share) from $35.0B, but that is distorted by non-operating
@@ -531,8 +539,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           Azure growing 48% and a $677B commercial backlog are the demand signals; the $45.2B of quarterly
           capex, which includes $7.4B of finance leases (cash purchases of property and equipment were
           $39.4B) and went about three-quarters to short-lived assets such as GPUs and CPUs, is the spend. Microsoft reorganized its reporting
@@ -586,8 +594,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           Meta's September quarter is this page's thesis in a single print. Revenue grew 26% to $64.6B, but
           $34.9B of capex (purchases of property and equipment plus finance-lease principal) outran $32.8B of
           operating cash flow, so free cash flow was negative $2.1B against $10.6B a year earlier. Operating
@@ -642,8 +650,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           SpaceX's second report as a public company dwarfed its first. Revenue nearly doubled quarter on
           quarter to $14.6B, the company swung to $2.8B of operating income and $4.4B of net income, and the
           AI segment, now called Super Intelligence (SI) and including Cursor, acquired on Aug 14 at a $60B
@@ -697,8 +705,8 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary>Details &amp; sources</summary>
-          <p class="mt-3 text-xs leading-relaxed text-slate-500">
+          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <p class="text-xs leading-relaxed text-slate-500">
           Oracle is the live case for the funding section below. Cloud-infrastructure revenue more than
           doubled to $7.4B and more than $30B of new AI contracts lifted the backlog to $664B, about half of
           which management expects to turn into revenue within 36 months. The price of that growth is $28.5B
@@ -775,9 +783,9 @@
 
       <details class="detail-note mt-8 max-w-3xl">
 
-        <summary>Details &amp; sources</summary>
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <p class="text-xs leading-relaxed text-slate-500">
         Snapshot view: trailing twelve months from the operators’ cash-flow statements. History view:
         annual fiscal-year figures combined across the five (2021–2025 from filings via
         stockanalysis.com, 2020 from company 10-Ks). Free cash flow here is simply operating cash flow
@@ -1018,9 +1026,9 @@
 
       <details class="detail-note mt-8 max-w-3xl">
 
-        <summary>Details &amp; sources</summary>
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <p class="text-xs leading-relaxed text-slate-500">
         Microscaler here means a specialist GPU cloud (also called a neocloud), distinct from the
         hyperscalers above. Capex: CoreWeave and Nebius from company filings and guidance. CoreWeave's
         2025 figure is $14.9B on its own definition, which counts financed equipment ($10.3B on a cash
@@ -1544,9 +1552,9 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary>Details &amp; sources</summary>
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <p class="text-xs leading-relaxed text-slate-500">
         Annual capital expenditure compiled from company filings (10-K / 20-F / 6-K and quarterly
         reports); points through 2025 are reported actuals, converted to USD at period rates (won figures
         at roughly 1,420 to the dollar). The 2026 points are current guidance, drawn dashed: TSMC’s $60–64B
@@ -1588,9 +1596,9 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary>Details &amp; sources</summary>
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <p class="text-xs leading-relaxed text-slate-500">
         Headline announcements, not deployed cash, a mix of state programs, sovereign wealth
         funds and public-private ventures, so they aren't strictly comparable (European figures
         overlap; * South Korea's cluster runs to 2047). Illustrative, not investment advice.
@@ -1627,9 +1635,9 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary>Details &amp; sources</summary>
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <p class="text-xs leading-relaxed text-slate-500">
         Company names indicate supply-chain exposure to each bottleneck, illustrative, not investment
         advice. Trajectory synthesized from IEA, McKinsey, SemiAnalysis, TrendForce, Yole, SK Group
         and industry commentary (2024–2026).
@@ -1672,8 +1680,8 @@
         </div>
       </div>
       <details class="detail-note mt-4 max-w-3xl">
-        <summary>Details &amp; sources</summary>
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <p class="text-xs leading-relaxed text-slate-500">
         A schematic of the primary buy-and-supply links, not every relationship. Color follows the selected year's
         column of the trajectories above; concentration is the estimated share of the largest supplier in each chokepoint, an
         order of magnitude rather than a precise split. Dashed links (capital, export controls) gate the whole flow
@@ -1730,9 +1738,9 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary>Details &amp; sources</summary>
+        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
-        <p class="mt-3 text-xs leading-relaxed text-slate-500">
+        <p class="text-xs leading-relaxed text-slate-500">
         Hypothetical and illustrative, not investment advice. Equal-weight means an equal dollar amount in
         each of the seven names a year ago, held without rebalancing; figures are price return only
         (excluding dividends) from the Nov 24, 2025 close to the Nov 23, 2026 close, the same window for
@@ -4115,6 +4123,14 @@ const DEEP = {
         });
       }
     })();
+  </script>
+  <script>
+    // Collapsed notes preview their own first line; CSS truncates it.
+    document.querySelectorAll(".detail-note").forEach((d) => {
+      const preview = d.querySelector(".detail-preview");
+      const text = d.querySelector(":scope > p");
+      if (preview && text) preview.textContent = text.textContent.replace(/\s+/g, " ").trim();
+    });
   </script>
   <script>
     // Table of contents: a sliding rail on wide screens, a menu button below 1440px.
