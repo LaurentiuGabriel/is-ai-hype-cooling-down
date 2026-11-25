@@ -59,13 +59,16 @@
     canvas { max-width: 100%; }
 
     /* Collapsible methodology / source notes under charts and tiles */
-    /* Collapsed: the note's first line, truncated, followed by "Read more". Open: the full note. */
+    /* Collapsed: the note's first two lines, truncated, followed by "Read more". Open: the full note. */
     .detail-note > summary {
-      display: flex; align-items: center; gap: .75rem; cursor: pointer; list-style: none;
+      display: flex; align-items: flex-end; gap: .75rem; cursor: pointer; list-style: none;
       font-size: .75rem; line-height: 1.25rem; color: #64748b;
     }
     .detail-note > summary::-webkit-details-marker { display: none; }
-    .detail-preview { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .detail-preview {
+      flex: 1 1 auto; min-width: 0; overflow: hidden;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
+    }
     .detail-note[open] .detail-preview { display: none; }
     .detail-toggle {
       flex: none; display: inline-flex; align-items: center; gap: .3rem; font-weight: 500; color: #94a3b8;
@@ -4125,7 +4128,7 @@ const DEEP = {
     })();
   </script>
   <script>
-    // Collapsed notes preview their own first line; CSS truncates it.
+    // Collapsed notes preview their own first two lines; CSS truncates it.
     document.querySelectorAll(".detail-note").forEach((d) => {
       const preview = d.querySelector(".detail-preview");
       const text = d.querySelector(":scope > p");
