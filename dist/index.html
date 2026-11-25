@@ -59,25 +59,27 @@
     canvas { max-width: 100%; }
 
     /* Collapsible methodology / source notes under charts and tiles */
-    /* Collapsed: the note's first two lines, truncated, followed by "Read more". Open: the full note. */
+    /* Collapsed: the note's first two lines, clamped, with "Read more" inline at the end of the second
+       line (a full-height float pushes the toggle down to the last visible line). Open: the full note. */
     .detail-note > summary {
-      display: flex; align-items: flex-end; gap: .75rem; cursor: pointer; list-style: none;
+      display: flex; cursor: pointer; list-style: none;
       font-size: .75rem; line-height: 1.25rem; color: #64748b;
     }
     .detail-note > summary::-webkit-details-marker { display: none; }
+    .detail-note > summary:focus-visible { outline: none; }
     .detail-preview {
       flex: 1 1 auto; min-width: 0; overflow: hidden;
       display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
     }
-    .detail-note[open] .detail-preview { display: none; }
+    .detail-preview::before { content: ""; float: right; height: 100%; margin-bottom: -1.25rem; }
+    .detail-more { float: right; clear: both; margin-left: .4rem; }
     .detail-toggle {
-      flex: none; display: inline-flex; align-items: center; gap: .3rem; font-weight: 500; color: #94a3b8;
+      display: inline-flex; align-items: center; gap: .25rem; font-weight: 500; color: #94a3b8;
       transition: color .15s;
     }
     .detail-note > summary:hover .detail-toggle, .detail-note > summary:focus-visible .detail-toggle { color: #fff; }
-    .detail-note > summary:focus-visible { outline: none; }
-    .detail-toggle .when-open, .detail-note[open] .detail-toggle .when-closed { display: none; }
-    .detail-note[open] .detail-toggle .when-open { display: inline; }
+    .detail-less, .detail-note[open] .detail-preview { display: none; }
+    .detail-note[open] .detail-less { display: inline-flex; }
     .detail-chevron { display: block; width: .75rem; height: .75rem; transition: transform .2s; }
     .detail-note[open] .detail-chevron { transform: rotate(180deg); }
     .detail-note > p { margin-top: .5rem; }
@@ -376,7 +378,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           Nvidia is the supplier whose revenue is the mirror of everyone else's capex: $107.6B of
           data-center sales in a single quarter, set against the $230B the five operators spent in the
@@ -433,7 +435,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           Amazon is where the build most visibly outran the cash. Purchases of property and equipment of
           $77.3B were more than double a year earlier (trailing twelve months: $215.2B against $120.1B),
@@ -487,7 +489,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           Google Cloud's revenue doubled to $30.7B and its operating income tripled to $11.1B, a 36% margin
           against 24% a year ago; management put the cloud backlog at $561B on the earnings call. Reported
@@ -542,7 +544,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           Azure growing 48% and a $677B commercial backlog are the demand signals; the $45.2B of quarterly
           capex, which includes $7.4B of finance leases (cash purchases of property and equipment were
@@ -597,7 +599,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           Meta's September quarter is this page's thesis in a single print. Revenue grew 26% to $64.6B, but
           $34.9B of capex (purchases of property and equipment plus finance-lease principal) outran $32.8B of
@@ -653,7 +655,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           SpaceX's second report as a public company dwarfed its first. Revenue nearly doubled quarter on
           quarter to $14.6B, the company swung to $2.8B of operating income and $4.4B of net income, and the
@@ -708,7 +710,7 @@
           </div>
         </div>
         <details class="detail-note mt-4 max-w-3xl">
-          <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+          <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
           <p class="text-xs leading-relaxed text-slate-500">
           Oracle is the live case for the funding section below. Cloud-infrastructure revenue more than
           doubled to $7.4B and more than $30B of new AI contracts lifted the backlog to $664B, about half of
@@ -786,7 +788,7 @@
 
       <details class="detail-note mt-8 max-w-3xl">
 
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
         <p class="text-xs leading-relaxed text-slate-500">
         Snapshot view: trailing twelve months from the operators’ cash-flow statements. History view:
@@ -1029,7 +1031,7 @@
 
       <details class="detail-note mt-8 max-w-3xl">
 
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
         <p class="text-xs leading-relaxed text-slate-500">
         Microscaler here means a specialist GPU cloud (also called a neocloud), distinct from the
@@ -1555,7 +1557,7 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
         <p class="text-xs leading-relaxed text-slate-500">
         Annual capital expenditure compiled from company filings (10-K / 20-F / 6-K and quarterly
@@ -1599,7 +1601,7 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
         <p class="text-xs leading-relaxed text-slate-500">
         Headline announcements, not deployed cash, a mix of state programs, sovereign wealth
@@ -1638,7 +1640,7 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
         <p class="text-xs leading-relaxed text-slate-500">
         Company names indicate supply-chain exposure to each bottleneck, illustrative, not investment
@@ -1683,7 +1685,7 @@
         </div>
       </div>
       <details class="detail-note mt-4 max-w-3xl">
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
         <p class="text-xs leading-relaxed text-slate-500">
         A schematic of the primary buy-and-supply links, not every relationship. Color follows the selected year's
         column of the trajectories above; concentration is the estimated share of the largest supplier in each chokepoint, an
@@ -1741,7 +1743,7 @@
 
       <details class="detail-note mt-6 max-w-3xl">
 
-        <summary><span class="detail-preview" aria-hidden="true"></span><span class="detail-toggle"><span class="when-closed">Read more</span><span class="when-open">Show less</span><svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
+        <summary><span class="detail-preview"><span class="detail-toggle detail-more">Read more<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span><span class="detail-text" aria-hidden="true"></span></span><span class="detail-toggle detail-less">Show less<svg class="detail-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5"/></svg></span></summary>
 
         <p class="text-xs leading-relaxed text-slate-500">
         Hypothetical and illustrative, not investment advice. Equal-weight means an equal dollar amount in
@@ -4130,7 +4132,7 @@ const DEEP = {
   <script>
     // Collapsed notes preview their own first two lines; CSS truncates it.
     document.querySelectorAll(".detail-note").forEach((d) => {
-      const preview = d.querySelector(".detail-preview");
+      const preview = d.querySelector(".detail-text");
       const text = d.querySelector(":scope > p");
       if (preview && text) preview.textContent = text.textContent.replace(/\s+/g, " ").trim();
     });
